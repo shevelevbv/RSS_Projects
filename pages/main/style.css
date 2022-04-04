@@ -1,0 +1,12 @@
+.section__not-only {
+  background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+}
+
+.not-only {
+  width: 1280px;
+  height: 908px;
+  margin: 0 auto;
+  padding-top: 180px;
+  background: url('../../assets/images/pattern/noise_transparent@2x.png');
+}
+
