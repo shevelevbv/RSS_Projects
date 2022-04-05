@@ -38,12 +38,19 @@ a {
   font-size: 15px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .header {
   width: 1280px;
   height: 60px;
   padding: 0 40px 0 40px;
   position: absolute;
   top: 60px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,7 +88,7 @@ a {
   text-align: center;
 }
 
-.nav {
+.nav__links {
   width: 443px;
   height: 27px;
   display: flex;
@@ -89,14 +96,17 @@ a {
   align-items: center;
 }
 
-.nav__link {
-  height: 24px;
-  line-height: 20px;
+.nav__link-item.active {
+  border-bottom: 3px solid var(--color-main);
 }
 
-.link-about {
+.nav__link {
+  height: 24px;
+  line-height: 24px;
+}
+
+.active .nav__link {
   color: #FAFAFA;
-  border-bottom: 3px solid var(--color-main);
 }
 
 .section__not-only {
