@@ -21,3 +21,71 @@
 .active .nav__link {
   color: #292929;
 }
+
+.main {
+  height: 1342px;
+  background-color: #F6F6F6;
+}
+
+.pets {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pets__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 40px;
+}
+
+.pets__card {
+  height: 435px;
+}
+
+.pets__title {
+  text-align: center;
+}
+
+.pets__nav {
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.pets__nav__button {
+  width: 52px;
+  height: 52px;
+  background-color: transparent;
+  border: 2px solid var(--color-main);
+  border-radius: 100px;
+  padding-top: 2px;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-family: 'Georgia', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: 0.06em;
+}
+
+.pets__nav__button.active {
+  background-color: var(--color-main);
+  cursor: default;
+}
+
+.pets__nav__button.inactive {
+  border-color: #CDCDCD;
+  color: #CDCDCD;
+  cursor: default;
+}
+
+.pets__nav__button.inactive:hover {
+  background-color: transparent;
+}

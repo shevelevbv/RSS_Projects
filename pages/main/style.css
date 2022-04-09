@@ -159,34 +159,6 @@ body {
   font-size: 18px;
 }
 
-.pets__card {
-  width: 270px;
-  height: 100%;
-  border-radius: 9px;
-  overflow: hidden;
-  background-color: #fafafa;
-  display: flex;
-  padding-bottom: 30px;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.pets__card:hover {
-  cursor: pointer;
-  background-color: white;
-}
-
-.pets__button {
-  width: 187px;
-  background-color: transparent;
-  border: 2px solid var(--color-main);
-}
-
-.pets__card:hover .pets__button {
-  background-color: #FDDCC4;
-}
-
 .pets__button-rest {
   width: 261px;
   height: 52px;

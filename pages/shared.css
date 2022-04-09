@@ -169,6 +169,34 @@ ul {
   cursor: default;
 }
 
+.pets__card {
+  width: 270px;
+  height: 100%;
+  border-radius: 9px;
+  overflow: hidden;
+  background-color: #fafafa;
+  display: flex;
+  padding-bottom: 30px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pets__card:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
+.pets__button {
+  width: 187px;
+  background-color: transparent;
+  border: 2px solid var(--color-main);
+}
+
+.pets__card:hover .pets__button {
+  background-color: #FDDCC4;
+}
+
 .section__footer {
   background: radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%),
     #211f20;
