@@ -146,14 +146,12 @@ ul {
   border-bottom: 3px solid transparent;
 }
 
-.nav__link-item.active {
-  color: #FAFAFA;
-  border-bottom: 3px solid var(--color-main);
-}
-
 .nav__link-item:hover {
   border-bottom: 3px solid transparent;
-  color: #FAFAFA;
+}
+
+.nav__link-item.active {
+  border-bottom: 3px solid var(--color-main);
 }
 
 .nav__link {
@@ -161,8 +159,13 @@ ul {
   line-height: 24px;
 }
 
+.nav__link:hover {
+  color: #FAFAFA;
+}
+
 .active .nav__link {
   color: #fafafa;
+  cursor: default;
 }
 
 .section__not-only,
@@ -329,7 +332,7 @@ ul {
 }
 
 .pets__card:hover .pets__button {
-  background-color: var(--color-main);
+  background-color: #FDDCC4;
 }
 
 .pets__button-rest {
