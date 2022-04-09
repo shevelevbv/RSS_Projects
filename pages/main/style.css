@@ -1,164 +1,25 @@
-@font-face {
-  font-family: Georgia;
-  font-weight: 400;
-  src: url("../../assets/fonts/georgia/georgia-regular.ttf");
-}
-
-@font-face {
-  font-family: Arial;
-  font-weight: 400;
-  src: url("../../assets/fonts/arial/arial-regular.ttf");
-}
-
-:root {
-  --color-main: #f1cdb3;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  -webkit-tap-highlight-color: transparent;
-  margin: 0;
-  padding: 0;
-  user-select: none;
-  transition: all 0.3s;
-}
-
-*:hover {
-  transition: all 0.3s;
-}
-
-html {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
 body {
   background-color: #5b483a;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  line-height: 0;
-}
-
-a {
-  color: #cdcdcd;
-  text-decoration: none;
-  font-family: "Arial", sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-}
-
-h4 {
-  font-family: "Georgia", sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-  color: #545454;
-  letter-spacing: 0.06em;
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-}
-
-.button {
-  width: 207px;
-  height: 52px;
-  border-radius: 100px;
-  border: none;
-  outline: none;
-  color: #292929;
-  background-color: var(--color-main);
-  font-family: "Georgia", sans-serif;
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 22.1px;
-  letter-spacing: 0.06em;
-}
-
-.button:hover {
-  background-color: #FDDCC4;
-  cursor: pointer;
-}
-
-.section {
-  width: 1280px;
-  margin: 0 auto;
-  padding: 80px 40px 100px 40px;
-  display: flex;
 }
 
 .header {
-  width: 1280px;
   height: 60px;
-  padding: 0 40px 0 40px;
   position: absolute;
   top: 60px;
   left: 0;
   right: 0;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: block;
-  width: 187px;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .logo__title {
-  margin: 0;
-  width: 100%;
-  height: 35px;
   color: var(--color-main);
-  font-family: "Georgia", sans-serif;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 35.2px;
-  letter-spacing: 0.06em;
 }
 
 .logo__subtitle {
-  width: 100%;
-  height: 15px;
   color: white;
-  font-family: "Arial", sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 15px;
-  letter-spacing: 0.1em;
-  text-align: center;
-}
-
-.nav__links {
-  width: 443px;
-  height: 27px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav__link-item {
-  border-bottom: 3px solid transparent;
-}
-
-.nav__link-item.active {
-  border-bottom: 3px solid var(--color-main);
 }
 
 .nav__link {
-  height: 24px;
-  line-height: 24px;
+  color: #CDCDCD;
 }
 
 .nav__link:hover {
@@ -167,11 +28,9 @@ ul {
 
 .active .nav__link {
   color: #fafafa;
-  cursor: default;
 }
 
-.section__not-only,
-.section__footer {
+.section__not-only {
   background: radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%),
     #211f20;
 }
@@ -240,15 +99,6 @@ ul {
   margin-top: 14px;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.title {
-  color: #545454;
-  font-family: "Georgia", sans-serif;
-  font-weight: 400;
-  font-size: 35px;
-  line-height: 45.5px;
-  letter-spacing: 0.06em;
 }
 
 .about__title {
@@ -442,91 +292,3 @@ ul {
   color: #b2b2b2;
 }
 
-.section__footer {
-  height: 350px;
-}
-
-.footer {
-  height: 100%;
-  padding: 40px 40px 0 40px;
-  background: url("../../assets/images/pattern/noise_transparent@2x.png");
-  justify-content: space-between;
-}
-
-.footer__contacts,
-.footer__locations {
-  width: 280px;
-  height: 234px;
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.footer__contacts-title,
-.footer__locations-title {
-  width: 100%;
-  color: white;
-}
-
-.footer__contacts-email,
-.footer__contacts-phone {
-  display: block;
-  width: 251px;
-  height: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer__contacts-phone {
-  width: 239px;
-}
-
-.footer__contacts-email-icon,
-.footer__contacts-phone-icon {
-  width: 40px;
-  height: 32px;
-}
-
-.footer__contacts-email-address,
-.footer__contacts-phone-number,
-.footer__locations-1-address,
-.footer__locations-2-address {
-  color: var(--color-main);
-}
-
-.footer__locations {
-  width: 302px;
-  height: 234px;
-}
-
-.footer__locations-icon {
-  width: 22px;
-  height: 32px;
-}
-
-.footer__locations-1,
-.footer__locations-2 {
-  display: block;
-  width: 302px;
-  height: 46px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer__locations-2 {
-  width: 269px;
-  height: 32px;
-}
-
-.footer__locations-1-address {
-  width: 260px;
-  text-align: left;
-}
-
-.footer__image {
-  width: 300px;
-  height: 310px;
-}
