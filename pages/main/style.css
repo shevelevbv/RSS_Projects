@@ -74,6 +74,11 @@ ul {
   letter-spacing: 0.06em;
 }
 
+.button:hover {
+  background-color: #FDDCC4;
+  cursor: pointer;
+}
+
 .section {
   width: 1280px;
   margin: 0 auto;
@@ -137,8 +142,18 @@ ul {
   align-items: center;
 }
 
+.nav__link-item {
+  border-bottom: 3px solid transparent;
+}
+
 .nav__link-item.active {
+  color: #FAFAFA;
   border-bottom: 3px solid var(--color-main);
+}
+
+.nav__link-item:hover {
+  border-bottom: 3px solid transparent;
+  color: #FAFAFA;
 }
 
 .nav__link {
@@ -302,10 +317,19 @@ ul {
   align-items: center;
 }
 
+.pets__card:hover {
+  cursor: pointer;
+  background-color: white;
+}
+
 .pets__button {
   width: 187px;
   background-color: transparent;
   border: 2px solid var(--color-main);
+}
+
+.pets__card:hover .pets__button {
+  background-color: var(--color-main);
 }
 
 .pets__button-rest {
@@ -380,6 +404,7 @@ ul {
 }
 
 .donation__card {
+  display: block;
   width: 349px;
   padding: 10px 15px;
   display: flex;
@@ -441,6 +466,7 @@ ul {
 
 .footer__contacts-email,
 .footer__contacts-phone {
+  display: block;
   width: 251px;
   height: 32px;
   display: flex;
@@ -477,6 +503,7 @@ ul {
 
 .footer__locations-1,
 .footer__locations-2 {
+  display: block;
   width: 302px;
   height: 46px;
   display: flex;

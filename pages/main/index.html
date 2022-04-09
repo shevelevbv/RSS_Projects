@@ -25,13 +25,13 @@
             <a href="" class="nav__link link-about">About the shelter</a>
           </li>
           <li class="nav__link-item">
-            <a href="" class="nav__link link-pets">Our pets</a>
+            <a href="../pets/index.html" class="nav__link link-pets">Our pets</a>
           </li>
           <li class="nav__link-item">
-            <a href="" class="nav__link link-help">Help the shelter</a>
+            <a href="#help" class="nav__link link-help">Help the shelter</a>
           </li>
           <li class="nav__link-item">
-            <a href="" class="nav__link link-contacts">Contacts</a>
+            <a href="#contacts" class="nav__link link-contacts">Contacts</a>
           </li>
         </ul>
       </nav>
@@ -46,7 +46,7 @@
               extremely wide and open heart. He or she will love you more than
               anybody else in the world, you will see!
             </p>
-            <button class="button not-only__button">Make a friend</button>
+            <button class="button not-only__button" onclick="window.location.href='#pets';">Make a friend</button>
           </div>
           <div class="not-only__image">
             <img
@@ -83,14 +83,14 @@
           </div>
         </section>
       </div>
-      <div class="section__pets">
+      <div class="section__pets" id="pets">
         <section class="section pets">
           <h3 class="title pets__title">
             Our friends who<br />
             are looking for a house
           </h3>
           <div class="pets__show">
-            <button class="pets__back">&#8592;</button>
+            <button class="button pets__back">&#8592;</button>
             <ul class="pets__cards">
               <li class="pets__card">
                 <div class="pets__picture">
@@ -126,12 +126,12 @@
                 <button class="button pets__button">Learn more</button>
               </li>
             </ul>
-            <button class="pets__forward">&#8594;</button>
+            <button class="button pets__forward">&#8594;</button>
           </div>
-          <button class="button pets__button-rest">Get to know the rest</button>
+          <button class="button pets__button-rest" onclick="window.location.href='../pets/index.html';">Get to know the rest</button>
         </section>
       </div>
-      <div class="section__help">
+      <div class="section__help" id="help">
         <section class="section help">
           <h3 class="title help__title">
             How you can help<br />
@@ -253,8 +253,8 @@
                   class="donation__card-svg"
                 />
               </div>
-              <span class="donation__card-number"
-                >8380 2880 8028 8791 7435</span
+              <a class="donation__card-number" href=" "
+                >8380 2880 8028 8791 7435</a
               >
             </div>
             <p class="donation__legal">
@@ -267,38 +267,37 @@
         </section>
       </div>
     </main>
-    <footer class="section__footer">
+    <footer class="section__footer" id="contacts">
       <section class="section footer">
         <div class="footer__contacts">
           <h3 class="title footer__contacts-title">For questions and suggestions</h3>
-          <div class="footer__contacts-email">
+          <a class="footer__contacts-email" href="mailto:email@shelter.com">
             <div class="footer__contacts-email-icon">
               <img src="../../assets/icons/icon-email.svg" alt="Email icon">
             </div>
             <h4 class="footer__contacts-email-address">email@shelter.com</h4>
-          </div>
-          <div class="footer__contacts-phone">
+          </a>
+          <a class="footer__contacts-phone" href="tel:+136745677554">
             <div class="footer__contacts-phone-icon">
               <img src="../../assets/icons/phone.svg" alt="Phone icon">
             </div>
             <h4 class="footer__contacts-phone-number">+13 674 567 75 54</h4>
-          </div>
+          </a>
         </div>
         <div class="footer__locations">
           <h3 class="title footer__locations-title">We are waiting for your visit</h3>
-          <div class="footer__locations-1">
+          <a class="footer__locations-1" href="https://maps.google.com/maps?q=1%20Central%20Street,%20Boston">
             <div class="footer__locations-icon">
               <img src="../../assets/icons/pin.svg" alt="Location icon">
             </div>
             <h4 class="footer__locations-1-address">1 Central Street, Boston (entrance from the store)</h4>
-          </div> 
-          <div class="footer__locations-2">
+          </a> 
+          <a class="footer__locations-2" href="https://maps.google.com/maps?q=18%20South%20Park,%20London">
             <div class="footer__locations-icon">
               <img src="../../assets/icons/pin.svg" alt="Location icon">
             </div>
             <h4 class="footer__locations-2-address">18 South Park, London</h4>
-          </div> 
-        </div>
+          </a> 
         </div>
         <div class="footer__image">
           <img src="../../assets/images/footer-puppy.png" alt="Puppy image">
