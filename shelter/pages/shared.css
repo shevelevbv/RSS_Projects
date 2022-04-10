@@ -99,7 +99,7 @@ ul {
   font-weight: 400;
   font-size: 35px;
   line-height: 45.5px;
-  letter-spacing: 110%;
+  letter-spacing: 0.06em;
 }
 
 .header {
@@ -130,7 +130,7 @@ ul {
   font-weight: 400;
   font-size: 32px;
   line-height: 35.2px;
-  letter-spacing: 0.06em;
+  letter-spacing: 110%;
 }
 
 .logo__subtitle {
