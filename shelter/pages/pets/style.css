@@ -24,7 +24,9 @@
 }
 
 .main {
+  width: 1280px;
   height: 1342px;
+  margin: 0 auto;
   background-color: #F6F6F6;
 }
 
@@ -78,6 +80,7 @@
 
 .our-friends__nav__button.active {
   background-color: var(--color-primary);
+  border: none;
   cursor: default;
 }
 
