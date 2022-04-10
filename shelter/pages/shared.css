@@ -1,13 +1,13 @@
 @font-face {
   font-family: Georgia;
   font-weight: 400;
-  src: url("../../assets/fonts/georgia/georgia-regular.ttf");
+  src: url("../assets/fonts/georgia/georgia-regular.ttf");
 }
 
 @font-face {
   font-family: Arial;
   font-weight: 400;
-  src: url("../../assets/fonts/arial/arial-regular.ttf");
+  src: url("../assets/fonts/arial/arial-regular.ttf");
 }
 
 :root {
@@ -130,7 +130,7 @@ ul {
   font-weight: 400;
   font-size: 32px;
   line-height: 35.2px;
-  letter-spacing: 110%;
+  letter-spacing: 0.06em;
 }
 
 .logo__subtitle {
@@ -206,7 +206,7 @@ ul {
 .footer {
   height: 100%;
   padding: 40px 40px 0 40px;
-  background: url("../../assets/images/pattern/noise_transparent@2x.png");
+  background: url("../assets/images/pattern/noise-transparent-2x.png");
   justify-content: space-between;
 }
 
