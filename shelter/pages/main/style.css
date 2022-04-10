@@ -40,7 +40,7 @@ body {
   height: 908px;
   margin: 0 auto;
   padding: 180px 40px 0 40px;
-  background: url("../../assets/images/pattern/noise_transparent@2x.png");
+  background: url("../../assets/images/pattern/noise-transparent-2x.png");
   display: flex;
   justify-content: space-between;
 }
