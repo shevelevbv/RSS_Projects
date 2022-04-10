@@ -11,7 +11,8 @@
 }
 
 :root {
-  --color-main: #f1cdb3;
+  --color-primary: #f1cdb3;
+  --color-primary-light: #FDDCC4;
 }
 
 *,
@@ -70,7 +71,7 @@ ul {
   border: none;
   outline: none;
   color: #292929;
-  background-color: var(--color-main);
+  background-color: var(--color-primary);
   font-family: "Georgia", sans-serif;
   font-weight: 400;
   font-size: 17px;
@@ -82,7 +83,8 @@ ul {
 }
 
 .button:hover {
-  background-color: #FDDCC4;
+  border-color: var(--color-primary-light);
+  background-color: var(--color-primary-light);
   cursor: pointer;
 }
 
@@ -157,7 +159,7 @@ ul {
 }
 
 .nav__link-item.active {
-  border-bottom: 3px solid var(--color-main);
+  border-bottom: 3px solid var(--color-primary);
 }
 
 .nav__link {
@@ -169,7 +171,7 @@ ul {
   cursor: default;
 }
 
-.pets__card {
+.our-friends__card {
   width: 270px;
   height: 100%;
   border-radius: 9px;
@@ -182,31 +184,31 @@ ul {
   align-items: center;
 }
 
-.pets__card:hover {
+.our-friends__card:hover {
   cursor: pointer;
   background-color: white;
 }
 
-.pets__button {
+.our-friends__button {
   width: 187px;
   background-color: transparent;
-  border: 2px solid var(--color-main);
+  border: 2px solid var(--color-primary);
 }
 
-.pets__card:hover .pets__button {
-  background-color: #FDDCC4;
-}
-
-.section__footer {
-  background: radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%),
-    #211f20;
-  height: 350px;
+.our-friends__card:hover .our-friends__button {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
 }
 
 .footer {
-  height: 100%;
+  width: 1280px;
+  height: 350px;
   padding: 40px 40px 0 40px;
-  background: url("../assets/images/pattern/noise-transparent-2x.png");
+  margin: 0 auto;
+  background: url("../assets/images/pattern/noise-transparent-2x.png"), 
+    radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%),
+    #211f20;
+  display: flex;
   justify-content: space-between;
 }
 
@@ -250,7 +252,7 @@ ul {
 .footer__contacts-phone-number,
 .footer__locations-1-address,
 .footer__locations-2-address {
-  color: var(--color-main);
+  color: var(--color-primary);
 }
 
 .footer__locations {

@@ -1,4 +1,5 @@
 .header {
+  background-color: white;
   height: 120px;
 }
 
@@ -27,7 +28,7 @@
   background-color: #F6F6F6;
 }
 
-.pets {
+.our-friends {
   width: 1200px;
   height: 100%;
   margin: 0 auto;
@@ -37,21 +38,21 @@
   align-items: center;
 }
 
-.pets__cards {
+.our-friends__cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px 40px;
 }
 
-.pets__card {
+.our-friends__card {
   height: 435px;
 }
 
-.pets__title {
+.our-friends__title {
   text-align: center;
 }
 
-.pets__nav {
+.our-friends__nav {
   height: 52px;
   display: flex;
   justify-content: center;
@@ -59,11 +60,11 @@
   align-items: center;
 }
 
-.pets__nav__button {
+.our-friends__nav__button {
   width: 52px;
   height: 52px;
   background-color: transparent;
-  border: 2px solid var(--color-main);
+  border: 2px solid var(--color-primary);
   border-radius: 100px;
   padding-top: 2px;
   font-family: sans-serif;
@@ -75,17 +76,17 @@
   letter-spacing: 0.06em;
 }
 
-.pets__nav__button.active {
-  background-color: var(--color-main);
+.our-friends__nav__button.active {
+  background-color: var(--color-primary);
   cursor: default;
 }
 
-.pets__nav__button.inactive {
+.our-friends__nav__button.disabled {
   border-color: #CDCDCD;
   color: #CDCDCD;
   cursor: default;
 }
 
-.pets__nav__button.inactive:hover {
+.our-friends__nav__button.disabled:hover {
   background-color: transparent;
 }
