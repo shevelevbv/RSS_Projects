@@ -1,5 +1,5 @@
 body {
-  background-color: #5b483a;
+  background: radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%), #211f20;
 }
 
 .header {
@@ -11,7 +11,7 @@ body {
 }
 
 .logo__title {
-  color: var(--color-main);
+  color: var(--color-primary);
 }
 
 .logo__subtitle {
@@ -19,20 +19,15 @@ body {
 }
 
 .nav__link {
-  color: #CDCDCD;
+  color: #cdcdcd;
 }
 
 .nav__link:hover {
-  color: #FAFAFA;
+  color: #fafafa;
 }
 
 .active .nav__link {
   color: #fafafa;
-}
-
-.section__not-only {
-  background: radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%),
-    #211f20;
 }
 
 .not-only {
@@ -40,7 +35,8 @@ body {
   height: 908px;
   margin: 0 auto;
   padding: 180px 40px 0 40px;
-  background: url("../../assets/images/pattern/noise-transparent-2x.png");
+  background: url("../../assets/images/pattern/noise-transparent-2x.png"),
+    radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 100%), #211f20;
   display: flex;
   justify-content: space-between;
 }
@@ -78,11 +74,8 @@ body {
   height: 728px;
 }
 
-.section__about {
-  background-color: white;
-}
-
 .about {
+  background-color: white;
   justify-content: center;
   gap: 120px;
 }
@@ -114,24 +107,21 @@ body {
   line-height: 24px;
 }
 
-.section__pets {
+.our-friends {
   background-color: #f6f6f6;
-}
-
-.pets {
   flex-direction: column;
   justify-content: center;
   gap: 60px;
   align-items: center;
 }
 
-.pets__title {
+.our-friends__title {
   width: 400px;
   margin: 0 auto;
   text-align: center;
 }
 
-.pets__show {
+.our-friends__show {
   width: 100%;
   height: 435px;
   display: flex;
@@ -139,7 +129,7 @@ body {
   align-items: center;
 }
 
-.pets__cards {
+.our-friends__cards {
   width: 990px;
   height: 435px;
   display: flex;
@@ -147,31 +137,28 @@ body {
   align-items: center;
 }
 
-.pets__back,
-.pets__forward {
+.our-friends__back,
+.our-friends__forward {
   width: 52px;
   height: 52px;
   background-color: transparent;
-  border: 2px solid var(--color-main);
+  border: 2px solid var(--color-primary);
   border-radius: 100px;
   padding-top: 2px;
   font-family: sans-serif;
   font-size: 18px;
 }
 
-.pets__button-rest {
+.our-friends__button-rest {
   width: 261px;
   height: 52px;
 }
 
-.section__help {
-  background-color: white;
-}
-
 .help {
+  background-color: white;
   flex-direction: column;
   justify-content: center;
-  gap: 60px;
+  gap: 58px 60px;
   align-items: center;
 }
 
@@ -180,6 +167,7 @@ body {
 }
 
 .help__cards {
+  height: 281px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -194,22 +182,19 @@ body {
   align-items: center;
 }
 
-.section__donation {
+.in-addition {
   background-color: #f6f6f6;
-}
-
-.donation {
   justify-content: center;
   gap: 30px;
   align-items: center;
 }
 
-.donation__image {
+.in-addition__image {
   width: 505px;
   height: 261px;
 }
 
-.donation__content {
+.in-addition__content {
   width: 380px;
   display: flex;
   flex-direction: column;
@@ -217,11 +202,11 @@ body {
   gap: 20px;
 }
 
-.donation__title {
+.in-addition__title {
   width: 300px;
 }
 
-.donation__subtitle {
+.in-addition__subtitle {
   font-family: "Georgia", sans-serif;
   font-weight: 400;
   font-size: 15px;
@@ -230,23 +215,27 @@ body {
   line-height: 110%;
 }
 
-.donation__card {
+.in-addition__card {
   display: block;
   width: 349px;
   padding: 10px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-main);
+  background-color: var(--color-primary);
   border-radius: 9px;
 }
 
-.donation__card-icon {
+.in-addition__card:hover {
+  background-color: var(--color-primary-light);
+}
+
+.in-addition__card-icon {
   width: 30px;
   height: 23px;
 }
 
-.donation__card-number {
+.in-addition__card-number {
   color: #545454;
   font-family: "Georgia", sans-serif;
   font-weight: 400;
@@ -255,7 +244,7 @@ body {
   letter-spacing: 0.06em;
 }
 
-.donation__legal {
+.in-addition__legal {
   font-family: "Arial", sans-serif;
   font-weight: 400;
   font-size: 12px;
@@ -263,4 +252,3 @@ body {
   font-style: italic;
   color: #b2b2b2;
 }
-
