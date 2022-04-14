@@ -297,5 +297,11 @@ body {
     margin-top: 0;
   }
 
+  .our-friends__cards {
+    width: calc(100% - 94px);
+    justify-content: center;
+    gap: 40px;
+  }
+
 
 }
