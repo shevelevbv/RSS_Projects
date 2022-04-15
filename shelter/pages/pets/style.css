@@ -115,3 +115,11 @@
   }
 
 }
+
+@media (max-width: 767px) {
+
+  .burger__line {
+    background-color: black;
+  }
+
+}
