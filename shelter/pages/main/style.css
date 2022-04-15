@@ -303,5 +303,19 @@ body {
     gap: 40px;
   }
 
+  .help {
+    
+  }
+
+  .help__cards {
+    height: auto;
+    gap: 55px 60px;
+  }
+
+  .help__card {
+    width: 170px;
+    height: 113px;
+  }
+
 
 }
