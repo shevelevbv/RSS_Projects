@@ -317,5 +317,9 @@ body {
     height: 113px;
   }
 
+  .in-addition {
+    gap: 60px;
+  }
+
 
 }
