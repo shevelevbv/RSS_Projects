@@ -305,6 +305,8 @@ body {
 
   .help__cards {
     height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 55px 60px;
   }
 
