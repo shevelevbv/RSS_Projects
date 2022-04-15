@@ -95,3 +95,23 @@
 .our-friends__nav__button.disabled:hover {
   background-color: transparent;
 }
+
+@media (max-width: 1279px) {
+
+  .main {
+    width: 100%;
+    height: auto;
+  }
+
+  .our-friends {
+    width: 100%;
+    height: auto;
+    padding: 80px 30px 76px 30px;
+  }
+
+  .our-friends__cards {
+    margin: 29px 0 40px 0;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
