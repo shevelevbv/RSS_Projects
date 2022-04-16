@@ -362,4 +362,35 @@ ul {
     display: none;
   }
 
+  .footer {
+    height: auto;
+    gap: 24px;
+  }
+
+  .footer__contacts,
+  .footer__locations {
+    height: auto;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .footer__locations-2 {
+    align-self: flex-start;
+  }
+
+  .footer .footer__locations-title {
+    width: 280px;
+  }
+
+  .footer__image {
+    width: 260px;
+    height: auto;
+    margin-top: 15px;
+  }
+
+  .footer__img {
+    width: 100%;
+    height: 100%;
+  }
+
 }
