@@ -393,5 +393,24 @@ body {
     height: 100%;
   }
 
+  .our-friends {
+    gap: 42px;
+  }
+
+  .our-friends__show {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 20px calc(100vw - 240px);
+    justify-content: center;
+  }
+
+  .our-friends__back {
+    order: 2;
+  }
+
+  .our-friends__forward {
+    order: 3;
+  }
+
 
 }
