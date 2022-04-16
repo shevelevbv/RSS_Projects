@@ -122,6 +122,14 @@
     background-color: black;
   }
 
+  .open .page-mask {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .nav {
+    background-color: white;
+  }
+
   .our-friends {
     width: 100%;
     height: auto;

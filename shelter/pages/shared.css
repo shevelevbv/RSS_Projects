@@ -151,6 +151,10 @@ ul {
   display: none;
 }
 
+.page-mask {
+  display: none;
+}
+
 .nav__links {
   width: 443px;
   height: 27px;
@@ -353,6 +357,7 @@ ul {
     flex-direction: column;
     justify-content: space-around;
     z-index: 2;
+    cursor: pointer;
   }
 
   .burger__line {
@@ -360,17 +365,24 @@ ul {
     height: 2px;
   }
 
-  .nav {
-    display: none;
+  .open .page-mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .open .nav {
+  .nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     margin-top: -30px;
+    margin-right: -320px;
     right: 0;
     z-index: 1;
     width: 320px;
@@ -378,7 +390,7 @@ ul {
     background-color: #292929;
   }
 
-  .open .nav__links {
+  .nav__links {
     width: 243px;
     height: auto;
     flex-direction: column;
@@ -395,9 +407,13 @@ ul {
     height: 54px;
   }
 
-  .open .nav__link {
+  .nav__link {
     font-size: 32px;
     line-height: 160%;
+  }
+
+  .open .nav {
+    transform: translateX(-320px);
   }
   
   .our-friends__extra-card-320 {
