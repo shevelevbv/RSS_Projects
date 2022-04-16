@@ -122,4 +122,26 @@
     background-color: black;
   }
 
+  .our-friends {
+    width: 100%;
+    height: auto;
+    padding: 42px 10px 42px 10px;
+    gap: 12px;
+  }
+
+  .our-friends__cards {
+    height: auto;
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+  }
+
+  .our-friends__card {
+    justify-self: center;
+  }
+
+  .our-friends__nav {
+    width: 100%;
+    gap: 10px;
+  }
+
 }

@@ -374,6 +374,11 @@ ul {
     align-items: center;
   }
 
+  .footer__contacts-title,
+  .footer__locations-title {
+    text-align: center;
+  }
+
   .footer__locations-2 {
     align-self: flex-start;
   }
