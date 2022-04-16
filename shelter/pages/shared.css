@@ -365,6 +365,18 @@ ul {
     height: 2px;
   }
 
+  .open .burger__line1 {
+    transform: rotate(-90deg) translate(-10px, -11px);
+  }
+
+  .open .burger__line2 {
+    transform: rotate(-90deg) translate(0, -1px);
+  }
+
+  .open .burger__line3 {
+    transform: rotate(-90deg) translate(10px, 9px);
+  }
+
   .open .page-mask {
     display: block;
     position: fixed;
