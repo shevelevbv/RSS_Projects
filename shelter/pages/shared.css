@@ -325,6 +325,16 @@ ul {
 
 @media (max-width: 767px) {
 
+  .section {
+    padding: 42px 10px;
+  }
+
+  .title {
+    width: 300px;
+    font-size: 25px;
+    line-height: 130%;
+  }
+
   .header {
     width: 100%;
     padding: 0 53px 0 calc(100% - 310px);

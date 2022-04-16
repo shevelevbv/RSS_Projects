@@ -324,13 +324,18 @@ body {
 
 @media (max-width: 767px) {
 
+  .title {
+    width: 300px;
+    text-align: center;
+  }
+
   .burger__line {
     background-color: var(--color-primary);
   }
 
   .not-only {
     padding: 150px 10px 0 10px;
-    gap: 105px;
+    gap: 106px;
   }
 
   .not-only__text {
@@ -360,5 +365,33 @@ body {
     width: 260px;
     height: auto;
   }
+
+  .about {
+    gap: 40px;
+  }
+
+  .about__title {
+    width: 250px;
+    height: auto;
+  }
+
+  .about__text {
+    height: auto;
+    padding: 0 15px;
+    align-items: center;
+    gap: 23px;
+    text-align: justify;
+  }
+
+  .about__image {
+    width: 260px;
+    height: auto;
+  }
+
+  .about__img {
+    width: 100%;
+    height: 100%;
+  }
+
 
 }
