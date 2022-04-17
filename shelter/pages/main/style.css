@@ -329,6 +329,10 @@ body {
     text-align: center;
   }
 
+  .header.open {
+    position: fixed;
+  }
+
   .burger__line {
     background-color: var(--color-primary);
   }
