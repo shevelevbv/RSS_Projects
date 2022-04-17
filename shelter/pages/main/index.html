@@ -16,10 +16,16 @@
   </head>
   <body>
     <header class="header">
+      <div class="page-mask"></div>
       <a class="logo" href="./index.html">
         <h1 class="logo__title">Cozy House</h1>
         <h6 class="logo__subtitle">Shelter for pets in Boston</h6>
       </a>
+      <div class="burger">
+        <div class="burger__line burger__line1"></div>
+        <div class="burger__line burger__line2"></div>
+        <div class="burger__line burger__line3"></div>
+      </div>
       <nav class="nav">
         <ul class="nav__links">
           <li class="nav__link-item active">
@@ -52,6 +58,7 @@
         </div>
         <div class="not-only__image">
           <img
+            class="not-only__img"
             src="../../assets/images/start-screen-puppy.png"
             alt="Picture of dog"
           />
@@ -60,6 +67,7 @@
       <section class="section about">
         <div class="about__image">
           <img
+            class="about__img"
             src="../../assets/images/pets/about-pets.png"
             alt="Picture of dogs"
           />
@@ -101,7 +109,7 @@
               <h4 class="our-friends__name">Katrine</h4>
               <button class="button our-friends__button">Learn more</button>
             </li>
-            <li class="our-friends__card">
+            <li class="our-friends__card our-friends__extra-card-320">
               <div class="our-friends__picture">
                 <img
                   src="../../assets/images/pets/jennifer.png"
@@ -112,7 +120,7 @@
               <h4 class="our-friends__name">Jennifer</h4>
               <button class="button our-friends__button">Learn more</button>
             </li>
-            <li class="our-friends__card">
+            <li class="our-friends__card our-friends__extra-card-768">
               <div class="our-friends__picture">
                 <img
                   src="../../assets/images/pets/woody.png"
@@ -308,8 +316,9 @@
         </a>
       </div>
       <div class="footer__image">
-        <img src="../../assets/images/footer-puppy.png" alt="Puppy image" />
+        <img src="../../assets/images/footer-puppy.png" alt="Puppy image" class="footer__img"/>
       </div>
     </footer>
+    <script src="./script.js"></script>
   </body>
 </html>

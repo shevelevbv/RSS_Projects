@@ -1,6 +1,8 @@
 .header {
   background-color: white;
   height: 120px;
+  position: sticky;
+  top: 0;
 }
 
 .logo__title {
@@ -92,4 +94,62 @@
 
 .our-friends__nav__button.disabled:hover {
   background-color: transparent;
+}
+
+@media (max-width: 1279px) {
+
+  .main {
+    width: 100%;
+    height: auto;
+  }
+
+  .our-friends {
+    width: 100%;
+    height: auto;
+    padding: 80px 30px 76px 30px;
+  }
+
+  .our-friends__cards {
+    margin: 29px 0 40px 0;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 767px) {
+
+  .burger__line {
+    background-color: black;
+  }
+
+  .open .page-mask {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .nav {
+    background-color: white;
+  }
+
+  .our-friends {
+    width: 100%;
+    height: auto;
+    padding: 42px 10px 42px 10px;
+    gap: 12px;
+  }
+
+  .our-friends__cards {
+    height: auto;
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+  }
+
+  .our-friends__card {
+    justify-self: center;
+  }
+
+  .our-friends__nav {
+    width: 100%;
+    gap: 10px;
+  }
+
 }
