@@ -153,6 +153,7 @@ ul {
 
 .page-mask {
   display: none;
+  opacity: 0;
 }
 
 .nav__links {
@@ -371,15 +372,18 @@ ul {
 
   .open .burger__line2 {
     transform: rotate(-90deg) translate(0, -1px);
+    transition-delay: 0.1s;
   }
 
   .open .burger__line3 {
     transform: rotate(-90deg) translate(10px, 9px);
+    transition-delay: 0.2s;
   }
 
   .open .page-mask {
     display: block;
     position: fixed;
+    opacity: 1;
     top: 0;
     bottom: 0;
     right: 0;
@@ -393,9 +397,7 @@ ul {
     align-items: center;
     position: fixed;
     top: 0;
-    margin-top: -30px;
     margin-right: -320px;
-    padding-top: 60px;
     right: 0;
     z-index: 1;
     width: 320px;
