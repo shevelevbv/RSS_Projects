@@ -282,7 +282,7 @@ body {
   .not-only__image {
     width: 569px;
     height: 593px;
-    align-self: flex-end;
+    margin-left: 140px;
   }
 
   .not-only__img {
@@ -291,7 +291,7 @@ body {
   }
 
   .about {
-    gap: 80px;
+    gap: 80px calc(100vw - 430px);
   }
 
   .about__text {
@@ -317,7 +317,7 @@ body {
   }
 
   .in-addition {
-    gap: 60px;
+    gap: 60px calc(100vw - 380px);
   }
 
 }
@@ -368,10 +368,11 @@ body {
   .not-only__image {
     width: 260px;
     height: auto;
+    margin-left: 40px;
   }
 
   .about {
-    gap: 40px;
+    gap: 40px calc(100vw - 380px);
   }
 
   .about__title {
@@ -448,7 +449,7 @@ body {
   }
 
   .in-addition {
-    gap: 43px;
+    gap: 43px calc(100vw - 380px);
   }
 
   .in-addition__image {
