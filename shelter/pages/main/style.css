@@ -298,8 +298,13 @@ body {
     margin-top: 0;
   }
 
+  .our-friends__show {
+    gap: 12px;
+    justify-content: center;
+  }
+
   .our-friends__cards {
-    width: calc(100% - 94px);
+    width: 580px;
     justify-content: center;
     gap: 40px;
   }
@@ -405,8 +410,12 @@ body {
   .our-friends__show {
     height: auto;
     flex-wrap: wrap;
-    gap: 20px calc(100vw - 240px);
+    gap: 20px 80px;
     justify-content: center;
+  }
+
+  .our-friends__cards {
+    width: 100%;
   }
 
   .our-friends__back {
