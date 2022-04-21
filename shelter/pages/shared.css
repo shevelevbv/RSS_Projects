@@ -333,6 +333,11 @@ ul {
 
 @media (max-width: 767px) {
 
+  body.open {
+    width: 100%;
+    position: fixed;
+  }
+
   .section {
     height: auto;
     padding: 42px 10px;
@@ -368,16 +373,16 @@ ul {
     height: 2px;
   }
 
-  .open .burger__line1 {
+  .open .burger__line:nth-child(1) {
     transform: rotate(-90deg) translate(-10px, -11px);
   }
 
-  .open .burger__line2 {
+  .open .burger__line:nth-child(2) {
     transform: rotate(-90deg) translate(0, -1px);
     transition-delay: 0.1s;
   }
 
-  .open .burger__line3 {
+  .open .burger__line:nth-child(3) {
     transform: rotate(-90deg) translate(10px, 9px);
     transition-delay: 0.2s;
   }
@@ -390,7 +395,7 @@ ul {
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(41, 41, 41, 0.6);
   }
 
   .nav {
@@ -403,7 +408,7 @@ ul {
     right: 0;
     z-index: 1;
     width: 320px;
-    height: 823px;
+    height: 100vh;
     background-color: #292929;
   }
 
