@@ -155,6 +155,15 @@ body {
   left: -1080px;
 }
 
+.our-friends__cards-left,
+.our-friends__cards-active,
+.our-friends__cards-right {
+  width: 990px;
+  height: 435px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .our-friends__cards.move-left {
   animation: move-left;
   animation-duration: 2s;
