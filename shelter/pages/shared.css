@@ -32,7 +32,6 @@
 
 html {
   box-sizing: border-box;
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
@@ -42,6 +41,12 @@ body {
   justify-content: space-between;
   line-height: 0;
   position: relative;
+}
+
+body.pop-up {
+  width: 100%;
+  position: fixed;
+  height: 100vh;
 }
 
 a {
@@ -151,7 +156,8 @@ ul {
   display: none;
 }
 
-.page-mask {
+.page-mask,
+.popup-mask {
   display: none;
   opacity: 0;
 }
@@ -179,6 +185,18 @@ ul {
 
 .active .nav__link {
   cursor: default;
+}
+
+.pop-up .popup-mask {
+  display: block;
+  position: fixed;
+  opacity: 1;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(41, 41, 41, 0.6);
+  z-index: 3;
 }
 
 .our-friends__card {
@@ -440,10 +458,6 @@ ul {
 
   .open .nav {
     transform: translateX(-320px);
-  }
-  
-  .our-friends__extra-card-320 {
-    display: none;
   }
 
   .footer {
