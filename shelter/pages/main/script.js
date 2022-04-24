@@ -166,7 +166,9 @@ fetch('../pets.json')
   function togglePopupClass(event) {
     if (
       event.target.closest('.our-friends__card') ||
-      event.target.classList.contains('popup-mask')
+      event.target.classList.contains('popup-mask') ||
+      event.target.classList.contains('popup__container') ||
+      event.target.closest('.popup__button')
     ) {
       if (!BODY.classList.contains('pop-up')) {
         disablePage('pop-up');

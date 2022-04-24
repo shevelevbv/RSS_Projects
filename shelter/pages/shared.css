@@ -94,6 +94,7 @@ ul {
   align-items: center;
 }
 
+.popup-mask:hover .popup__button,
 .button:hover {
   border-color: var(--color-primary-light);
   background-color: var(--color-primary-light);
