@@ -144,10 +144,27 @@ fetch('../pets.json')
   const HEADER = document.querySelector('.header');
   const BODY = document.body;
   const PET_SHOW = document.querySelector('.our-friends__show');
+  const POPUP_MASK = document.querySelector('.popup-mask');
+  const POPUP_BTN = document.querySelector('.popup__button');
   
   HEADER.addEventListener('click', toggleOpenClass);
   PET_SHOW.addEventListener('click', togglePopupClass);
+  POPUP_MASK.addEventListener('mouseover', addHoverClass);
+  POPUP_MASK.addEventListener('mouseover', removeHoverClass);
   
+  function addHoverClass(event) {
+    if (event.target.classList.contains('popup-mask') ||
+    event.target.classList.contains('popup__container')) {
+      POPUP_BTN.classList.add('hover');
+    }
+  }
+
+  function removeHoverClass(event) {
+    if (event.target.classList.contains('popup__window')) {
+      POPUP_BTN.classList.remove('hover');
+    }
+  }
+
   function toggleOpenClass(event) {
     if (
       event.target.classList.contains('burger') ||
