@@ -6,6 +6,7 @@ fetch('../pets.json')
     const OUR_FRIENDS_BTN_PANEL = document.querySelector('.our-friends__nav');
     let pets = Array.from(allPetsInfo);
     let petObjects = [];
+    let currentPage = 1;
     
     for (let i = 0; i < 6; i++) {
       petObjects.push(shuffleArray(pets));
@@ -20,13 +21,29 @@ fetch('../pets.json')
       })
     }
 
-    //OUR_FRIENDS_BTN_PANEL.addEventListener('click', )
+    OUR_FRIENDS_BTN_PANEL.addEventListener('click', changePage);
+
+    function changePage(event) {
+      if (event.target.closest('.our-friends__forward__button')) {
+        currentPage += 1;
+      } else if (event.target.closest('.our-friends__back__button')) {
+        currentPage -= 1;
+      } else if (event.target.closest('.our-friends__start__button')) {
+        currentPage = 1;
+      } else if (event.target.closest('.our-friends__end__button')) {
+        currentPage = 6;
+      }
+      document.querySelector('.our-friends__current__button').innerHTML = currentPage;
+      createCards(currentPage - 1);
+    }
 
     function createCards (index) {
       for (let i = 0; i < 8; i++) {
         let card = document.querySelector(`.our-friends__card:nth-child(${i + 1})`);
         let cardImage = card.querySelector('.our-friends__img');
+        let cardName = card.querySelector('.our-friends__name');
         cardImage.src = petObjects[index][i].img;
+        cardName.innerHTML = petObjects[index][i].name;
       }
     }
 
