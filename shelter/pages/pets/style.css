@@ -114,6 +114,11 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .our-friends__card:nth-child(8),
+  .our-friends__card:nth-child(7) {
+    display: none;
+  }
+
 }
 
 @media (max-width: 767px) {
@@ -137,6 +142,12 @@
     height: auto;
     grid-template-columns: 1fr;
     margin-bottom: 30px;
+  }
+
+  .our-friends__card:nth-child(6),
+  .our-friends__card:nth-child(5),
+  .our-friends__card:nth-child(4) {
+    display: none;
   }
 
   .our-friends__card {
