@@ -246,12 +246,16 @@ ul {
 
 .popup__content {
   width: 351px;
-  height: auto;
+  height: 362px;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+}
+
+.popup__breed {
+  text-align: left;
 }
 
 .popup__description {
@@ -272,7 +276,16 @@ ul {
 }
 
 .popup__notes {
-  list-style: circle;
+  padding-left: 15px;
+  list-style-type: disc;
+}
+
+.popup__note {
+  margin-bottom: 13px;
+}
+
+.popup__note::marker {
+  color: var(--color-primary);
 }
 
 .popup__note-item {
