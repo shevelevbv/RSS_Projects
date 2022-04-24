@@ -3,10 +3,15 @@ fetch('../pets.json')
   .then((allPetsInfo) => {
     const OUR_FRIENDS_SECTION = document.querySelector('.our-friends');
     const CARDS = document.querySelectorAll('.our-friends__card');
-    const OUR_FRIENDS_BTN_PANEL = document.querySelector('.our-friends__nav');
+    const OUR_FRIENDS_BTNS = document.querySelectorAll('.our-friends__nav__button');
     let pets = Array.from(allPetsInfo);
     let petObjects = [];
     let currentPage = 1;
+    let startButton = document.querySelector('.our-friends__start__button');
+    let backButton = document.querySelector('.our-friends__back__button');
+    let forwardButton = document.querySelector('.our-friends__forward__button');
+    let endButton = document.querySelector('.our-friends__end__button');
+
     
     for (let i = 0; i < 6; i++) {
       petObjects.push(shuffleArray(pets));
@@ -21,7 +26,9 @@ fetch('../pets.json')
       })
     }
 
-    OUR_FRIENDS_BTN_PANEL.addEventListener('click', changePage);
+    for (let button of OUR_FRIENDS_BTNS) {
+      button.addEventListener('click', changePage);
+    }
 
     function changePage(event) {
       if (event.target.closest('.our-friends__forward__button')) {
@@ -35,6 +42,32 @@ fetch('../pets.json')
       }
       document.querySelector('.our-friends__current__button').innerHTML = currentPage;
       createCards(currentPage - 1);
+      if (currentPage == 1) {
+        startButton.classList.add('disabled');
+        startButton.removeEventListener('click', changePage);
+        backButton.classList.add('disabled');
+        backButton.removeEventListener('click', changePage);
+        forwardButton.classList.remove('disabled');
+        forwardButton.addEventListener('click', changePage);
+        endButton.classList.remove('disabled');
+        endButton.addEventListener('click', changePage);
+
+      } else if (currentPage == 6) {
+        forwardButton.classList.add('disabled');
+        forwardButton.removeEventListener('click', changePage);
+        endButton.classList.add('disabled');
+        endButton.removeEventListener('click', changePage);
+        startButton.classList.remove('disabled');
+        startButton.addEventListener('click', changePage);
+        backButton.classList.remove('disabled');
+        backButton.addEventListener('click', changePage);
+      } else {
+        for (let button of OUR_FRIENDS_BTNS) {
+          button.addEventListener('click', changePage);
+          button.classList.remove('disabled');
+        }
+      }
+
     }
 
     function createCards (index) {
