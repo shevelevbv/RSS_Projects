@@ -1,10 +1,11 @@
+preloadImages();
+
 fetch('../pets.json')
   .then((response) => response.json())
   .then((allPetsInfo) => {
 
-    const CARDS = document.querySelectorAll('.our-friends__card');
+    const OUR_FRIENDS_CARD_CONTAINER = document.querySelector('.our-friends__cards');
     const OUR_FRIENDS_BTNS = document.querySelectorAll('.our-friends__nav__button');
-    let pets = Array.from(allPetsInfo);
     let petObjects = [];
     let currentPage = 1;
     let startButton = document.querySelector('.our-friends__start__button');
@@ -14,36 +15,25 @@ fetch('../pets.json')
     let numberOfCards;
     let pageNumbers;
     
-    preloadImages();
-
     setLimits();
 
     for (let i = 0; i < pageNumbers; i++) {
-      petObjects.push(shuffleArray(pets));
+      petObjects.push(shuffleArray(allPetsInfo));
     }
 
-    createCards(0);
+    createCards();
+
+    const CARDS = document.querySelectorAll('.our-friends__card');
 
     for (let card of CARDS) {
       card.addEventListener('click', () => {
         let petNameElement = card.querySelector('.our-friends__name');
-          createPopupWindow(petNameElement.innerHTML);
+        createPopupWindow(petNameElement.innerHTML);
       })
     }
 
     for (let button of OUR_FRIENDS_BTNS) {
       button.addEventListener('click', changePage);
-    }
-
-    function preloadImages() {
-      const img = new Image();
-      img.src = '../../assets/images/charly.png';
-      img.src = '../../assets/images/freddie.png';
-      img.src = '../../assets/images/jennifer.png';
-      img.src = '../../assets/images/katrine.png';
-      img.src = '../../assets/images/scarlett.png';
-      img.src = '../../assets/images/sophia.png';
-      img.src = '../../assets/images/timmy.png';
     }
 
     function setLimits() {
@@ -86,16 +76,36 @@ fetch('../pets.json')
           button.classList.remove('disabled');
         }
       }
-
     }
 
-    function createCards (index) {
+    function createCard(name, imagePath) {
+      const card = document.createElement('li');
+      card.classList.add('our-friends__card');
+      const imageContainer = document.createElement('div');
+      imageContainer.classList.add('our-friends__picture');
+      const image = document.createElement('img');
+      image.setAttribute('src', imagePath);
+      image.setAttribute('alt', 'Pet picture');
+      const petName = document.createElement('h4');
+      petName.classList.add('our-friends__name');
+      petName.innerText = name;
+      const button = document.createElement('button');
+      button.innerText = 'Learn more';
+      button.classList.add('button');
+      button.classList.add('our-friends__button');
+
+      imageContainer.appendChild(image);
+      card.appendChild(imageContainer);
+      card.appendChild(petName);
+      card.appendChild(button);
+
+      return card;
+    }
+
+    function createCards() {
+      OUR_FRIENDS_CARD_CONTAINER.innerHTML = '';
       for (let i = 0; i < numberOfCards; i++) {
-        let card = document.querySelector(`.our-friends__card:nth-child(${i + 1})`);
-        let cardImage = card.querySelector('.our-friends__img');
-        let cardName = card.querySelector('.our-friends__name');
-        cardImage.src = petObjects[index][i].img;
-        cardName.innerHTML = petObjects[index][i].name;
+        OUR_FRIENDS_CARD_CONTAINER.appendChild(createCard(petObjects[currentPage - 1][i].name, petObjects[currentPage - 1][i].img));
       }
     }
 
@@ -197,4 +207,15 @@ fetch('../pets.json')
     BODY.classList.remove(className);
     window.scroll({top: pagePosition, left: 0});
     BODY.removeAttribute('data-position');
+  }
+
+  function preloadImages() {
+    const img = new Image();
+    img.src = '../../assets/images/charly.png';
+    img.src = '../../assets/images/freddie.png';
+    img.src = '../../assets/images/jennifer.png';
+    img.src = '../../assets/images/katrine.png';
+    img.src = '../../assets/images/scarlett.png';
+    img.src = '../../assets/images/sophia.png';
+    img.src = '../../assets/images/timmy.png';
   }
