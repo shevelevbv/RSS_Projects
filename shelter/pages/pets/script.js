@@ -1,7 +1,7 @@
 fetch('../pets.json')
   .then((response) => response.json())
   .then((allPetsInfo) => {
-    const OUR_FRIENDS_SECTION = document.querySelector('.our-friends');
+
     const CARDS = document.querySelectorAll('.our-friends__card');
     const OUR_FRIENDS_BTNS = document.querySelectorAll('.our-friends__nav__button');
     let pets = Array.from(allPetsInfo);
@@ -14,6 +14,8 @@ fetch('../pets.json')
     let numberOfCards;
     let pageNumbers;
     
+    preloadImages();
+
     setLimits();
 
     for (let i = 0; i < pageNumbers; i++) {
@@ -33,7 +35,7 @@ fetch('../pets.json')
       button.addEventListener('click', changePage);
     }
 
-    (function preloadImages() {
+    function preloadImages() {
       const img = new Image();
       img.src = '../../assets/images/charly.png';
       img.src = '../../assets/images/freddie.png';
@@ -42,7 +44,7 @@ fetch('../pets.json')
       img.src = '../../assets/images/scarlett.png';
       img.src = '../../assets/images/sophia.png';
       img.src = '../../assets/images/timmy.png';
-    })();
+    }
 
     function setLimits() {
       if (window.screen.width >= 1280) {
@@ -71,25 +73,16 @@ fetch('../pets.json')
       createCards(currentPage - 1);
       if (currentPage === 1) {
         startButton.classList.add('disabled');
-        startButton.removeEventListener('click', changePage);
         backButton.classList.add('disabled');
-        backButton.removeEventListener('click', changePage);
         forwardButton.classList.remove('disabled');
-        forwardButton.addEventListener('click', changePage);
         endButton.classList.remove('disabled');
-        endButton.addEventListener('click', changePage);
       } else if (currentPage === pageNumbers) {
         forwardButton.classList.add('disabled');
-        forwardButton.removeEventListener('click', changePage);
         endButton.classList.add('disabled');
-        endButton.removeEventListener('click', changePage);
         startButton.classList.remove('disabled');
-        startButton.addEventListener('click', changePage);
         backButton.classList.remove('disabled');
-        backButton.addEventListener('click', changePage);
       } else if (currentPage === 2 || currentPage == pageNumbers - 1) {
         for (let button of OUR_FRIENDS_BTNS) {
-          button.addEventListener('click', changePage);
           button.classList.remove('disabled');
         }
       }
@@ -164,8 +157,7 @@ fetch('../pets.json')
 
   function toggleOpenClass(event) {
     if (
-      event.target.classList.contains('burger') ||
-      event.target.classList.contains('burger__line') ||
+      event.target.closest('.burger') ||
       event.target.classList.contains('nav__link') ||
       event.target.classList.contains('page-mask')
     ) {

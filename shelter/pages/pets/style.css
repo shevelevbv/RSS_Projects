@@ -90,6 +90,7 @@
   border-color: #CDCDCD;
   color: #CDCDCD;
   cursor: default;
+  pointer-events: none;
 }
 
 .our-friends__nav__button.disabled:hover {
