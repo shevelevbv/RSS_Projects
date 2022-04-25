@@ -52,7 +52,6 @@ body {
 body.pop-up {
   width: 100%;
   position: fixed;
-  height: 100vh;
 }
 
 a {
@@ -195,7 +194,6 @@ ul {
 }
 
 .pop-up .popup-mask {
-  display: block;
   position: fixed;
   opacity: 1;
   top: 0;
