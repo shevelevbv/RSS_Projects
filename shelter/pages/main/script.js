@@ -160,7 +160,7 @@ fetch('../pets.json')
   }
 
   function removeHoverClass(event) {
-    if (event.target.classList.contains('popup__window')) {
+    if (event.target.closest('.popup__window')) {
       POPUP_BTN.classList.remove('hover');
     }
   }

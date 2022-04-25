@@ -582,6 +582,7 @@ ul {
 
   .open .nav {
     transform: translateX(-320px);
+    transition: all 0.5s;
   }
 
   .pop-up .popup-mask {
