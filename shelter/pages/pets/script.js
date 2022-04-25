@@ -23,15 +23,6 @@ fetch('../pets.json')
 
     createCards();
 
-    const CARDS = document.querySelectorAll('.our-friends__card');
-
-    for (let card of CARDS) {
-      card.addEventListener('click', () => {
-        let petNameElement = card.querySelector('.our-friends__name');
-        createPopupWindow(petNameElement.innerHTML);
-      })
-    }
-
     for (let button of OUR_FRIENDS_BTNS) {
       button.addEventListener('click', changePage);
     }
@@ -98,6 +89,11 @@ fetch('../pets.json')
       card.appendChild(imageContainer);
       card.appendChild(petName);
       card.appendChild(button);
+
+      card.addEventListener('click', () => {
+        let petNameElement = card.querySelector('.our-friends__name');
+        createPopupWindow(petNameElement.innerHTML);
+      })
 
       return card;
     }
