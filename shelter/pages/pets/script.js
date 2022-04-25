@@ -11,9 +11,12 @@ fetch('../pets.json')
     let backButton = document.querySelector('.our-friends__back__button');
     let forwardButton = document.querySelector('.our-friends__forward__button');
     let endButton = document.querySelector('.our-friends__end__button');
-
+    let numberOfCards;
+    let pageNumbers;
     
-    for (let i = 0; i < 6; i++) {
+    setLimits();
+
+    for (let i = 0; i < pageNumbers; i++) {
       petObjects.push(shuffleArray(pets));
     }
 
@@ -30,6 +33,30 @@ fetch('../pets.json')
       button.addEventListener('click', changePage);
     }
 
+    (function preloadImages() {
+      const img = new Image();
+      img.src = '../../assets/images/charly.png';
+      img.src = '../../assets/images/freddie.png';
+      img.src = '../../assets/images/jennifer.png';
+      img.src = '../../assets/images/katrine.png';
+      img.src = '../../assets/images/scarlett.png';
+      img.src = '../../assets/images/sophia.png';
+      img.src = '../../assets/images/timmy.png';
+    })();
+
+    function setLimits() {
+      if (window.screen.width >= 1280) {
+        numberOfCards = 8;
+        pageNumbers = 6;
+      } else if (window.screen.width >= 768) {
+        numberOfCards = 6;
+        pageNumbers = 8;
+      } else {
+        numberOfCards = 3;
+        pageNumbers = 16;
+      }
+    }
+
     function changePage(event) {
       if (event.target.closest('.our-friends__forward__button')) {
         currentPage += 1;
@@ -38,11 +65,11 @@ fetch('../pets.json')
       } else if (event.target.closest('.our-friends__start__button')) {
         currentPage = 1;
       } else if (event.target.closest('.our-friends__end__button')) {
-        currentPage = 6;
+        currentPage = pageNumbers;
       }
       document.querySelector('.our-friends__current__button').innerHTML = currentPage;
       createCards(currentPage - 1);
-      if (currentPage == 1) {
+      if (currentPage === 1) {
         startButton.classList.add('disabled');
         startButton.removeEventListener('click', changePage);
         backButton.classList.add('disabled');
@@ -51,8 +78,7 @@ fetch('../pets.json')
         forwardButton.addEventListener('click', changePage);
         endButton.classList.remove('disabled');
         endButton.addEventListener('click', changePage);
-
-      } else if (currentPage == 6) {
+      } else if (currentPage === pageNumbers) {
         forwardButton.classList.add('disabled');
         forwardButton.removeEventListener('click', changePage);
         endButton.classList.add('disabled');
@@ -61,7 +87,7 @@ fetch('../pets.json')
         startButton.addEventListener('click', changePage);
         backButton.classList.remove('disabled');
         backButton.addEventListener('click', changePage);
-      } else {
+      } else if (currentPage === 2 || currentPage == pageNumbers - 1) {
         for (let button of OUR_FRIENDS_BTNS) {
           button.addEventListener('click', changePage);
           button.classList.remove('disabled');
@@ -71,7 +97,7 @@ fetch('../pets.json')
     }
 
     function createCards (index) {
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < numberOfCards; i++) {
         let card = document.querySelector(`.our-friends__card:nth-child(${i + 1})`);
         let cardImage = card.querySelector('.our-friends__img');
         let cardName = card.querySelector('.our-friends__name');
@@ -107,7 +133,7 @@ fetch('../pets.json')
     function shuffleArray(array) {
       let shuffled = [].concat(array);
       shuffled = shuffled.sort(() => Math.random() - 0.5);
-      return shuffled;
+      return shuffled.slice(0, numberOfCards);
     }
 
   });
