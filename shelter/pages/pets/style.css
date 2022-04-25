@@ -90,6 +90,7 @@
   border-color: #CDCDCD;
   color: #CDCDCD;
   cursor: default;
+  pointer-events: none;
 }
 
 .our-friends__nav__button.disabled:hover {
@@ -114,16 +115,17 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .our-friends__card:nth-child(8),
+  .our-friends__card:nth-child(7) {
+    display: none;
+  }
+
 }
 
 @media (max-width: 767px) {
 
   .burger__line {
     background-color: black;
-  }
-
-  .open .page-mask {
-    background-color: rgba(255, 255, 255, 0.5);
   }
 
   .nav {
@@ -141,6 +143,12 @@
     height: auto;
     grid-template-columns: 1fr;
     margin-bottom: 30px;
+  }
+
+  .our-friends__card:nth-child(6),
+  .our-friends__card:nth-child(5),
+  .our-friends__card:nth-child(4) {
+    display: none;
   }
 
   .our-friends__card {
