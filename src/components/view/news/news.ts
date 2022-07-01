@@ -4,19 +4,21 @@ import { Article } from '../../../types/index';
 type htmlTempElementOrNull = HTMLTemplateElement | null;
 
 class News {
-    draw(data: Array<Article>) {
-        const news: Array<Article> = data.length >= 10 ? data.filter((_item: Article, idx: number) => idx < 10) : data;
+    draw(data: Array<Article>): void {
+        const news: Array<Article> = data.length >= 10 
+            ? data.filter((_item: Article, idx: number) => idx < 10) 
+            : data;
         const fragment: DocumentFragment = document.createDocumentFragment();
 
         const newsItemTemp: htmlTempElementOrNull = document.querySelector('#newsItemTemp');
-        if (newsItemTemp === null) {
+        if (!newsItemTemp) {
             throw new Error('Object is null');
         }
 
         news.forEach((item: Article, idx: number) => {
 
             const newsClone: Node | null = newsItemTemp.content.cloneNode(true);
-            if (newsClone === null) {
+            if (!newsClone) {
                 throw new Error('Object is null');
             }
 
@@ -29,14 +31,14 @@ class News {
                 const newsDescSource: htmlTempElementOrNull = newsClone.querySelector('.news__description-source');
                 const newsDescContent: htmlTempElementOrNull = newsClone.querySelector('.news__description-content');
                 const newsReadMore: htmlTempElementOrNull = newsClone.querySelector('.news__read-more a');
-                if (newsItem === null
-                    || newsMetaPhoto === null
-                    || newsMetaAuthor === null
-                    || newsMetaDate === null
-                    || newsDescTitle === null
-                    || newsDescSource === null
-                    || newsDescContent === null
-                    || newsReadMore === null) {
+                if (!newsItem
+                    || !newsMetaPhoto
+                    || !newsMetaAuthor
+                    || !newsMetaDate
+                    || !newsDescTitle
+                    || !newsDescSource
+                    || !newsDescContent
+                    || !newsReadMore) {
                     throw new Error('Object is null');
                 }
                 if (idx % 2) newsItem.classList.add('alt');
@@ -59,7 +61,7 @@ class News {
         });
 
         const newsElement: Element | null = document.querySelector('.news');
-        if (newsElement === null) {
+        if (!newsElement) {
             throw new Error('Object is null');
         }
         newsElement.innerHTML = '';

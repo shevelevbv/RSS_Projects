@@ -1,4 +1,4 @@
-interface Source {
+export interface Source {
   id: string | null;
   name: string;
 }
@@ -18,4 +18,5 @@ export interface Response {
   status: string;
   totalResults: number;
   articles: Array<Article>;
+  sources: Array<Source>
 }
