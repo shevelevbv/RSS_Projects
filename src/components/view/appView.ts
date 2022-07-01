@@ -15,7 +15,6 @@ export class AppView {
         const values: Array<Article> = data?.articles 
             ? data?.articles 
             : [];
-
         this.news.draw(values);
     }
 
@@ -23,7 +22,6 @@ export class AppView {
         const values: Array<Source> = data?.sources 
             ? data?.sources 
             : [];
-            
         this.sources.draw(values);
     }
 }
