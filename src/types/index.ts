@@ -14,9 +14,13 @@ export interface Article {
   content: string;
 }
 
-export interface Response {
+export interface Data {
   status: string;
   totalResults: number;
   articles: Array<Article>;
-  sources: Array<Source>
+  sources: Array<Source>;
+}
+
+export interface Request {
+  apiKey: string;
 }
