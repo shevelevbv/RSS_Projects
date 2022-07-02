@@ -5,6 +5,11 @@ export interface Callback {
 export interface Source {
   id: string | null;
   name: string;
+  description: string;
+  url: string;
+  category: string;
+  language: string;
+  country: string;
 }
 
 export interface Article {
@@ -28,3 +33,4 @@ export interface Data {
 export interface Request {
   apiKey: string;
 }
+

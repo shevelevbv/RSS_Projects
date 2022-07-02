@@ -1,5 +1,6 @@
 import './news.css';
-import { Article } from '../../../types/index';
+import { Article } from '../../../helpers/interfaces';
+import { Errors } from '../../../helpers/enums';
 
 type htmlTempElementOrNull = HTMLTemplateElement | null;
 
@@ -12,14 +13,14 @@ class News {
 
         const newsItemTemp: htmlTempElementOrNull = document.querySelector('#newsItemTemp');
         if (!newsItemTemp) {
-            throw new Error('Object is null');
+            throw new Error(Errors.isNull);
         }
 
         news.forEach((item: Article, idx: number) => {
 
             const newsClone: Node | null = newsItemTemp.content.cloneNode(true);
             if (!newsClone) {
-                throw new Error('Object is null');
+                throw new Error(Errors.isNull);
             }
 
             if (newsClone instanceof DocumentFragment) {
@@ -39,7 +40,7 @@ class News {
                     || !newsDescSource
                     || !newsDescContent
                     || !newsReadMore) {
-                    throw new Error('Object is null');
+                    throw new Error(Errors.isNull);
                 }
                 if (idx % 2) newsItem.classList.add('alt');
                 newsMetaPhoto.style.backgroundImage = `url(${
@@ -62,7 +63,7 @@ class News {
 
         const newsElement: Element | null = document.querySelector('.news');
         if (!newsElement) {
-            throw new Error('Object is null');
+            throw new Error(Errors.isNull);
         }
         newsElement.innerHTML = '';
         newsElement.appendChild(fragment);

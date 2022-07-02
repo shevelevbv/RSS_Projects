@@ -1,11 +1,12 @@
 import AppLoader from './appLoader';
-import { Callback } from '../../types/index';
+import { Callback } from '../../helpers/interfaces';
+import { Endpoints, Errors } from '../../helpers/enums';
 
 class AppController extends AppLoader {
     getSources(callback: Callback): void {
         super.getResp(
             {
-                endpoint: 'sources',
+                endpoint: Endpoints.sources,
             },
             callback
         );
@@ -18,18 +19,18 @@ class AppController extends AppLoader {
         while (target !== newsContainer) {
             if (target instanceof HTMLElement && newsContainer instanceof HTMLElement) {
                 if (!(target && newsContainer)) {
-                    throw new Error('Object is null');
+                    throw new Error(Errors.isNull);
                 }
                 if (target.classList.contains('source__item')) {
                     const sourceId: string | null = target.getAttribute('data-source-id');
                     if (!sourceId) {
-                        throw new Error('Source not found');
+                        throw new Error(Errors.noSource);
                     }
                     if (newsContainer.getAttribute('data-source') !== sourceId) {
                         newsContainer.setAttribute('data-source', sourceId);
                         super.getResp(
                             {
-                                endpoint: 'everything',
+                                endpoint: Endpoints.everything,
                                 options: {
                                     sources: sourceId,
                                 },

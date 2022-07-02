@@ -1,5 +1,6 @@
 import './sources.css';
-import { Source } from '../../../types/index';
+import { Source } from '../../../helpers/interfaces';
+import { Errors } from '../../../helpers/enums';
 
 type htmlTempElementOrNull = HTMLTemplateElement | null;
 
@@ -8,10 +9,11 @@ class Sources {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: htmlTempElementOrNull = document.querySelector('#sourceItemTemp');
         if (!sourceItemTemp) {
-            throw new Error('Object is null');
+            throw new Error(Errors.isNull);
         }
 
         data.forEach((item: Source) => {
+            console.log(item);
             const sourceClone: Node = sourceItemTemp.content.cloneNode(true);
 
             if (sourceClone instanceof DocumentFragment) {
@@ -19,7 +21,7 @@ class Sources {
                 const sourceItem: htmlTempElementOrNull = sourceClone.querySelector('.source__item');
                 if (!sourceItemName
                     || !sourceItem) {
-                    throw new Error('Object is null');
+                    throw new Error(Errors.isNull);
                 }
                 sourceItemName.textContent = item.name;
                 sourceItem.setAttribute('data-source-id', item.id as string);
@@ -30,7 +32,7 @@ class Sources {
 
         const sources: Element | null = document.querySelector('.sources');
         if (!sources) {
-            throw new Error('Object is null');
+            throw new Error(Errors.isNull);
         }
         sources.append(fragment);
     }

@@ -1,4 +1,4 @@
-import { Callback, Data, Request } from '../../types/index';
+import { Callback, Data, Request } from '../../helpers/interfaces';
 
 interface Endpoint {
     endpoint: string;
