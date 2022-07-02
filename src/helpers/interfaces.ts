@@ -1,5 +1,5 @@
-export interface Callback {
-  (param?: Data) : void;
+export interface Callback<T> {
+  (param: T) : void;
 }
 
 export interface Source {
@@ -32,5 +32,14 @@ export interface Data {
 
 export interface Request {
   apiKey: string;
+}
+
+export interface Endpoint {
+  endpoint: string;
+  options?: Options; 
+}
+
+export interface Options {
+  sources?: string;
 }
 

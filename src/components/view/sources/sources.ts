@@ -1,13 +1,12 @@
 import './sources.css';
 import { Source } from '../../../helpers/interfaces';
 import { Errors } from '../../../helpers/enums';
-
-type htmlTempElementOrNull = HTMLTemplateElement | null;
+import { HtmlTempElementOrNull } from '../../../helpers/types';
 
 class Sources {
     draw(data: Array<Source>): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
-        const sourceItemTemp: htmlTempElementOrNull = document.querySelector('#sourceItemTemp');
+        const sourceItemTemp: HtmlTempElementOrNull = document.querySelector('#sourceItemTemp');
         if (!sourceItemTemp) {
             throw new Error(Errors.isNull);
         }
@@ -17,8 +16,8 @@ class Sources {
             const sourceClone: Node = sourceItemTemp.content.cloneNode(true);
 
             if (sourceClone instanceof DocumentFragment) {
-                const sourceItemName: htmlTempElementOrNull = sourceClone.querySelector('.source__item-name');
-                const sourceItem: htmlTempElementOrNull = sourceClone.querySelector('.source__item');
+                const sourceItemName: HtmlTempElementOrNull = sourceClone.querySelector('.source__item-name');
+                const sourceItem: HtmlTempElementOrNull = sourceClone.querySelector('.source__item');
                 if (!sourceItemName
                     || !sourceItem) {
                     throw new Error(Errors.isNull);

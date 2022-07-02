@@ -1,9 +1,9 @@
 import AppLoader from './appLoader';
-import { Callback } from '../../helpers/interfaces';
+import { Callback, Data } from '../../helpers/interfaces';
 import { Endpoints, Errors } from '../../helpers/enums';
 
 class AppController extends AppLoader {
-    getSources(callback: Callback): void {
+    getSources(callback: Callback<Data>): void {
         super.getResp(
             {
                 endpoint: Endpoints.sources,
@@ -12,7 +12,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: MouseEvent, callback: Callback): void {
+    getNews(e: MouseEvent, callback: Callback<Data>): void {
         let target: EventTarget | null = e.target;
         const newsContainer: EventTarget | null = e.currentTarget;
 

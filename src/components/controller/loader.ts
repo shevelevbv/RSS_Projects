@@ -1,15 +1,5 @@
-import { Callback, Data, Request } from '../../helpers/interfaces';
-
-interface Endpoint {
-    endpoint: string;
-    options?: Options; 
-}
-
-interface Options {
-    sources?: string;
-}
-
-type ReqAndOpt = Request & Options;
+import { Callback, Data, Endpoint, Options, Request } from '../../helpers/interfaces';
+import { ReqAndOpt } from '../../helpers/types';
 
 class Loader {
     baseLink: string;
@@ -22,7 +12,7 @@ class Loader {
 
     getResp(
         endpoint: Endpoint,
-        callback: Callback = () => {
+        callback: Callback<Data> = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -50,7 +40,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: Callback, options: Options = {}): void {
+    load(method: string, endpoint: string, callback: Callback<Data>, options: Options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())

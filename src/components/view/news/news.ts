@@ -1,8 +1,7 @@
 import './news.css';
 import { Article } from '../../../helpers/interfaces';
 import { Errors } from '../../../helpers/enums';
-
-type htmlTempElementOrNull = HTMLTemplateElement | null;
+import { HtmlTempElementOrNull } from '../../../helpers/types';
 
 class News {
     draw(data: Array<Article>): void {
@@ -11,7 +10,7 @@ class News {
             : data;
         const fragment: DocumentFragment = document.createDocumentFragment();
 
-        const newsItemTemp: htmlTempElementOrNull = document.querySelector('#newsItemTemp');
+        const newsItemTemp: HtmlTempElementOrNull = document.querySelector('#newsItemTemp');
         if (!newsItemTemp) {
             throw new Error(Errors.isNull);
         }
@@ -24,14 +23,14 @@ class News {
             }
 
             if (newsClone instanceof DocumentFragment) {
-                const newsItem: htmlTempElementOrNull = newsClone.querySelector('.news__item');
-                const newsMetaPhoto: htmlTempElementOrNull = newsClone.querySelector('.news__meta-photo');
-                const newsMetaAuthor: htmlTempElementOrNull = newsClone.querySelector('.news__meta-author');
-                const newsMetaDate: htmlTempElementOrNull = newsClone.querySelector('.news__meta-date');
-                const newsDescTitle: htmlTempElementOrNull = newsClone.querySelector('.news__description-title');
-                const newsDescSource: htmlTempElementOrNull = newsClone.querySelector('.news__description-source');
-                const newsDescContent: htmlTempElementOrNull = newsClone.querySelector('.news__description-content');
-                const newsReadMore: htmlTempElementOrNull = newsClone.querySelector('.news__read-more a');
+                const newsItem: HtmlTempElementOrNull = newsClone.querySelector('.news__item');
+                const newsMetaPhoto: HtmlTempElementOrNull = newsClone.querySelector('.news__meta-photo');
+                const newsMetaAuthor: HtmlTempElementOrNull = newsClone.querySelector('.news__meta-author');
+                const newsMetaDate: HtmlTempElementOrNull = newsClone.querySelector('.news__meta-date');
+                const newsDescTitle: HtmlTempElementOrNull = newsClone.querySelector('.news__description-title');
+                const newsDescSource: HtmlTempElementOrNull = newsClone.querySelector('.news__description-source');
+                const newsDescContent: HtmlTempElementOrNull = newsClone.querySelector('.news__description-content');
+                const newsReadMore: HtmlTempElementOrNull = newsClone.querySelector('.news__read-more a');
                 if (!newsItem
                     || !newsMetaPhoto
                     || !newsMetaAuthor
@@ -48,10 +47,10 @@ class News {
                 })`;
                 newsMetaAuthor.textContent = item.author || item.source.name;
                 newsMetaDate.textContent = item.publishedAt
-                .slice(0, 10)
-                .split('-')
-                .reverse()
-                .join('-');
+                    .slice(0, 10)
+                    .split('-')
+                    .reverse()
+                    .join('-');
                 newsDescTitle.textContent = item.title;
                 newsDescSource.textContent = item.source.name;
                 newsDescContent.textContent = item.description;
