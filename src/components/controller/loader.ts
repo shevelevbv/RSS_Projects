@@ -1,8 +1,4 @@
-import { Data, Request } from '../../types/index';
-
-interface Callback {
-    (param?: Data) : void;
-}
+import { Callback, Data, Request } from '../../types/index';
 
 interface Endpoint {
     endpoint: string;

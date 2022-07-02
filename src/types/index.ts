@@ -1,3 +1,7 @@
+export interface Callback {
+  (param?: Data) : void;
+}
+
 export interface Source {
   id: string | null;
   name: string;
