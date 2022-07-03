@@ -34,10 +34,41 @@ main {
 }
 
 main .menu {
-    width: 20%;
-    margin: 0 auto;
+    width: 300px;
+    height: 30px;
+    margin: 0 auto 10px;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+
+main .menu::after {
+    content: '>';
+    color: #70d6ff;
+    position: absolute;
+    top: 20%;
+    right: 20%;
+    transform: rotate(90deg);
+}
+
+main .menu__select {
+    width: 200px;
+    font-family: inherit;
+    font-size: 1em;
+    color: #70d6ff;
+    text-align: center;
+    appearance: none;
+    outline: none;
+    border: 1px solid #30c5ff;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    background-color: transparent;
+}
+
+main .menu__select:hover {
+    color: #69db7e;
+    border: 1px solid #3fcc59;
 }
 
 footer {

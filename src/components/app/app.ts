@@ -14,9 +14,9 @@ class App {
 
     start() {
         const sources: HTMLTemplateElement = checkForNull(document.querySelector('.sources'));
-        const okButton: HTMLTemplateElement = checkForNull(document.querySelector('.menu__button'));
+        const select: HTMLTemplateElement = checkForNull(document.querySelector('.menu__select'));
         sources.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: Data | undefined) => this.view.drawNews(data as Data)));
-        okButton.addEventListener('click', () => this.view.drawSources(this.controller.getData()));
+        select.addEventListener('change', () => this.view.drawSources(this.controller.getData()));
         this.controller.getSources((data: Data | undefined) => this.view.drawSources(data as Data));
     }
 }

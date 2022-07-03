@@ -22,6 +22,9 @@ class AppController extends AppLoader {
                     throw new Error(Errors.isNull);
                 }
                 if (target.classList.contains('source__item')) {
+                    const sources: Array<HTMLTemplateElement> = Array.from(document.querySelectorAll('.source__item'));
+                    sources.forEach(source => source.classList.remove('selected'));
+                    target.classList.add('selected');
                     const sourceId: string | null = target.getAttribute('data-source-id');
                     if (!sourceId) {
                         throw new Error(Errors.noSource);
