@@ -16,8 +16,12 @@ const baseConfig = {
             {
                 test: /\.ts$/i, 
                 use: 'ts-loader'
+            },
+            {
+                test: /\.svg$/,
+                type: 'asset/inline'
             }
-        ],
+        ]
     },
     resolve: {
         extensions: ['.ts', '.js'],

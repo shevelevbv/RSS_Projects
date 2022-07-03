@@ -1,10 +1,14 @@
 .sources {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 120px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 5px 0;
+    border: 1px solid gray; 
+    border-radius: 10px;
+    height: 40vh;
     overflow: auto;
-    align-items: center;
+    column-gap: 5px;
     font: 300 1em 'Fira Sans', sans-serif;
 }
 
@@ -13,11 +17,12 @@
     border: 2px solid #30c5ff;
     font: inherit;
     line-height: 1;
-    margin: 0.5em;
+    margin-top: 0.5em;
     padding: 1em 2em;
     color: #70d6ff;
     transition: 0.25s;
     cursor: pointer;
+    text-align: center;
 }
 
 .source__item:hover,
@@ -30,5 +35,29 @@
 
 .source__item-name {
     font-weight: 400;
-    white-space: nowrap;
 }
+
+@media screen and (max-width: 1240px) {
+
+    .sources {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media screen and (max-width: 930px) {
+
+    .sources {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media screen and (max-width: 630px) {
+
+    .sources {
+        grid-template-columns: 1fr;
+    }
+
+}
+
