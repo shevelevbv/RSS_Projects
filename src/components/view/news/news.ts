@@ -1,7 +1,7 @@
 import './news.css';
 import { Article } from '../../../helpers/interfaces';
 import { Errors } from '../../../helpers/enums';
-import { HtmlTempElementOrNull } from '../../../helpers/types';
+import { checkForNull } from '../../../helpers/functions';
 
 class News {
     draw(data: Array<Article>): void {
@@ -10,10 +10,7 @@ class News {
             : data;
         const fragment: DocumentFragment = document.createDocumentFragment();
 
-        const newsItemTemp: HtmlTempElementOrNull = document.querySelector('#newsItemTemp');
-        if (!newsItemTemp) {
-            throw new Error(Errors.isNull);
-        }
+        const newsItemTemp: HTMLTemplateElement = checkForNull(document.querySelector('#newsItemTemp'));
 
         news.forEach((item: Article, idx: number) => {
 
@@ -23,38 +20,21 @@ class News {
             }
 
             if (newsClone instanceof DocumentFragment) {
-                const newsItem: HtmlTempElementOrNull = newsClone.querySelector('.news__item');
-                const newsMetaPhoto: HtmlTempElementOrNull = newsClone.querySelector('.news__meta-photo');
-                const newsMetaAuthor: HtmlTempElementOrNull = newsClone.querySelector('.news__meta-author');
-                const newsMetaDate: HtmlTempElementOrNull = newsClone.querySelector('.news__meta-date');
-                const newsDescTitle: HtmlTempElementOrNull = newsClone.querySelector('.news__description-title');
-                const newsDescSource: HtmlTempElementOrNull = newsClone.querySelector('.news__description-source');
-                const newsDescContent: HtmlTempElementOrNull = newsClone.querySelector('.news__description-content');
-                const newsReadMore: HtmlTempElementOrNull = newsClone.querySelector('.news__read-more a');
-                if (!newsItem
-                    || !newsMetaPhoto
-                    || !newsMetaAuthor
-                    || !newsMetaDate
-                    || !newsDescTitle
-                    || !newsDescSource
-                    || !newsDescContent
-                    || !newsReadMore) {
-                    throw new Error(Errors.isNull);
-                }
-                if (idx % 2) newsItem.classList.add('alt');
-                newsMetaPhoto.style.backgroundImage = `url(${
+                
+                if (idx % 2) checkForNull(newsClone.querySelector('.news__item')).classList.add('alt');
+                checkForNull(newsClone.querySelector('.news__meta-photo')).style.backgroundImage = `url(${
                     item.urlToImage || 'img/news_placeholder.jpg'
                 })`;
-                newsMetaAuthor.textContent = item.author || item.source.name;
-                newsMetaDate.textContent = item.publishedAt
+                checkForNull(newsClone.querySelector('.news__meta-author')).textContent = item.author || item.source.name;
+                checkForNull(newsClone.querySelector('.news__meta-date')).textContent = item.publishedAt
                     .slice(0, 10)
                     .split('-')
                     .reverse()
                     .join('-');
-                newsDescTitle.textContent = item.title;
-                newsDescSource.textContent = item.source.name;
-                newsDescContent.textContent = item.description;
-                newsReadMore.setAttribute('href', item.url);
+                checkForNull(newsClone.querySelector('.news__description-title')).textContent = item.title;
+                checkForNull(newsClone.querySelector('.news__description-source')).textContent = item.source.name;
+                checkForNull(newsClone.querySelector('.news__description-content')).textContent = item.description;
+                checkForNull(newsClone.querySelector('.news__read-more a')).setAttribute('href', item.url);
             }
 
             fragment.append(newsClone);

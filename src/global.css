@@ -2,6 +2,7 @@ body {
     color: #fff;
     background: #17181c;
     font-family: sans-serif;
+    min-height: 100vh;
 }
 
 header {
@@ -11,6 +12,7 @@ header {
 header h1 {
     font-size: 40px;
     font-weight: 800;
+    text-align: center;
 }
 
 footer {
@@ -18,6 +20,8 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    bottom: 0;
 }
 footer .copyright {
     font-size: 14px;
