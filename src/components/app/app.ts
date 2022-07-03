@@ -1,7 +1,7 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 import { Data } from '../../helpers/interfaces'
-import { Errors } from '../../helpers/enums';
+import { checkForNull } from '../../helpers/functions'
 
 class App {
     controller: AppController;
@@ -13,11 +13,10 @@ class App {
     }
 
     start() {
-        const sources: HTMLTemplateElement | null = document.querySelector('.sources');
-        if (!sources) {
-            throw new Error(Errors.isNull);
-        }
-        sources.addEventListener('click', (e) => this.controller.getNews(e, (data: Data | undefined) => this.view.drawNews(data as Data)));
+        const sources: HTMLTemplateElement = checkForNull(document.querySelector('.sources'));
+        const okButton: HTMLTemplateElement = checkForNull(document.querySelector('.menu__button'));
+        sources.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: Data | undefined) => this.view.drawNews(data as Data)));
+        okButton.addEventListener('click', () => this.view.drawSources(this.controller.getData()));
         this.controller.getSources((data: Data | undefined) => this.view.drawSources(data as Data));
     }
 }

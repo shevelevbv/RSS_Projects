@@ -4,10 +4,16 @@ import { ReqAndOpt } from '../../helpers/types';
 class Loader {
     baseLink: string;
     options: Request;
+    data: Data;
 
     constructor(baseLink: string, options: Request) {
         this.baseLink = baseLink;
         this.options = options;
+        this.data = {} as Data;
+    }
+
+    getData(): Data {
+        return this.data;
     }
 
     getResp(
@@ -44,7 +50,12 @@ class Loader {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())
-            .then((data: Data) => callback(data))
+            .then((data: Data) => {
+                if (endpoint === 'sources') {
+                    this.data = data;
+                }
+                callback(data);
+            })
             .catch((err: Error) => console.error(err));
     }
 }
