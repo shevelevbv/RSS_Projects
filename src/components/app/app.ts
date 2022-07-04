@@ -4,20 +4,20 @@ import { Data } from '../../helpers/interfaces'
 import { checkForNull } from '../../helpers/functions'
 
 class App {
-    controller: AppController;
-    view: AppView;
+    private controller: AppController;
+    private view: AppView;
 
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
     }
 
-    start() {
+    public start() {
         const sources: HTMLTemplateElement = checkForNull(document.querySelector('.sources'));
         const select: HTMLTemplateElement = checkForNull(document.querySelector('.menu__select'));
-        sources.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: Data | undefined) => this.view.drawNews(data as Data)));
-        select.addEventListener('change', () => this.view.drawSources(this.controller.getData()));
-        this.controller.getSources((data: Data | undefined) => this.view.drawSources(data as Data));
+        sources.addEventListener('click', (e: MouseEvent): void => this.controller.getNews(e, (data: Data | null) => this.view.drawNews(checkForNull(data))));
+        select.addEventListener('change', (): void => this.view.drawSources(this.controller.getData()));
+        this.controller.getSources((data: Data | null): void => this.view.drawSources(checkForNull(data)));
     }
 }
 

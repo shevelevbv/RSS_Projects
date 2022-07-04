@@ -1,16 +1,15 @@
 import './sources.css';
-import { Source } from '../../../helpers/interfaces';
-import { Errors } from '../../../helpers/enums';
 import { checkForNull } from '../../../helpers/functions';
+import { Subsource } from '../../../helpers/types';
 
 class Sources {
-    draw(data: Array<Source>): void {
+    draw(data: Array<Subsource>): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement = checkForNull(document.querySelector('#sourceItemTemp'));
-        const selectMenu: HTMLSelectElement | null = document.getElementById('select') as HTMLSelectElement;
+        const selectMenu: HTMLSelectElement = checkForNull(document.getElementById('select') as HTMLSelectElement | null);
         const menuValue: string = selectMenu.options[selectMenu.selectedIndex].value;
 
-        data.forEach((item: Source) => {
+        data.forEach((item: Subsource): void => {
             if (!menuValue || item.language === menuValue) {
                 const sourceClone: Node = sourceItemTemp.content.cloneNode(true);
 
@@ -22,13 +21,9 @@ class Sources {
 
                 fragment.append(sourceClone);
             }
-            
         });
 
-        const sources: Element | null = document.querySelector('.sources');
-        if (!sources) {
-            throw new Error(Errors.isNull);
-        }
+        const sources: Element = checkForNull(document.querySelector('.sources'));
         sources.innerHTML = '';
         sources.append(fragment);
     }

@@ -1,22 +1,23 @@
+import { Endpoints } from '../../helpers/enums';
 import { Callback, Data, Endpoint, Options, Request } from '../../helpers/interfaces';
 import { ReqAndOpt } from '../../helpers/types';
 
 class Loader {
-    baseLink: string;
-    options: Request;
-    data: Data;
+    private baseLink: string;
+    private options: Request;
+    private sourceData: Data;
 
     constructor(baseLink: string, options: Request) {
         this.baseLink = baseLink;
         this.options = options;
-        this.data = {} as Data;
+        this.sourceData = {} as Data;
     }
 
-    getData(): Data {
-        return this.data;
+    public getData(): Data {
+        return this.sourceData;
     }
 
-    getResp(
+    public getResp(
         endpoint: Endpoint,
         callback: Callback<Data> = () => {
             console.error('No callback for GET response');
@@ -25,7 +26,7 @@ class Loader {
         this.load('GET', endpoint.endpoint, callback, endpoint.options);
     }
 
-    errorHandler(res: Response): Response {
+    private errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -35,28 +36,28 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: Options, endpoint: string): string {
+    private makeUrl(options: Options, endpoint: string): string {
         const urlOptions: ReqAndOpt = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
-        Object.keys(urlOptions).forEach((key: string) => {
+        Object.keys(urlOptions).forEach((key: string): void => {
             url += `${key}=${urlOptions[key as keyof ReqAndOpt]}&`;
         });
 
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: Callback<Data>, options: Options = {}): void {
+    private load(method: string, endpoint: string, callback: Callback<Data>, options: Options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res: Response) => res.json())
-            .then((data: Data) => {
-                if (endpoint === 'sources') {
-                    this.data = data;
+            .then((res: Response): Promise<Data> => res.json())
+            .then((data: Data): void => {
+                if (endpoint === Endpoints.sources) {
+                    this.sourceData = data;
                 }
                 callback(data);
             })
-            .catch((err: Error) => console.error(err));
+            .catch((err: Error): void => console.error(err));
     }
 }
 

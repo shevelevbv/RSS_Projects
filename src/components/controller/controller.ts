@@ -1,9 +1,10 @@
 import AppLoader from './appLoader';
 import { Callback, Data } from '../../helpers/interfaces';
-import { Endpoints, Errors } from '../../helpers/enums';
+import { Endpoints } from '../../helpers/enums';
+import { checkForNull } from '../../helpers/functions';
 
 class AppController extends AppLoader {
-    getSources(callback: Callback<Data>): void {
+    public getSources(callback: Callback<Data>): void {
         super.getResp(
             {
                 endpoint: Endpoints.sources,
@@ -12,23 +13,19 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: MouseEvent, callback: Callback<Data>): void {
-        let target: EventTarget | null = e.target;
-        const newsContainer: EventTarget | null = e.currentTarget;
+    public getNews(e: MouseEvent, callback: Callback<Data>): void {
+        let target: EventTarget = checkForNull(e.target);
+        const newsContainer: EventTarget = checkForNull(e.currentTarget);
 
         while (target !== newsContainer) {
             if (target instanceof HTMLElement && newsContainer instanceof HTMLElement) {
-                if (!(target && newsContainer)) {
-                    throw new Error(Errors.isNull);
-                }
+
                 if (target.classList.contains('source__item')) {
-                    const sources: Array<HTMLTemplateElement> = Array.from(document.querySelectorAll('.source__item'));
-                    sources.forEach(source => source.classList.remove('selected'));
+                    Array.from(document.querySelectorAll('.source__item'))
+                        .forEach((source: Element): void => source.classList.remove('selected'));
                     target.classList.add('selected');
-                    const sourceId: string | null = target.getAttribute('data-source-id');
-                    if (!sourceId) {
-                        throw new Error(Errors.noSource);
-                    }
+                    const sourceId: string = checkForNull(target.getAttribute('data-source-id'));
+    
                     if (newsContainer.getAttribute('data-source') !== sourceId) {
                         newsContainer.setAttribute('data-source', sourceId);
                         super.getResp(
@@ -43,9 +40,8 @@ class AppController extends AppLoader {
                     }
                     return;
                 }
-                target = target.parentNode;
+                target = checkForNull(target.parentNode);
             }
-            
         }
     }
 }

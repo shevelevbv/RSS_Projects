@@ -8,3 +8,6 @@ export enum Errors {
   noSource = 'Source not found',
 }
 
+export enum PageSettings {
+  maxArticlesPerPage = 10,
+}

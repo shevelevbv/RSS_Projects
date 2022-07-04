@@ -1,6 +1,6 @@
-import {Options, Request } from './interfaces';
-
-export type HtmlTempElementOrNull = HTMLTemplateElement | null;
+import {Options, Request, Source } from './interfaces';
 
 export type ReqAndOpt = Request & Options;
+
+export type Subsource = Pick<Source, 'id' | 'name' | 'language'>
 

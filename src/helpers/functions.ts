@@ -1,9 +1,8 @@
-import { HtmlTempElementOrNull } from "./types";
 import { Errors } from "./enums";
 
-export function checkForNull (item: HtmlTempElementOrNull): HTMLTemplateElement {
+export function checkForNull<T> (item: T): Exclude<T, null> {
   if (!item) {
       throw new Error(Errors.isNull);
   }
-  return item;
+  return item as Exclude<T, null>;
 }
