@@ -117,7 +117,7 @@ footer .copyright a:hover {
     color: #555;
 }
 footer .copyright:before {
-    content: '© 2022';
+    content: '©';
 }
 
 footer .rs-school {
