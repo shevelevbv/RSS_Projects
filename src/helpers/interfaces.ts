@@ -1,8 +1,8 @@
-export interface Callback<T> {
+export interface ICallback<T> {
   (param: T) : void;
 }
 
-export interface Source {
+export interface ISource {
   id: string | null;
   name: string;
   description: string;
@@ -12,8 +12,8 @@ export interface Source {
   country: string;
 }
 
-export interface Article {
-  source: Source,
+export interface IArticle {
+  source: ISource,
   author: string | null;
   title: string;
   description: string;
@@ -23,23 +23,23 @@ export interface Article {
   content: string;
 }
 
-export interface Data {
+export interface IData {
   status: string;
   totalResults: number;
-  articles: Array<Article>;
-  sources: Array<Source>;
+  articles: Array<IArticle>;
+  sources: Array<ISource>;
 }
 
-export interface Request {
+export interface IRequest {
   apiKey: string;
 }
 
-export interface Endpoint {
+export interface IEndpoint {
   endpoint: string;
-  options?: Options; 
+  options?: IOptions; 
 }
 
-export interface Options {
+export interface IOptions {
   sources?: string;
 }
 

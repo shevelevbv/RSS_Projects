@@ -1,10 +1,10 @@
 import AppLoader from './appLoader';
-import { Callback, Data } from '../../helpers/interfaces';
+import { ICallback, IData } from '../../helpers/interfaces';
 import { Endpoints } from '../../helpers/enums';
 import { checkForNull } from '../../helpers/functions';
 
 class AppController extends AppLoader {
-    public getSources(callback: Callback<Data>): void {
+    public getSources(callback: ICallback<IData>): void {
         super.getResp(
             {
                 endpoint: Endpoints.sources,
@@ -13,7 +13,7 @@ class AppController extends AppLoader {
         );
     }
 
-    public getNews(e: MouseEvent, callback: Callback<Data>): void {
+    public getNews(e: MouseEvent, callback: ICallback<IData>): void {
         let target: EventTarget = checkForNull(e.target);
         const newsContainer: EventTarget = checkForNull(e.currentTarget);
 

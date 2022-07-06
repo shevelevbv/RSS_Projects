@@ -1,6 +1,6 @@
-import {Options, Request, Source } from './interfaces';
+import {IOptions, IRequest, ISource } from './interfaces';
 
-export type ReqAndOpt = Request & Options;
+export type ReqAndOpt = IRequest & IOptions;
 
-export type Subsource = Pick<Source, 'id' | 'name' | 'language'>
+export type Subsource = Pick<ISource, 'id' | 'name' | 'language'>
 

@@ -1,6 +1,6 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-import { Data } from '../../helpers/interfaces'
+import { IData } from '../../helpers/interfaces'
 import { checkForNull } from '../../helpers/functions'
 
 class App {
@@ -12,12 +12,12 @@ class App {
         this.view = new AppView();
     }
 
-    public start() {
+    public start(): void {
         const sources: HTMLTemplateElement = checkForNull(document.querySelector('.sources'));
         const select: HTMLTemplateElement = checkForNull(document.querySelector('.menu__select'));
-        sources.addEventListener('click', (e: MouseEvent): void => this.controller.getNews(e, (data: Data | null) => this.view.drawNews(checkForNull(data))));
+        sources.addEventListener('click', (e: MouseEvent): void => this.controller.getNews(e, (data: IData | null) => this.view.drawNews(checkForNull(data))));
         select.addEventListener('change', (): void => this.view.drawSources(this.controller.getData()));
-        this.controller.getSources((data: Data | null): void => this.view.drawSources(checkForNull(data)));
+        this.controller.getSources((data: IData | null): void => this.view.drawSources(checkForNull(data)));
     }
 }
 

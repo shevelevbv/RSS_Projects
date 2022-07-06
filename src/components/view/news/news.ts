@@ -1,25 +1,25 @@
 import './news.css';
-import { Article } from '../../../helpers/interfaces';
+import { IArticle } from '../../../helpers/interfaces';
 import { checkForNull } from '../../../helpers/functions';
 import { PageSettings } from '../../../helpers/enums';
 
 class News {
-    draw(data: Array<Article>): void {
-        const news: Array<Article> = data.length >= PageSettings.maxArticlesPerPage
-            ? data.filter((_item: Article, idx: number) => idx < PageSettings.maxArticlesPerPage) 
+    draw(data: Array<IArticle>): void {
+        const news: Array<IArticle> = data.length >= PageSettings.maxArticlesPerPage
+            ? data.filter((_item: IArticle, idx: number) => idx < PageSettings.maxArticlesPerPage) 
             : data;
         const fragment: DocumentFragment = document.createDocumentFragment();
 
         const newsItemTemp: HTMLTemplateElement = checkForNull(document.querySelector('#newsItemTemp'));
 
-        news.forEach((item: Article, idx: number) => {
+        news.forEach((item: IArticle, idx: number) => {
             const newsClone: Node = checkForNull(newsItemTemp.content.cloneNode(true));
 
             if (newsClone instanceof DocumentFragment) {
                 
                 if (idx % 2) checkForNull(newsClone.querySelector('.news__item')).classList.add('alt');
                 checkForNull(newsClone.querySelector('.news__meta-photo') as HTMLTemplateElement | null).style.backgroundImage = `url(${
-                    item.urlToImage || '../../../../news_placeholder.png'
+                    item.urlToImage || './news_placeholder.png'
                 })`;
                 checkForNull(newsClone.querySelector('.news__meta-author')).textContent = item.author || item.source.name;
                 checkForNull(newsClone.querySelector('.news__meta-date')).textContent = item.publishedAt

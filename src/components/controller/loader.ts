@@ -1,25 +1,25 @@
 import { Endpoints } from '../../helpers/enums';
-import { Callback, Data, Endpoint, Options, Request } from '../../helpers/interfaces';
+import { ICallback, IData, IEndpoint, IOptions, IRequest } from '../../helpers/interfaces';
 import { ReqAndOpt } from '../../helpers/types';
 
 class Loader {
     private baseLink: string;
-    private options: Request;
-    private sourceData: Data;
+    private options: IRequest;
+    private sourceData: IData;
 
-    constructor(baseLink: string, options: Request) {
+    constructor(baseLink: string, options: IRequest) {
         this.baseLink = baseLink;
         this.options = options;
-        this.sourceData = {} as Data;
+        this.sourceData = {} as IData;
     }
 
-    public getData(): Data {
+    public getData(): IData {
         return this.sourceData;
     }
 
     public getResp(
-        endpoint: Endpoint,
-        callback: Callback<Data> = () => {
+        endpoint: IEndpoint,
+        callback: ICallback<IData> = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -36,7 +36,7 @@ class Loader {
         return res;
     }
 
-    private makeUrl(options: Options, endpoint: string): string {
+    private makeUrl(options: IOptions, endpoint: string): string {
         const urlOptions: ReqAndOpt = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -47,11 +47,11 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    private load(method: string, endpoint: string, callback: Callback<Data>, options: Options = {}): void {
+    private load(method: string, endpoint: string, callback: ICallback<IData>, options: IOptions = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res: Response): Promise<Data> => res.json())
-            .then((data: Data): void => {
+            .then((res: Response): Promise<IData> => res.json())
+            .then((data: IData): void => {
                 if (endpoint === Endpoints.sources) {
                     this.sourceData = data;
                 }
