@@ -3,7 +3,7 @@ import { checkForNull } from '../../../helpers/functions';
 import { Subsource } from '../../../helpers/types';
 
 class Sources {
-    draw(data: Array<Subsource>): void {
+    public draw(data: Array<Subsource>): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement = checkForNull(document.querySelector('#sourceItemTemp'));
         const selectMenu: HTMLSelectElement = checkForNull(document.getElementById('select') as HTMLSelectElement | null);
