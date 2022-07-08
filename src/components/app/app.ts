@@ -15,7 +15,7 @@ class App {
     public start(): void {
         const sources: HTMLTemplateElement = checkForNull(document.querySelector('.sources'));
         const select: HTMLTemplateElement = checkForNull(document.querySelector('.menu__select'));
-        sources.addEventListener('click', (e: MouseEvent): void => this.controller.getNews(e, (data: IData | null) => this.view.drawNews(checkForNull(data))));
+        sources.addEventListener('click', (e: MouseEvent): void => this.controller.getNews(e, (data: IData | null): void => this.view.drawNews(checkForNull(data))));
         select.addEventListener('change', (): void => this.view.drawSources(this.controller.getData()));
         this.controller.getSources((data: IData | null): void => this.view.drawSources(checkForNull(data)));
     }
