@@ -19,7 +19,7 @@ class Loader {
 
     public getResp(
         endpoint: IEndpoint,
-        callback: ICallback<IData> = () => {
+        callback: ICallback<IData> = (): void => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -38,7 +38,7 @@ class Loader {
 
     private makeUrl(options: IOptions, endpoint: string): string {
         const urlOptions: ReqAndOpt = { ...this.options, ...options };
-        let url = `${this.baseLink}${endpoint}?`;
+        let url: string = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key: string): void => {
             url += `${key}=${urlOptions[key as keyof ReqAndOpt]}&`;
