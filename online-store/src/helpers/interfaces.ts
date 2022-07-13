@@ -1,4 +1,5 @@
 export interface ICard {
+  id: number;
   title: string,
   img: string,
   country: string,

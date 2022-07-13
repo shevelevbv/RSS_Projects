@@ -2,6 +2,7 @@ import { ICard } from "./helpers/interfaces";
 
 const data: Array<ICard> = [ 
   {
+    id: 1,
     title: 'Assam Enigma',
     img: './img/assam.jpg',
     country: 'India',
@@ -12,6 +13,7 @@ const data: Array<ICard> = [
     price: 9
   },
   {
+    id: 2,
     title: 'Gold Ceylon',
     img: './img/ceylon.jpg',
     country: 'Ceylon',
@@ -22,6 +24,7 @@ const data: Array<ICard> = [
     price: 7.5
   },
   {
+    id: 3,
     title: 'Da Hong Pao',
     img: './img/da-hong-pao.jpg',
     country: 'China',
@@ -32,6 +35,7 @@ const data: Array<ICard> = [
     price: 17
   },
   {
+    id: 4,
     title: 'Jin Jun Mei',
     img: './img/jin-jun-mei.jpg',
     country: 'China',
@@ -42,6 +46,7 @@ const data: Array<ICard> = [
     price: 16.5
   },
   {
+    id: 5,
     title: 'Long Jing',
     img: './img/long-jing.jpg',
     country: 'China',
@@ -52,6 +57,7 @@ const data: Array<ICard> = [
     price: 28
   },
   {
+    id: 6,
     title: 'Organic Dargeeling',
     img: './img/organic-darjeeling.jpg',
     country: 'India',
@@ -62,6 +68,7 @@ const data: Array<ICard> = [
     price: 21
   },
   {
+    id: 7,
     title: 'Ripe Puerh',
     img: './img/puerh-ripe.jpg',
     country: 'China',
@@ -72,6 +79,7 @@ const data: Array<ICard> = [
     price: 12
   },
   {
+    id: 8,
     title: 'Shen Puerh',
     img: './img/puerh-shen.jpg',
     country: 'China',
@@ -82,6 +90,7 @@ const data: Array<ICard> = [
     price: 39
   },
   {
+    id: 9,
     title: 'Tai Ping Hou Kui',
     img: './img/tai-ping-hou-kui.jpg',
     country: 'China',
@@ -92,6 +101,7 @@ const data: Array<ICard> = [
     price: 19
   },
   {
+    id: 10,
     title: 'Tie Guan Yin',
     img: './img/tie-guan-yin.jpg',
     country: 'China',
@@ -102,6 +112,7 @@ const data: Array<ICard> = [
     price: 15
   },
   {
+    id: 11,
     title: 'Darjeeling - First Flush',
     img: './img/darjeeling-first-flush.jpeg',
     country: 'India',
@@ -112,6 +123,7 @@ const data: Array<ICard> = [
     price: 23
   },
   {
+    id: 12,
     title: 'Bai Hao Yin Zhen',
     img: './img/bai-hao-yin-zhen.jpg',
     country: 'China',
@@ -122,6 +134,7 @@ const data: Array<ICard> = [
     price: 49
   },
   {
+    id: 13,
     title: 'Bai Mu Dan',
     img: './img/bai-mu-dan.jpg',
     country: 'China',
@@ -132,6 +145,7 @@ const data: Array<ICard> = [
     price: 36
   },
   {
+    id: 14,
     title: 'English Breakfast',
     img: './img/english-breakfast.jpg',
     country: 'India',
@@ -142,6 +156,7 @@ const data: Array<ICard> = [
     price: 5
   },
   {
+    id: 15,
     title: 'Ceylon Green Tea',
     img: './img/ceylon-green-tea.jpg',
     country: 'Ceylon',
@@ -152,6 +167,7 @@ const data: Array<ICard> = [
     price: 16
   },
   {
+    id: 16,
     title: 'Bi Luo Chun',
     img: './img/bi-luo-chun.jpg',
     country: 'China',
@@ -162,6 +178,7 @@ const data: Array<ICard> = [
     price: 21
   },
   {
+    id: 17,
     title: 'Dian Hong',
     img: './img/dian-hong.jpg',
     country: 'China',
@@ -172,6 +189,7 @@ const data: Array<ICard> = [
     price: 17
   },
   {
+    id: 18,
     title: 'Alishan',
     img: './img/alishan.jpeg',
     country: 'China',
@@ -182,6 +200,7 @@ const data: Array<ICard> = [
     price: 39
   },
   {
+    id: 19,
     title: 'Shui Xian',
     img: './img/shui-xian.jpg',
     country: 'China',
@@ -192,6 +211,7 @@ const data: Array<ICard> = [
     price: 24
   },
   {
+    id: 20,
     title: 'Rou Gui',
     img: './img/rou-gui.jpeg',
     country: 'China',
@@ -202,6 +222,7 @@ const data: Array<ICard> = [
     price: 12
   },
   {
+    id: 21,
     title: 'Shou Mei',
     img: './img/shou-mei.jpg',
     country: 'China',

@@ -1,14 +1,22 @@
 import './page.css';
-import data from '../../data';
 import Card from '../card/card';
+import { ICard } from '../../helpers/interfaces';
 
 class Page {
+  private cardContainer: HTMLDivElement;
 
-  public createCardContainer(): void {
-    const cardContainer: HTMLDivElement = document.createElement('div');
-    cardContainer.classList.add('container_cards');
-    data.forEach((item): void => cardContainer.append(new Card(item).createCard()));
-    document.body.append(cardContainer);
+  constructor() {
+    this.cardContainer = document.createElement('div');
+    this.cardContainer.classList.add('container_cards');
+    document.body.append(this.cardContainer);
+  }
+
+  public fillCardContainer(data: Array<ICard>): void {
+    data.forEach((item): void => this.cardContainer.append(new Card(item).createCard())); 
+  }
+
+  public clearCardContainer(): void {
+    this.cardContainer.innerHTML = '';
   }
 
 }

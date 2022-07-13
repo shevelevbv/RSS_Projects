@@ -1,3 +1,5 @@
-import Page from "./view/page/page";
+import Controller from "./controller/controller";
 
-new Page().createCardContainer();
+const controller: Controller = new Controller();
+controller.start();
+
