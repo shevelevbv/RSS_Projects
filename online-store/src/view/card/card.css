@@ -1,0 +1,18 @@
+.card {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.card__title {
+  text-align: center;
+}
+
+.card__container_img {
+  text-align: center;
+}
+
+.card__list {
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}

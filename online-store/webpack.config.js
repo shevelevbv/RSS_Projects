@@ -1,9 +1,10 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
-
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -12,7 +13,7 @@ const stylesHandler = isProduction
   : "style-loader";
 
 const config = {
-  entry: "./src/index.ts",
+  entry: path.resolve(__dirname, './src/index'),
   output: {
     path: path.resolve(__dirname, "dist"),
   },
@@ -22,11 +23,19 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
     }),
-
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+    new CleanWebpackPlugin(),
+    new EslintPlugin({ extensions: '.ts' }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: './img',
+          to: './img',
+        }
+      ]
+    }),
   ],
   module: {
     rules: [
@@ -48,8 +57,6 @@ const config = {
         type: "asset",
       },
 
-      // Add your rules for custom modules here
-      // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
   resolve: {

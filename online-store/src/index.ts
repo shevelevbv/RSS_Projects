@@ -1,1 +1,3 @@
-console.log("Hello World!");
+import Page from "./view/page/page";
+
+new Page().createCardContainer();
