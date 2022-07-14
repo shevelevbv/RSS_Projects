@@ -1,21 +1,27 @@
 import data from '../data';
-import { ICard } from '../helpers/interfaces';
+import { ICard, IFilter } from '../helpers/interfaces';
 
 class DataManager {
   private originalData: Array<ICard>;
 
   constructor() {
     this.originalData = data;
+    
   }
 
-  getOriginalData(): Array<ICard> {
+  public getOriginalData(): Array<ICard> {
     return this.originalData;
   }
 
-  filterData(): Array<ICard> {
-    return this.originalData.filter(obj => obj.id > 5);
+  private checkData(key: string, testValue: string, values: Array<string | boolean | number>): boolean {
+    if (!values.length) return true;
+    return values.includes(testValue);
   }
 
+  public filterData(filters: IFilter) {
+    return this.originalData.filter(obj => this.checkData('country', obj.country, filters.country)
+                                            && this.checkData('variety', obj.variety, filters.variety));
+  }
 }
 
 export default DataManager;

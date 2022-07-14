@@ -9,3 +9,9 @@ export interface ICard {
   favorite: boolean,
   price: number
 }
+
+export interface IFilter {
+  country: Array<string>,
+  variety: Array<string>,
+  favorite?: boolean;
+}

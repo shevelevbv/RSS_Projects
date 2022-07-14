@@ -4,9 +4,11 @@ import { ICard } from '../../helpers/interfaces';
 
 class Page {
   private header: HTMLElement;
-  private cardContainer: HTMLDivElement;
   private cartContainer: HTMLDivElement;
   private cartLabel: HTMLDivElement;
+  private filterContainer: HTMLDivElement;
+  private cardContainer: HTMLDivElement;
+  
 
   constructor() {
     this.header = document.createElement('header');
@@ -14,9 +16,12 @@ class Page {
     this.cartLabel = document.createElement('p');
     this.createHeader();
     
+    this.filterContainer = document.createElement('div');
+    this.filterContainer.className = 'filter__container';
+
     this.cardContainer = document.createElement('div');
     this.cardContainer.className = 'container_cards';
-    document.body.append(this.header, this.cardContainer);
+    document.body.append(this.header, this.filterContainer, this.cardContainer);
   }
 
   private createHeader() {
@@ -55,7 +60,29 @@ class Page {
     this.cartContainer.append(this.cartLabel);
   }
 
+  public drawFilter(key: string, textValues: Array<string>): Array<HTMLButtonElement> {
+    const filter: HTMLDivElement = document.createElement('div');
+    filter.className = 'filter';
+    const filterTitle: HTMLHeadingElement = document.createElement('h3'); 
+    filterTitle.className = 'filter__title';
+    filterTitle.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+    filter.append(filterTitle);
+    const filterButtonContainer: HTMLDivElement = document.createElement('div');
+    const filterButtons: Array<HTMLButtonElement> = [];
+    textValues.forEach((value: string): void => {
+      const filterButton = document.createElement('button');
+      filterButton.className = `filter__${key}`;
+      filterButton.textContent = value;
+      filterButtonContainer.append(filterButton);
+      filterButtons.push(filterButton);
+    });
+    filter.append(filterButtonContainer);
+    this.filterContainer.append(filter);
+    return filterButtons;
+  }
+
   public fillCardContainer(data: Array<ICard>): Array<[ICard, HTMLElement]> {
+    this.cardContainer.innerHTML = '';
     const cards: Array<[ICard, HTMLElement]> = []; 
     data.forEach((item: ICard): void => {
       const card: HTMLDivElement = new Card(item).createCard();
