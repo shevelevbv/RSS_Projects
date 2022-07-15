@@ -5,14 +5,34 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.3s;
 }
 
 .card:hover {
   cursor: pointer;
+  box-shadow: 0 5px 5px green;
+  transition: all 0.3s;
 }
 
 .card.in-cart {
-  background-color: antiquewhite;
+  position: relative;
+}
+
+.card.in-cart::after {
+  content: 'IN CART';
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: rgb(39, 115, 44);
+  color: white;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 3px 3px #cdc8c8;
+  transform: rotate(-20deg);
 }
 
 .card__title {

@@ -10,6 +10,7 @@ class Page {
   private cartLabel: HTMLDivElement;
   private filterContainer: HTMLDivElement;
   private filterElements: HTMLDivElement;
+  private resetButtonContainer: HTMLDivElement;
   private cardContainer: HTMLDivElement;
   
   constructor() {
@@ -22,13 +23,14 @@ class Page {
     
     this.filterContainer = createElement(this.main, 'div', 'filter__container')
     this.filterElements = createElement(this.filterContainer, 'div', 'filter__elements');
+    this.resetButtonContainer = createElement(this.filterContainer, 'div', 'filter__buttons_reset');
     this.cardContainer = createElement(this.main, 'div', 'container_cards');
   }
 
   private createHeader(): void {
     const logo: HTMLDivElement = createElement(this.header, 'div', 'logo');
     const logoImageContainer: HTMLDivElement = createElement(logo, 'div', 'logo__container_img');
-    const logoImage: HTMLImageElement = createElement(logoImageContainer, 'img');
+    const logoImage: HTMLImageElement = createElement(logoImageContainer, 'img', 'logo__image');
     logoImage.src = '../../img/leaf.svg';
     logoImage.width = 50;
     logoImage.height = 50;
@@ -66,7 +68,7 @@ class Page {
   }
 
   public drawResetButton(content: string, value: string): HTMLButtonElement {
-    const button: HTMLButtonElement = createElement(this.filterElements, 'button', `filter__button_${value}`, content);
+    const button: HTMLButtonElement = createElement(this.resetButtonContainer, 'button', `filter__button_reset filter__button_${value}`, content);
     return button;
   }
 
