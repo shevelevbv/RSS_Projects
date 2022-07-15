@@ -41,6 +41,8 @@ class Controller {
     const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['Black', 'Green', 'White', 'Oolong', 'Puerh']);
     const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
+    const resetButton: HTMLButtonElement = this.page.drawResetButton('Reset filters', 'resetFilters');
+
     this.addClassesOnFilters('country', countryFilterButtons);
     this.addClassesOnFilters('variety', varietyFilterButtons);
     this.addClassesOnFilters('favorite', favoriteFilterButtons);
@@ -59,10 +61,20 @@ class Controller {
 
     searchInput.oninput = (): void => {
       this.searchInputValue = searchInput.value;
-      this.filteringData = this.dataManager.applyFiltersToData(this.filters, searchInput.value);
-      this.cards = this.page.fillCardContainer(this.filteringData);
-      this.addListenerOnCards(this.cards);
-      this.addClassesOnCards(this.cards);
+      this.rerenderCards();
+    }
+
+    resetButton.onclick = () => {
+      this.filters = {country: [],
+                      variety: [],
+                      favorite: []
+                    };
+      this.removeClassesFromFilters(countryFilterButtons);
+      this.removeClassesFromFilters(varietyFilterButtons);
+      this.removeClassesFromFilters(favoriteFilterButtons);
+      this.searchInputValue = '';
+      searchInput.value = '';
+      this.rerenderCards();
     }
 
     window.onunload = ():void => {
@@ -109,6 +121,12 @@ class Controller {
     });
   }
 
+  removeClassesFromFilters(filterButtons: Array<HTMLButtonElement>): void {
+    filterButtons.forEach((button: HTMLButtonElement) => {
+      button.classList.remove('selected');
+    });
+  }
+
   addClassesOnCards(cards: Array<Tuple>) {
     cards.forEach((card: Tuple) => {
       if (this.cart.getItems().includes(card[0].id)) {
@@ -128,13 +146,16 @@ class Controller {
         this.filters[key as keyof IFilter].push(`${button.textContent}`);
         button.classList.add('selected');
       }
-
-      this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue);
-        
-      this.cards = this.page.fillCardContainer(this.filteringData);
-      this.addListenerOnCards(this.cards);
-      this.addClassesOnCards(this.cards);
+      this.rerenderCards();
+      
     });
+  }
+
+  rerenderCards() {
+    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue);
+    this.cards = this.page.fillCardContainer(this.filteringData);
+    this.addListenerOnCards(this.cards);
+    this.addClassesOnCards(this.cards);
   }
 
 }

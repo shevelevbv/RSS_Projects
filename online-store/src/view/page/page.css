@@ -9,7 +9,10 @@ body {
 }
 
 .button {
-  border: none;
+  line-height: 20px;
+  width: fit-content;
+  border: 2px solid transparent;
+  border-radius: 0;
   outline: none;
   background-color: transparent;
   cursor: pointer;
@@ -18,7 +21,7 @@ body {
 }
 
 .button.selected {
-  background-color: antiquewhite;
+  border-bottom: 2px solid green;
 }
 
 .header {

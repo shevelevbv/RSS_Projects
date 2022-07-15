@@ -91,6 +91,14 @@ class Page {
     return filterButtons;
   }
 
+  public drawResetButton(content: string, value: string) {
+    const button: HTMLButtonElement = document.createElement('button');
+    button.className = `filter__button_${value}`;
+    button.textContent = content;
+    this.filterElements.append(button);
+    return button;
+  }
+
   public drawSearch(value = '') {
     const searchContainer: HTMLDivElement = document.createElement('div');
     searchContainer.className = 'filter__container_search';
@@ -98,6 +106,7 @@ class Page {
     searchInput.className = 'filter__input_search';
     searchInput.type = 'text';
     searchInput.value = value;
+    searchInput.autofocus = true;
     searchContainer.append(searchInput);
     this.filterElements.append(searchContainer);
     return searchInput;
