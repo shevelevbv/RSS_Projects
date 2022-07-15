@@ -67,7 +67,7 @@ body {
 
 .filter__elements {
   position: sticky;
-  
+  top: 0;
 }
 
 .filter__button_container {

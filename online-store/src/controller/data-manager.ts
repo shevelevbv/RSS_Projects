@@ -9,19 +9,27 @@ class DataManager {
   }
 
   public getOriginalData(): Array<ICard> {
-    return this.originalData;
+    return [...this.originalData];
   }
 
-  private checkData(testValue: string, values: Array<string>): boolean {
+  private isItemInData(testValue: string, values: Array<string>): boolean {
     if (!values.length) return true;
     return values.includes(testValue);
   }
 
-  public filterData(filters: IFilter): Array<ICard> {
-    return this.originalData.filter(obj => this.checkData(obj.country, filters.country)
-                                        && this.checkData(obj.variety, filters.variety)
-                                        && this.checkData(obj.favorite, filters.favorite));
+  private isStringInData(testString: string, title: string): boolean {
+    if (!testString) return true;
+    return title.toLowerCase().includes(testString.toLowerCase());
   }
+
+  public applyFiltersToData(filters: IFilter, testString = ''): Array<ICard> {
+    return this.originalData.filter(obj => this.isItemInData(obj.country, filters.country)
+                                        && this.isItemInData(obj.variety, filters.variety)
+                                        && this.isItemInData(obj.favorite, filters.favorite)
+                                        && this.isStringInData(testString, obj.title)
+                                    );
+  }
+
 }
 
 export default DataManager;

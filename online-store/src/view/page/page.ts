@@ -91,6 +91,18 @@ class Page {
     return filterButtons;
   }
 
+  public drawSearch(value = '') {
+    const searchContainer: HTMLDivElement = document.createElement('div');
+    searchContainer.className = 'filter__container_search';
+    const searchInput: HTMLInputElement = document.createElement('input');
+    searchInput.className = 'filter__input_search';
+    searchInput.type = 'text';
+    searchInput.value = value;
+    searchContainer.append(searchInput);
+    this.filterElements.append(searchContainer);
+    return searchInput;
+  }
+
   public fillCardContainer(data: Array<ICard>): Array<[ICard, HTMLElement]> {
     this.cardContainer.innerHTML = '';
     const cards: Array<[ICard, HTMLElement]> = []; 
