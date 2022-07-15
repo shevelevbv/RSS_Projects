@@ -6,23 +6,23 @@ class Cart {
     this.items = [];
   }
 
-  addItem(item:number): void {
+  public addItem(item:number): void {
     this.items.push(item);
   }
 
-  removeItem(item: number): void {
+  public removeItem(item: number): void {
     this.items = this.items.filter(value => value != item);
   }
 
-  setItems(items: Array<number>) {
+  public setItems(items: Array<number>) {
     this.items = items;
   }
 
-  getItems(): Array<number> {
+  public getItems(): Array<number> {
     return this.items;
   }
 
-  getSize(): number {
+  public getSize(): number {
     return this.items.length;
   }
 }

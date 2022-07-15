@@ -42,6 +42,7 @@ class Controller {
     const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
     const resetButton: HTMLButtonElement = this.page.drawResetButton('Reset filters', 'resetFilters');
+    const resetAllButton: HTMLButtonElement = this.page.drawResetButton('Reset all', 'resetAll');
 
     this.addClassesOnFilters('country', countryFilterButtons);
     this.addClassesOnFilters('variety', varietyFilterButtons);
@@ -75,6 +76,13 @@ class Controller {
       this.searchInputValue = '';
       searchInput.value = '';
       this.rerenderCards();
+    }
+
+    resetAllButton.onclick = () => {
+      resetButton.click();
+      this.cart.setItems([]);
+      this.page.drawCartLabel(this.cart.getSize());
+      this.removeClassesFromCards(this.cards);
     }
 
     window.onunload = ():void => {
@@ -133,6 +141,12 @@ class Controller {
     
         card[1].classList.add('in-cart');
       } 
+    });
+  }
+
+  removeClassesFromCards(cards: Array<Tuple>) {
+    cards.forEach((card: Tuple) => {
+        card[1].classList.remove('in-cart');
     });
   }
 
