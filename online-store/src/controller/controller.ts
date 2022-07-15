@@ -11,6 +11,7 @@ class Controller {
   private cart: Cart;
   private filters: IFilter;
   private filteringData: Array<ICard>
+  private searchInputValue: string;
   private cards: Array<Tuple>;
 
   constructor() {
@@ -22,6 +23,7 @@ class Controller {
                     favorite: []
                   };
     this.filteringData = this.dataManager.getOriginalData();
+    this.searchInputValue = '';
     this.cards = this.page.fillCardContainer(this.filteringData);
   }
 
@@ -29,10 +31,11 @@ class Controller {
 
     this.getLocalStorage();
     this.page.drawCartLabel(this.cart.getSize());
-    this.filteringData = this.dataManager.applyFiltersToData(this.filters);
+    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue);
     this.cards = this.page.fillCardContainer(this.filteringData);
 
     const searchInput: HTMLInputElement = this.page.drawSearch();
+    searchInput.value = this.searchInputValue;
 
     const countryFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('country', ['India', 'China', 'Ceylon']);
     const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['Black', 'Green', 'White', 'Oolong', 'Puerh']);
@@ -55,6 +58,7 @@ class Controller {
     this.addListenerOnFilters('favorite', favoriteFilterButtons);
 
     searchInput.oninput = (): void => {
+      this.searchInputValue = searchInput.value;
       this.filteringData = this.dataManager.applyFiltersToData(this.filters, searchInput.value);
       this.cards = this.page.fillCardContainer(this.filteringData);
       this.addListenerOnCards(this.cards);
@@ -68,7 +72,8 @@ class Controller {
 
   setLocalStorage(): void {
     localStorage.setItem('cart', JSON.stringify(this.cart.getItems()));
-    localStorage.setItem('filters', JSON.stringify(this.filters))
+    localStorage.setItem('filters', JSON.stringify(this.filters));
+    localStorage.setItem('search', this.searchInputValue);
   }
 
   getLocalStorage(): void {
@@ -77,6 +82,9 @@ class Controller {
     }
     if (localStorage.getItem('filters')) {
       this.filters = JSON.parse(localStorage.getItem('filters') as string);
+    }
+    if (localStorage.getItem('search')) {
+      this.searchInputValue = localStorage.getItem('search') as string;
     }
   }
 
@@ -121,7 +129,7 @@ class Controller {
         button.classList.add('selected');
       }
 
-      this.filteringData = this.dataManager.applyFiltersToData(this.filters);
+      this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue);
         
       this.cards = this.page.fillCardContainer(this.filteringData);
       this.addListenerOnCards(this.cards);

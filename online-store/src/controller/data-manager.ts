@@ -22,7 +22,7 @@ class DataManager {
     return title.toLowerCase().includes(testString.toLowerCase());
   }
 
-  public applyFiltersToData(filters: IFilter, testString = ''): Array<ICard> {
+  public applyFiltersToData(filters: IFilter, testString: string): Array<ICard> {
     return this.originalData.filter(obj => this.isItemInData(obj.country, filters.country)
                                         && this.isItemInData(obj.variety, filters.variety)
                                         && this.isItemInData(obj.favorite, filters.favorite)
