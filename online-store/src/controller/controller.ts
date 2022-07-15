@@ -27,7 +27,7 @@ class Controller {
     this.cards = this.page.fillCardContainer(this.filteringData);
   }
 
-  start() {
+  public start(): void {
 
     this.getLocalStorage();
     this.page.drawCartLabel(this.cart.getSize());
@@ -65,7 +65,7 @@ class Controller {
       this.rerenderCards();
     }
 
-    resetButton.onclick = () => {
+    resetButton.onclick = (): void => {
       this.filters = {country: [],
                       variety: [],
                       favorite: []
@@ -78,25 +78,25 @@ class Controller {
       this.rerenderCards();
     }
 
-    resetAllButton.onclick = () => {
+    resetAllButton.onclick = (): void => {
       resetButton.click();
       this.cart.setItems([]);
       this.page.drawCartLabel(this.cart.getSize());
       this.removeClassesFromCards(this.cards);
     }
 
-    window.onunload = ():void => {
+    window.onunload = (): void => {
       this.setLocalStorage();
     }
   }
 
-  setLocalStorage(): void {
+  public setLocalStorage(): void {
     localStorage.setItem('cart', JSON.stringify(this.cart.getItems()));
     localStorage.setItem('filters', JSON.stringify(this.filters));
     localStorage.setItem('search', this.searchInputValue);
   }
 
-  getLocalStorage(): void {
+  public getLocalStorage(): void {
     if (localStorage.getItem('cart')) {
       this.cart.setItems(JSON.parse(localStorage.getItem('cart') as string));
     }
@@ -108,7 +108,7 @@ class Controller {
     }
   }
 
-  addListenerOnCards(cards: Array<Tuple>): void {
+  private addListenerOnCards(cards: Array<Tuple>): void {
     cards.forEach((card: Tuple) => card[1].onclick = (): void => {
       if (this.cart.getItems().includes(card[0].id)) {
         this.cart.removeItem(card[0].id);
@@ -121,7 +121,7 @@ class Controller {
     });
   }
 
-  addClassesOnFilters(key: string, filterButtons: Array<HTMLButtonElement>): void {
+  private addClassesOnFilters(key: string, filterButtons: Array<HTMLButtonElement>): void {
     filterButtons.forEach((button: HTMLButtonElement) => {
       if (this.filters[key as keyof IFilter].includes(`${button.textContent}`)) {
         button.classList.add('selected');
@@ -129,13 +129,13 @@ class Controller {
     });
   }
 
-  removeClassesFromFilters(filterButtons: Array<HTMLButtonElement>): void {
+  private removeClassesFromFilters(filterButtons: Array<HTMLButtonElement>): void {
     filterButtons.forEach((button: HTMLButtonElement) => {
       button.classList.remove('selected');
     });
   }
 
-  addClassesOnCards(cards: Array<Tuple>) {
+  private addClassesOnCards(cards: Array<Tuple>): void {
     cards.forEach((card: Tuple) => {
       if (this.cart.getItems().includes(card[0].id)) {
     
@@ -144,13 +144,13 @@ class Controller {
     });
   }
 
-  removeClassesFromCards(cards: Array<Tuple>) {
+  private removeClassesFromCards(cards: Array<Tuple>): void {
     cards.forEach((card: Tuple) => {
         card[1].classList.remove('in-cart');
     });
   }
 
-  addListenerOnFilters(key: string, filterButtons: Array<HTMLButtonElement>): void {
+  private addListenerOnFilters(key: string, filterButtons: Array<HTMLButtonElement>): void {
     filterButtons.forEach((button: HTMLButtonElement) => button.onclick = (): void => {
 
       if (this.filters[key as keyof IFilter].includes(`${button.textContent}`)) {
@@ -165,7 +165,7 @@ class Controller {
     });
   }
 
-  rerenderCards() {
+  private rerenderCards(): void {
     this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue);
     this.cards = this.page.fillCardContainer(this.filteringData);
     this.addListenerOnCards(this.cards);
