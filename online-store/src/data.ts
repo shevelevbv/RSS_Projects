@@ -9,7 +9,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'black',
     stock: 12,
-    favorite: true,
+    favorite: 'yes',
     price: 9
   },
   {
@@ -20,7 +20,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'black',
     stock: 6,
-    favorite: false,
+    favorite: 'no',
     price: 7.5
   },
   {
@@ -31,7 +31,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'oolong',
     stock: 5,
-    favorite: true,
+    favorite: 'yes',
     price: 17
   },
   {
@@ -42,7 +42,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'black',
     stock: 8,
-    favorite: true,
+    favorite: 'yes',
     price: 16.5
   },
   {
@@ -53,7 +53,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'green',
     stock: 18,
-    favorite: true,
+    favorite: 'yes',
     price: 28
   },
   {
@@ -64,7 +64,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'black',
     stock: 13,
-    favorite: true,
+    favorite: 'yes',
     price: 21
   },
   {
@@ -75,7 +75,7 @@ const data: Array<ICard> = [
     year: 2015,
     variety: 'puerh',
     stock: 7,
-    favorite: false,
+    favorite: 'no',
     price: 12
   },
   {
@@ -86,7 +86,7 @@ const data: Array<ICard> = [
     year: 2012,
     variety: 'puerh',
     stock: 2,
-    favorite: true,
+    favorite: 'yes',
     price: 39
   },
   {
@@ -97,7 +97,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'green',
     stock: 12,
-    favorite: true,
+    favorite: 'yes',
     price: 19
   },
   {
@@ -108,7 +108,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'oolong',
     stock: 16,
-    favorite: true,
+    favorite: 'yes',
     price: 15
   },
   {
@@ -119,7 +119,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'black',
     stock: 16,
-    favorite: true,
+    favorite: 'yes',
     price: 23
   },
   {
@@ -130,7 +130,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'white',
     stock: 6,
-    favorite: true,
+    favorite: 'yes',
     price: 49
   },
   {
@@ -141,7 +141,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'white',
     stock: 14,
-    favorite: false,
+    favorite: 'yes',
     price: 36
   },
   {
@@ -152,7 +152,7 @@ const data: Array<ICard> = [
     year: 2020,
     variety: 'black',
     stock: 12,
-    favorite: false,
+    favorite: 'no',
     price: 5
   },
   {
@@ -163,7 +163,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'green',
     stock: 17,
-    favorite: false,
+    favorite: 'no',
     price: 16
   },
   {
@@ -174,7 +174,7 @@ const data: Array<ICard> = [
     year: 2022,
     variety: 'green',
     stock: 12,
-    favorite: true,
+    favorite: 'yes',
     price: 21
   },
   {
@@ -185,7 +185,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'black',
     stock: 17,
-    favorite: false,
+    favorite: 'no',
     price: 17
   },
   {
@@ -196,7 +196,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'oolong',
     stock: 15,
-    favorite: true,
+    favorite: 'yes',
     price: 39
   },
   {
@@ -207,7 +207,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'oolong',
     stock: 7,
-    favorite: false,
+    favorite: 'no',
     price: 24
   },
   {
@@ -218,7 +218,7 @@ const data: Array<ICard> = [
     year: 2020,
     variety: 'oolong',
     stock: 4,
-    favorite: false,
+    favorite: 'no',
     price: 12
   },
   {
@@ -229,7 +229,7 @@ const data: Array<ICard> = [
     year: 2021,
     variety: 'white',
     stock: 1,
-    favorite: false,
+    favorite: 'no',
     price: 19
   }
 ]

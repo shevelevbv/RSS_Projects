@@ -24,26 +24,17 @@ class Card {
     cardImageContainer.append(cardImage);
     const cardList: HTMLUListElement = document.createElement('ul');
     cardList.className = 'card__list';
-    const cardCountry: HTMLLIElement = document.createElement('li');
-    cardCountry.className = 'card__list_item';
-    cardCountry.textContent = `Country: ${this.data.country}`;
     const cardYear: HTMLLIElement = document.createElement('li');
     cardYear.className = 'card__list_item';
     cardYear.textContent = `Year: ${this.data.year}`;
-    const cardVariety: HTMLLIElement = document.createElement('li');
-    cardVariety.className = 'card__list_item';
-    cardVariety.textContent = `Variety: ${this.data.variety}`;
     const cardStock: HTMLLIElement = document.createElement('li');
     cardStock.className = 'card__list_item';
     cardStock.textContent = `In stock: ${this.data.stock}`;
-    const cardFavorite: HTMLLIElement = document.createElement('li');
-    cardFavorite.className = 'card__list_item';
-    cardFavorite.textContent = `Favorite: ${this.data.favorite ? 'yes' : 'no'}`;
     const cardPrice: HTMLLIElement = document.createElement('li');
     cardPrice.className = 'card__list_item';
     cardPrice.textContent = `Price (100g): $${this.data.price}`;
 
-    cardList.append(cardCountry, cardYear, cardVariety, cardStock, cardFavorite, cardPrice);
+    cardList.append(cardYear, cardStock, cardPrice);
     newCard.append(cardTitle, cardImageContainer, cardList);
     return newCard;
   }

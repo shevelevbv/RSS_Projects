@@ -10,6 +10,8 @@ class Controller {
   private dataManager: DataManager;
   private cart: Basket;
   private filters: IFilter;
+  private filteringData: Array<ICard>
+  private cards: Array<Tuple>;
 
   constructor() {
     this.page = new Page();
@@ -17,7 +19,10 @@ class Controller {
     this.cart = new Basket();
     this.filters = {country: [],
                     variety: [],
+                    favorite: []
                   };
+    this.filteringData = this.dataManager.getOriginalData();
+    this.cards = this.page.fillCardContainer(this.filteringData);
   }
 
   setLocalStorage() {
@@ -43,52 +48,44 @@ class Controller {
     });
   }
 
+  addListenerOnFilters(key: string, filterButtons: Array<HTMLButtonElement>) {
+    filterButtons.forEach((button: HTMLButtonElement) => button.onclick = (): void => {
+
+      if (this.filters[key as keyof IFilter].includes(`${button.textContent}`)) {
+        this.filters[key as keyof IFilter] = this.filters[key as keyof IFilter].filter(value => value !== `${button.textContent}`);
+      } else {
+        this.filters[key as keyof IFilter].push(`${button.textContent}`);
+      }
+
+      this.filteringData = this.dataManager.filterData(this.filters);
+        
+      this.cards = this.page.fillCardContainer(this.filteringData);
+      this.addListenerOnCards(this.cards);
+    });
+  }
+
   start() {
 
-    let filteringData: Array<ICard> = this.dataManager.getOriginalData();
     this.getLocalStorage();
     this.page.drawCartLabel(this.cart.getSize());
 
     const countryFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('country', ['India', 'China', 'Ceylon']);
-    const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['black', 'green', 'white', 'oolong']);
-
-    let cards: Array<Tuple> = this.page.fillCardContainer(filteringData);
+    const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['black', 'green', 'white', 'oolong', 'puerh']);
+    const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
     if (this.cart.getSize()) {
-      cards.filter((card: Tuple): boolean => this.cart.getItems().includes(card[0].id))
+      this.cards.filter((card: Tuple): boolean => this.cart.getItems().includes(card[0].id))
            .forEach((item: Tuple): void => {item[1].classList.add('in-cart');
       })
     }
 
-    this.addListenerOnCards(cards);
+    this.addListenerOnCards(this.cards);
     
-    countryFilterButtons.forEach((button: HTMLButtonElement) => button.onclick = (): void => {
+    this.addListenerOnFilters('country', countryFilterButtons);
 
-      if (this.filters.country.includes(`${button.textContent}`)) {
-        this.filters.country = this.filters.country.filter(value => value !== `${button.textContent}`);
-      } else {
-        this.filters.country.push(`${button.textContent}`);
-      }
+    this.addListenerOnFilters('variety', varietyFilterButtons);
 
-      filteringData = this.dataManager.filterData(this.filters);
-        
-      cards = this.page.fillCardContainer(filteringData);
-      this.addListenerOnCards(cards);
-    });
-
-    varietyFilterButtons.forEach((button: HTMLButtonElement) => button.onclick = (): void => {
-
-      if (this.filters.variety.includes(`${button.textContent}`)) {
-        this.filters.variety = this.filters.variety.filter(value => value !== `${button.textContent}`);
-      } else {
-        this.filters.variety.push(`${button.textContent}`);
-      }
-
-      filteringData = this.dataManager.filterData(this.filters);
-        
-      cards = this.page.fillCardContainer(filteringData);
-      this.addListenerOnCards(cards);
-    });
+    this.addListenerOnFilters('favorite', favoriteFilterButtons);
 
     window.onunload = ():void => {
       this.setLocalStorage();

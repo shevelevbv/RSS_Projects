@@ -6,12 +6,12 @@ export interface ICard {
   year: number,
   variety: string,
   stock: number,
-  favorite: boolean,
+  favorite: string,
   price: number
 }
 
 export interface IFilter {
   country: Array<string>,
   variety: Array<string>,
-  favorite?: boolean;
+  favorite: Array<string>;
 }

@@ -20,7 +20,8 @@ class DataManager {
 
   public filterData(filters: IFilter) {
     return this.originalData.filter(obj => this.checkData('country', obj.country, filters.country)
-                                            && this.checkData('variety', obj.variety, filters.variety));
+                                            && this.checkData('variety', obj.variety, filters.variety)
+                                            && this.checkData('favorite', obj.favorite, filters.favorite));
   }
 }
 
