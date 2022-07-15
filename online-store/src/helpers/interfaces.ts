@@ -4,6 +4,7 @@ export interface ICard {
   img: string,
   country: string,
   year: number,
+  season: string,
   variety: string,
   stock: number,
   favorite: string,

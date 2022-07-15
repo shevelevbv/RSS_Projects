@@ -7,7 +7,8 @@ const data: Array<ICard> = [
     img: './img/assam.jpg',
     country: 'India',
     year: 2022,
-    variety: 'black',
+    season: 'Summer',
+    variety: 'Black',
     stock: 12,
     favorite: 'yes',
     price: 9
@@ -18,7 +19,8 @@ const data: Array<ICard> = [
     img: './img/ceylon.jpg',
     country: 'Ceylon',
     year: 2022,
-    variety: 'black',
+    season: 'Summer',
+    variety: 'Black',
     stock: 6,
     favorite: 'no',
     price: 7.5
@@ -29,7 +31,8 @@ const data: Array<ICard> = [
     img: './img/da-hong-pao.jpg',
     country: 'China',
     year: 2021,
-    variety: 'oolong',
+    season: 'Fall',
+    variety: 'Oolong',
     stock: 5,
     favorite: 'yes',
     price: 17
@@ -40,7 +43,8 @@ const data: Array<ICard> = [
     img: './img/jin-jun-mei.jpg',
     country: 'China',
     year: 2021,
-    variety: 'black',
+    season: 'Summer',
+    variety: 'Black',
     stock: 8,
     favorite: 'yes',
     price: 16.5
@@ -51,7 +55,8 @@ const data: Array<ICard> = [
     img: './img/long-jing.jpg',
     country: 'China',
     year: 2022,
-    variety: 'green',
+    season: 'Spring',
+    variety: 'Green',
     stock: 18,
     favorite: 'yes',
     price: 28
@@ -62,7 +67,8 @@ const data: Array<ICard> = [
     img: './img/organic-darjeeling.jpg',
     country: 'India',
     year: 2021,
-    variety: 'black',
+    season: 'Fall',
+    variety: 'Black',
     stock: 13,
     favorite: 'yes',
     price: 21
@@ -73,7 +79,8 @@ const data: Array<ICard> = [
     img: './img/puerh-ripe.jpg',
     country: 'China',
     year: 2015,
-    variety: 'puerh',
+    season: 'Fall',
+    variety: 'Puerh',
     stock: 7,
     favorite: 'no',
     price: 12
@@ -84,7 +91,8 @@ const data: Array<ICard> = [
     img: './img/puerh-shen.jpg',
     country: 'China',
     year: 2012,
-    variety: 'puerh',
+    season: 'Winter',
+    variety: 'Puerh',
     stock: 2,
     favorite: 'yes',
     price: 39
@@ -95,7 +103,8 @@ const data: Array<ICard> = [
     img: './img/tai-ping-hou-kui.jpg',
     country: 'China',
     year: 2021,
-    variety: 'green',
+    season: 'Spring',
+    variety: 'Green',
     stock: 12,
     favorite: 'yes',
     price: 19
@@ -106,7 +115,8 @@ const data: Array<ICard> = [
     img: './img/tie-guan-yin.jpg',
     country: 'China',
     year: 2022,
-    variety: 'oolong',
+    season: 'Spring',
+    variety: 'Oolong',
     stock: 16,
     favorite: 'yes',
     price: 15
@@ -117,7 +127,8 @@ const data: Array<ICard> = [
     img: './img/darjeeling-first-flush.jpeg',
     country: 'India',
     year: 2022,
-    variety: 'black',
+    season: 'Spring',
+    variety: 'Black',
     stock: 16,
     favorite: 'yes',
     price: 23
@@ -128,7 +139,8 @@ const data: Array<ICard> = [
     img: './img/bai-hao-yin-zhen.jpg',
     country: 'China',
     year: 2022,
-    variety: 'white',
+    season: 'Spring',
+    variety: 'White',
     stock: 6,
     favorite: 'yes',
     price: 49
@@ -139,7 +151,8 @@ const data: Array<ICard> = [
     img: './img/bai-mu-dan.jpg',
     country: 'China',
     year: 2022,
-    variety: 'white',
+    season: 'Fall',
+    variety: 'White',
     stock: 14,
     favorite: 'yes',
     price: 36
@@ -150,7 +163,8 @@ const data: Array<ICard> = [
     img: './img/english-breakfast.jpg',
     country: 'India',
     year: 2020,
-    variety: 'black',
+    season: 'Summer',
+    variety: 'Black',
     stock: 12,
     favorite: 'no',
     price: 5
@@ -161,7 +175,8 @@ const data: Array<ICard> = [
     img: './img/ceylon-green-tea.jpg',
     country: 'Ceylon',
     year: 2021,
-    variety: 'green',
+    season: 'Spring',
+    variety: 'Green',
     stock: 17,
     favorite: 'no',
     price: 16
@@ -172,7 +187,8 @@ const data: Array<ICard> = [
     img: './img/bi-luo-chun.jpg',
     country: 'China',
     year: 2022,
-    variety: 'green',
+    season: 'Spring',
+    variety: 'Green',
     stock: 12,
     favorite: 'yes',
     price: 21
@@ -183,7 +199,8 @@ const data: Array<ICard> = [
     img: './img/dian-hong.jpg',
     country: 'China',
     year: 2021,
-    variety: 'black',
+    season: 'Summer',
+    variety: 'Black',
     stock: 17,
     favorite: 'no',
     price: 17
@@ -194,7 +211,8 @@ const data: Array<ICard> = [
     img: './img/alishan.jpeg',
     country: 'China',
     year: 2021,
-    variety: 'oolong',
+    season: 'Spring',
+    variety: 'Oolong',
     stock: 15,
     favorite: 'yes',
     price: 39
@@ -205,7 +223,8 @@ const data: Array<ICard> = [
     img: './img/shui-xian.jpg',
     country: 'China',
     year: 2021,
-    variety: 'oolong',
+    season: 'Summer',
+    variety: 'Oolong',
     stock: 7,
     favorite: 'no',
     price: 24
@@ -216,7 +235,8 @@ const data: Array<ICard> = [
     img: './img/rou-gui.jpeg',
     country: 'China',
     year: 2020,
-    variety: 'oolong',
+    season: 'Summer',
+    variety: 'Oolong',
     stock: 4,
     favorite: 'no',
     price: 12
@@ -227,6 +247,7 @@ const data: Array<ICard> = [
     img: './img/shou-mei.jpg',
     country: 'China',
     year: 2021,
+    season: 'Fall',
     variety: 'white',
     stock: 1,
     favorite: 'no',

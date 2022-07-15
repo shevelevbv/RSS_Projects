@@ -26,7 +26,7 @@ class Card {
     cardList.className = 'card__list';
     const cardYear: HTMLLIElement = document.createElement('li');
     cardYear.className = 'card__list_item';
-    cardYear.textContent = `Year: ${this.data.year}`;
+    cardYear.textContent = `Season: ${this.data.season} ${this.data.year}`;
     const cardStock: HTMLLIElement = document.createElement('li');
     cardStock.className = 'card__list_item';
     cardStock.textContent = `In stock: ${this.data.stock}`;

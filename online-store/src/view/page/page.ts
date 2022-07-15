@@ -8,6 +8,7 @@ class Page {
   private cartContainer: HTMLDivElement;
   private cartLabel: HTMLDivElement;
   private filterContainer: HTMLDivElement;
+  private filterElements: HTMLDivElement;
   private cardContainer: HTMLDivElement;
   
 
@@ -22,8 +23,12 @@ class Page {
     this.filterContainer = document.createElement('div');
     this.filterContainer.className = 'filter__container';
 
+    this.filterElements = document.createElement('div');
+    this.filterElements.className = 'filter__elements';
+
     this.cardContainer = document.createElement('div');
     this.cardContainer.className = 'container_cards';
+    this.filterContainer.append(this.filterElements);
     this.main.append(this.filterContainer, this.cardContainer)
     document.body.append(this.header, this.main);
   }
@@ -82,7 +87,7 @@ class Page {
       filterButtons.push(filterButton);
     });
     filter.append(filterButtonContainer);
-    this.filterContainer.append(filter);
+    this.filterElements.append(filter);
     return filterButtons;
   }
 

@@ -33,7 +33,7 @@ class Controller {
     this.cards = this.page.fillCardContainer(this.filteringData);
 
     const countryFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('country', ['India', 'China', 'Ceylon']);
-    const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['black', 'green', 'white', 'oolong', 'puerh']);
+    const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['Black', 'Green', 'White', 'Oolong', 'Puerh']);
     const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
     this.addClassesOnFilters('country', countryFilterButtons);
