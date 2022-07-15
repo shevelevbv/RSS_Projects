@@ -4,6 +4,7 @@ import { ICard } from '../../helpers/interfaces';
 
 class Page {
   private header: HTMLElement;
+  private main: HTMLElement;
   private cartContainer: HTMLDivElement;
   private cartLabel: HTMLDivElement;
   private filterContainer: HTMLDivElement;
@@ -12,6 +13,8 @@ class Page {
 
   constructor() {
     this.header = document.createElement('header');
+    this.main = document.createElement('main');
+    this.main.className = 'main';
     this.cartContainer = document.createElement('div');
     this.cartLabel = document.createElement('p');
     this.createHeader();
@@ -21,7 +24,8 @@ class Page {
 
     this.cardContainer = document.createElement('div');
     this.cardContainer.className = 'container_cards';
-    document.body.append(this.header, this.filterContainer, this.cardContainer);
+    this.main.append(this.filterContainer, this.cardContainer)
+    document.body.append(this.header, this.main);
   }
 
   private createHeader() {
@@ -68,10 +72,11 @@ class Page {
     filterTitle.textContent = key.charAt(0).toUpperCase() + key.slice(1);
     filter.append(filterTitle);
     const filterButtonContainer: HTMLDivElement = document.createElement('div');
+    filterButtonContainer.className = "filter__button_container"
     const filterButtons: Array<HTMLButtonElement> = [];
     textValues.forEach((value: string): void => {
       const filterButton = document.createElement('button');
-      filterButton.className = `filter__${key}`;
+      filterButton.className = `button filter__button_${key}`;
       filterButton.textContent = value;
       filterButtonContainer.append(filterButton);
       filterButtons.push(filterButton);

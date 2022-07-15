@@ -5,23 +5,22 @@ class DataManager {
   private originalData: Array<ICard>;
 
   constructor() {
-    this.originalData = data;
-    
+    this.originalData = data; 
   }
 
   public getOriginalData(): Array<ICard> {
     return this.originalData;
   }
 
-  private checkData(key: string, testValue: string, values: Array<string | boolean | number>): boolean {
+  private checkData(testValue: string, values: Array<string>): boolean {
     if (!values.length) return true;
     return values.includes(testValue);
   }
 
-  public filterData(filters: IFilter) {
-    return this.originalData.filter(obj => this.checkData('country', obj.country, filters.country)
-                                            && this.checkData('variety', obj.variety, filters.variety)
-                                            && this.checkData('favorite', obj.favorite, filters.favorite));
+  public filterData(filters: IFilter): Array<ICard> {
+    return this.originalData.filter(obj => this.checkData(obj.country, filters.country)
+                                        && this.checkData(obj.variety, filters.variety)
+                                        && this.checkData(obj.favorite, filters.favorite));
   }
 }
 
