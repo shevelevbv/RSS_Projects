@@ -173,9 +173,16 @@ class Controller {
 
   private rerenderCards(): void {
     this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue, this.sorter.value);
-    this.cards = this.page.fillCardContainer(this.filteringData);
-    this.addListenerOnCards(this.cards);
-    this.addClassesOnCards(this.cards);
+    if (this.filteringData.length) {
+      this.page.cardContainer.classList.remove('none');
+      this.cards = this.page.fillCardContainer(this.filteringData);
+      this.addListenerOnCards(this.cards);
+      this.addClassesOnCards(this.cards);
+    } else {
+      this.page.cardContainer.innerHTML = '';
+      this.page.cardContainer.classList.add('none');
+    }
+    
   }
 
 }

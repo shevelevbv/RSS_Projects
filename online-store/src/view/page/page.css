@@ -79,10 +79,28 @@ body {
   gap: 20px;
 }
 
+.filter_favorite {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .filter__button_container {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.filter__button_favorite {
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.filter__button_favorite.selected {
+  background-color: rgb(73, 138, 73);
 }
 
 .filter__buttons_reset {
@@ -100,17 +118,57 @@ body {
   width: 80%;
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .sorter {
   display: flex;
   justify-content: end;
+  gap: 5px;
 }
 
 .container_cards {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
   gap: 30px;
+}
+
+.container_cards.none {
+  padding-top: 5px;
+  grid-template-columns: 1fr;
+}
+
+.container_cards.none::after {
+  content: 'Oops! Nothing found. Please try another search.';
+  font-size: 1.5rem;
+  color: black;
+}
+
+@media screen and (max-width: 1530px) {
+
+  .container_cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+  .header {
+    padding: 0 30px;
+  }
+
+  .main {
+    padding: 0 30px;
+  }
+
+  .section_content {
+    width: 75%;
+  }
+  
+  .container_cards {
+    grid-template-columns: 1fr 1fr;
+  }
 }

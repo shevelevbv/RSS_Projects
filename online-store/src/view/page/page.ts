@@ -12,7 +12,7 @@ class Page {
   private filterElements: HTMLDivElement;
   private resetButtonContainer: HTMLDivElement;
   private sectionContent: HTMLDivElement;
-  private cardContainer: HTMLDivElement;
+  public cardContainer: HTMLDivElement;
   
   constructor() {
     this.header = createElement(document.body, 'header', 'header');
@@ -58,7 +58,7 @@ class Page {
   }
 
   public drawFilter(key: string, textValues: Array<string>): Array<HTMLButtonElement> {
-    const filter: HTMLDivElement = createElement(this.filterElements, 'div', 'filter');
+    const filter: HTMLDivElement = createElement(this.filterElements, 'div', `filter filter_${key}`);
     createElement(filter, 'h2', 'filter__title', key.charAt(0).toUpperCase() + key.slice(1));
     const filterButtonContainer: HTMLDivElement = createElement(filter, 'div', 'filter__button_container');
     const filterButtons: Array<HTMLButtonElement> = [];
