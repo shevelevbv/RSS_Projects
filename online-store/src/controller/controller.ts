@@ -82,6 +82,7 @@ class Controller {
     }
 
     resetAllButton.onclick = (): void => {
+      this.sorter.value = 'nameAsc';
       resetButton.click();
       this.cart.setItems([]);
       this.page.drawCartLabel(this.cart.getSize());
@@ -101,6 +102,7 @@ class Controller {
     localStorage.setItem('cart', JSON.stringify(this.cart.getItems()));
     localStorage.setItem('filters', JSON.stringify(this.filters));
     localStorage.setItem('search', this.searchInputValue);
+    localStorage.setItem('sorter', this.sorter.value);
   }
 
   public getLocalStorage(): void {
@@ -112,6 +114,9 @@ class Controller {
     }
     if (localStorage.getItem('search')) {
       this.searchInputValue = localStorage.getItem('search') as string;
+    }
+    if (localStorage.getItem('sorter')) {
+      this.sorter.value = localStorage.getItem('sorter') as string;
     }
   }
 
