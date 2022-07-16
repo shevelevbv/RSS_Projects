@@ -80,6 +80,7 @@ class Page {
     searchInput.type = 'text';
     searchInput.value = value;
     searchInput.autofocus = true;
+    searchInput.placeholder = 'Search';
     return searchInput;
   }
 
@@ -94,9 +95,9 @@ class Page {
     option1.value = 'nameAsc';
     const option2: HTMLOptionElement = createElement(sorter, 'option', 'option', 'name Z-A');
     option2.value = 'nameDesc';
-    const option3: HTMLOptionElement = createElement(sorter, 'option', 'option', 'year: early first');
+    const option3: HTMLOptionElement = createElement(sorter, 'option', 'option', 'year: earliest first');
     option3.value = 'yearAsc';
-    const option4: HTMLOptionElement = createElement(sorter, 'option', 'option', 'year: late first');
+    const option4: HTMLOptionElement = createElement(sorter, 'option', 'option', 'year: latest first');
     option4.value = 'yearDesc';
     const option5: HTMLOptionElement = createElement(sorter, 'option', 'option', 'price: lowest first');
     option5.value = 'priceAsc';

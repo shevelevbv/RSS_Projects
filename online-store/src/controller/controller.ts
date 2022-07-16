@@ -87,6 +87,7 @@ class Controller {
       this.cart.setItems([]);
       this.page.drawCartLabel(this.cart.getSize());
       this.removeClassesFromCards(this.cards);
+      localStorage.clear();
     }
 
     this.sorter.onchange = (): void => {

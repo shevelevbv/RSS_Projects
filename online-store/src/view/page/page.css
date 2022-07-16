@@ -79,6 +79,10 @@ body {
   gap: 20px;
 }
 
+.filter__input_search {
+  outline: none;
+}
+
 .filter_favorite {
   display: flex;
   justify-content: space-between;
@@ -124,7 +128,12 @@ body {
 .sorter {
   display: flex;
   justify-content: end;
+  align-items: center;
   gap: 5px;
+}
+
+.sorter__select {
+  outline: none;
 }
 
 .container_cards {
