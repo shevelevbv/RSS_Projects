@@ -22,12 +22,23 @@ class DataManager {
     return title.toLowerCase().includes(testString.toLowerCase());
   }
 
-  public applyFiltersToData(filters: IFilter, testString: string): Array<ICard> {
+  public applyFiltersToData(filters: IFilter, testString: string, algorithm: string): Array<ICard> {
     return this.originalData.filter(obj => this.isItemInData(obj.country, filters.country)
                                         && this.isItemInData(obj.variety, filters.variety)
                                         && this.isItemInData(obj.favorite, filters.favorite)
                                         && this.isStringInData(testString, obj.title)
-                                    );
+                                    )
+                            .sort((a, b): number => {
+                              switch (algorithm) {
+                                case 'nameAsc': return a.title.localeCompare(b.title);
+                                case 'nameDesc': return b.title.localeCompare(a.title);
+                                case 'yearAsc': return a.year - b.year;
+                                case 'yearDesc': return b.year - a.year;
+                                case 'priceAsc': return a.price - b.price;
+                                case 'priceDesc': return b.price - a.price;
+                                default: return 0;
+                              }
+                            });
   }
 
 }

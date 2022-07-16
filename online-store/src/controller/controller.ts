@@ -12,6 +12,7 @@ class Controller {
   private filters: IFilter;
   private filteringData: Array<ICard>
   private searchInputValue: string;
+  private sorter: HTMLSelectElement;
   private cards: Array<Tuple>;
 
   constructor() {
@@ -24,6 +25,7 @@ class Controller {
                   };
     this.filteringData = this.dataManager.getOriginalData();
     this.searchInputValue = '';
+    this.sorter = this.page.drawSorter();
     this.cards = this.page.fillCardContainer(this.filteringData);
   }
 
@@ -31,7 +33,7 @@ class Controller {
 
     this.getLocalStorage();
     this.page.drawCartLabel(this.cart.getSize());
-    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue);
+    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue, this.sorter.value);
     this.cards = this.page.fillCardContainer(this.filteringData);
 
     const searchInput: HTMLInputElement = this.page.drawSearch();
@@ -83,6 +85,10 @@ class Controller {
       this.cart.setItems([]);
       this.page.drawCartLabel(this.cart.getSize());
       this.removeClassesFromCards(this.cards);
+    }
+
+    this.sorter.onchange = (): void => {
+      this.rerenderCards();
     }
 
     window.onunload = (): void => {
@@ -166,7 +172,7 @@ class Controller {
   }
 
   private rerenderCards(): void {
-    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue);
+    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue, this.sorter.value);
     this.cards = this.page.fillCardContainer(this.filteringData);
     this.addListenerOnCards(this.cards);
     this.addClassesOnCards(this.cards);
