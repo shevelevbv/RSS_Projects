@@ -248,7 +248,7 @@ const data: Array<ICard> = [
     country: 'China',
     year: 2021,
     season: 'Fall',
-    variety: 'white',
+    variety: 'White',
     stock: 1,
     favorite: 'no',
     price: 19

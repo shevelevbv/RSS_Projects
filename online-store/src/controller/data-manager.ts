@@ -25,6 +25,7 @@ class DataManager {
   public applyFiltersToData(filters: IFilter, testString: string, algorithm: string): Array<ICard> {
     return this.originalData.filter(obj => this.isItemInData(obj.country, filters.country)
                                         && this.isItemInData(obj.variety, filters.variety)
+                                        && this.isItemInData(obj.season, filters.season)
                                         && this.isItemInData(obj.favorite, filters.favorite)
                                         && this.isStringInData(testString, obj.title)
                                     )

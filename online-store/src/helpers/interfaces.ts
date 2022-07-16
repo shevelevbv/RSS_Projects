@@ -14,5 +14,6 @@ export interface ICard {
 export interface IFilter {
   country: Array<string>,
   variety: Array<string>,
+  season: Array<string>,
   favorite: Array<string>;
 }

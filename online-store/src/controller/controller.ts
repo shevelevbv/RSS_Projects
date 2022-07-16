@@ -22,6 +22,7 @@ class Controller {
     this.cart = new Cart();
     this.filters = {country: [],
                     variety: [],
+                    season: [],
                     favorite: []
                   };
     this.filteringData = this.dataManager.getOriginalData();
@@ -42,6 +43,7 @@ class Controller {
 
     const countryFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('country', ['India', 'China', 'Ceylon']);
     const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['Black', 'Green', 'White', 'Oolong', 'Puerh']);
+    const seasonFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('season', ['Spring', 'Summer', 'Fall', 'Winter']);
     const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
     const resetButton: HTMLButtonElement = this.page.drawResetButton('Reset filters', 'resetFilters');
@@ -49,6 +51,7 @@ class Controller {
 
     this.addClassesOnFilters('country', countryFilterButtons);
     this.addClassesOnFilters('variety', varietyFilterButtons);
+    this.addClassesOnFilters('season', seasonFilterButtons);
     this.addClassesOnFilters('favorite', favoriteFilterButtons);
 
     if (this.cart.getSize()) {
@@ -61,6 +64,7 @@ class Controller {
     
     this.addListenerOnFilters('country', countryFilterButtons);
     this.addListenerOnFilters('variety', varietyFilterButtons);
+    this.addListenerOnFilters('season', seasonFilterButtons);
     this.addListenerOnFilters('favorite', favoriteFilterButtons);
 
     searchInput.oninput = (): void => {
@@ -71,10 +75,12 @@ class Controller {
     resetButton.onclick = (): void => {
       this.filters = {country: [],
                       variety: [],
+                      season: [],
                       favorite: []
                     };
       this.removeClassesFromFilters(countryFilterButtons);
       this.removeClassesFromFilters(varietyFilterButtons);
+      this.removeClassesFromFilters(seasonFilterButtons);
       this.removeClassesFromFilters(favoriteFilterButtons);
       this.searchInputValue = '';
       searchInput.value = '';
