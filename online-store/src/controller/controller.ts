@@ -2,6 +2,7 @@ import { ICard, IFilter } from '../helpers/interfaces';
 import Cart from '../view/cart/cart';
 import Page from '../view/page/page';
 import DataManager from './data-manager';
+import { Limits } from '../helpers/enums';
 
 type Tuple = [ICard, HTMLElement];
 
@@ -115,12 +116,24 @@ class Controller {
   }
 
   private addListenerOnCards(cards: Array<Tuple>): void {
+    let extraCard: Tuple | null;
     cards.forEach((card: Tuple) => card[1].onclick = (): void => {
       if (this.cart.getItems().includes(card[0].id)) {
         this.cart.removeItem(card[0].id);
         card[1].classList.remove('in-cart');
+        card[1].classList.remove('exceed-limit');
+        if (extraCard) {
+          extraCard[1].classList.remove('exceed-limit');
+          extraCard = null;
+        }
       } else {
         this.cart.addItem(card[0].id);
+        if (this.cart.getSize() > Limits.maxCartItems) {
+          extraCard = card;
+          card[1].classList.add('exceed-limit');
+          this.cart.removeItem(card[0].id);
+          return;
+        }
         card[1].classList.add('in-cart');
       }
       this.page.drawCartLabel(this.cart.getSize());

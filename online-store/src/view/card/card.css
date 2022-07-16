@@ -35,6 +35,21 @@
   transform: rotate(-20deg);
 }
 
+.card.exceed-limit {
+  box-shadow: 0 0 3px 3px red;
+  position: relative;
+}
+
+.card.card.exceed-limit::after {
+  content: 'Sorry. There are no more slots available.';
+  color: white;
+  position: absolute;
+  width: 100%;
+  background-color: red;
+  top: 50px;
+  text-align: center;
+}
+
 .card__title {
   margin-top: 10px;
   text-align: center;
