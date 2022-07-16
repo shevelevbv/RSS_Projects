@@ -44,6 +44,8 @@ class Controller {
     const countryFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('country', ['India', 'China', 'Ceylon']);
     const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['Black', 'Green', 'White', 'Oolong', 'Puerh']);
     const seasonFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('season', ['Spring', 'Summer', 'Fall', 'Winter']);
+    this.page.drawRangeInput('Price', 5, 49);
+    this.page.drawRangeInput('In stock', 1, 18);
     const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
     const resetButton: HTMLButtonElement = this.page.drawResetButton('Reset filters', 'resetFilters');

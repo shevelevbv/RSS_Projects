@@ -69,6 +69,26 @@ class Page {
     return filterButtons;
   }
 
+  public drawRangeInput(title: string, min: number, max: number) {
+    const inputRangeContainer: HTMLDivElement = createElement(this.filterElements, 'div', 'filter__range_container');
+    createElement(inputRangeContainer, 'h2', 'filter__input_title', title);
+    const inputContainer: HTMLDivElement = createElement(inputRangeContainer, 'div', 'filter__input_container');
+    createElement(inputContainer, 'div', 'filter__input_track');
+    const input1: HTMLInputElement = createElement(inputContainer, 'input', 'filter__input filter__input1');
+    input1.min = String(min);
+    input1.max = String(max);
+    input1.type = 'range';
+    input1.value = String(min);
+    const input2: HTMLInputElement = createElement(inputContainer, 'input', 'filter__input filter__input2');
+    input2.min = String(min);
+    input2.max = String(max);
+    input2.type = 'range';
+    input2.value = String(max);
+
+    return [input1, input2];
+
+  }
+
   public drawResetButton(content: string, value: string): HTMLButtonElement {
     const button: HTMLButtonElement = createElement(this.resetButtonContainer, 'button', `filter__button_reset filter__button_${value}`, content);
     return button;
