@@ -29,7 +29,7 @@ class DataManager {
                                         && this.isItemInData(obj.favorite, filters.favorite)
                                         && this.isStringInData(testString, obj.title)
                                     )
-                            .sort((a, b): number => {
+                            .sort((a: ICard, b: ICard): number => {
                               switch (algorithm) {
                                 case 'nameAsc': return a.title.localeCompare(b.title);
                                 case 'nameDesc': return b.title.localeCompare(a.title);
@@ -40,6 +40,13 @@ class DataManager {
                                 default: return 0;
                               }
                             });
+  }
+
+  public getMinOrMax(key: string, isMin: boolean): number {
+    const values: Array<number> = [];
+    this.originalData.forEach(obj => values.push(obj[key as keyof ICard] as number));
+    
+    return isMin ? Math.min(...values) : Math.max(...values);
   }
 
 }
