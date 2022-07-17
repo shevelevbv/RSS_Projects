@@ -1,5 +1,6 @@
 import { ICard, IFilter } from '../helpers/interfaces';
 import Cart from '../view/cart/cart';
+import Range from './range';
 import Page from '../view/page/page';
 import DataManager from './data-manager';
 import { Limits } from '../helpers/enums';
@@ -10,7 +11,7 @@ class Controller {
   private page: Page;
   private dataManager: DataManager;
   private cart: Cart;
-  private filters: IFilter;
+  public filters: IFilter;
   private filteringData: Array<ICard>
   private searchInputValue: string;
   private sorter: HTMLSelectElement;
@@ -23,8 +24,8 @@ class Controller {
     this.filters = {country: [],
                     variety: [],
                     season: [],
-                    priceRange: [],
-                    stockRange: [],
+                    priceRange: [String(this.dataManager.getMinOrMax('price', true)), String(this.dataManager.getMinOrMax('price', false))],
+                    stockRange: [String(this.dataManager.getMinOrMax('stock', true)), String(this.dataManager.getMinOrMax('stock', false))],
                     favorite: []
                   };
     this.filteringData = this.dataManager.getOriginalData();
@@ -46,10 +47,20 @@ class Controller {
     const countryFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('country', ['India', 'China', 'Ceylon']);
     const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['Black', 'Green', 'White', 'Oolong', 'Puerh']);
     const seasonFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('season', ['Spring', 'Summer', 'Fall', 'Winter']);
-    const [priceInput1, priceInput2, priceValue1, priceValue2, priceTrack]: [HTMLInputElement, HTMLInputElement, HTMLSpanElement, HTMLSpanElement, HTMLDivElement] = 
-      this.page.drawRangeInput('Price', this.dataManager.getMinOrMax('price', true), this.dataManager.getMinOrMax('price', false));
-    const [stockInput1, stockInput2, stockValue1, stockValue2, stockTrack]: [HTMLInputElement, HTMLInputElement, HTMLSpanElement, HTMLSpanElement, HTMLDivElement] = 
-      this.page.drawRangeInput('In stock', this.dataManager.getMinOrMax('stock', true), this.dataManager.getMinOrMax('stock', false));
+
+    const priceRange = new Range('Price',
+                                String(this.dataManager.getMinOrMax('price', true)), 
+                                String(this.dataManager.getMinOrMax('price', false)),
+                                this.page);
+                      
+    const stockRange = new Range('In stock',
+                                String(this.dataManager.getMinOrMax('stock', true)), 
+                                String(this.dataManager.getMinOrMax('stock', false)),
+                                this.page);
+
+    priceRange.reset(this.filters, 'priceRange');
+    stockRange.reset(this.filters, 'stockRange');
+
     const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
     const resetButton: HTMLButtonElement = this.page.drawResetButton('Reset filters', 'resetFilters');
@@ -78,85 +89,41 @@ class Controller {
       this.rerenderCards();
     }
 
-    priceInput1.oninput = (): void => {
-      if (parseInt(priceInput2.value) - parseInt(priceInput1.value) <= Limits.minInputFilterGap) {
-        priceInput1.value = String(parseInt(priceInput2.value) - Limits.minInputFilterGap);
-      }
-      priceValue1.textContent = priceInput1.value;
-      this.fillColor(priceInput1, priceInput2, priceTrack);
-    }
+    priceRange.input1.oninput = (): void => priceRange.onInput1();
 
-    priceInput2.oninput = (): void => {
-      if (parseInt(priceInput2.value) - parseInt(priceInput1.value) <= Limits.minInputFilterGap) {
-        priceInput2.value = String(parseInt(priceInput1.value) + Limits.minInputFilterGap);
-      }
-      priceValue2.textContent = priceInput2.value;
-      this.fillColor(priceInput1, priceInput2, priceTrack);
-    }
+    priceRange.input2.oninput = (): void => priceRange.onInput2();
 
-    priceInput1.onmouseup = () => {
-      this.filters.priceRange = [priceInput1.value, priceInput2.value];
+    priceRange.input1.onmouseup = (): void => {
+      priceRange.onMouseup1(this.filters, 'priceRange');
       this.rerenderCards();
     }
 
-    priceInput2.onmouseup = () => {
-      this.filters.priceRange = [priceInput1.value, priceInput2.value];
+    priceRange.input2.onmouseup = (): void => {
+      priceRange.onMouseup2(this.filters, 'priceRange');
       this.rerenderCards();
     }
 
-    stockInput1.oninput = (): void => {
-      if (parseInt(stockInput2.value) - parseInt(stockInput1.value) <= Limits.minInputFilterGap) {
-        stockInput1.value = String(parseInt(stockInput2.value) - Limits.minInputFilterGap);
-      }
-      stockValue1.textContent = stockInput1.value;
-      this.fillColor(stockInput1, stockInput2, stockTrack);
-    }
+    stockRange.input1.oninput = (): void => stockRange.onInput1();
 
-    stockInput2.oninput = (): void => {
-      if (parseInt(stockInput2.value) - parseInt(stockInput1.value) <= Limits.minInputFilterGap) {
-        stockInput2.value = String(parseInt(stockInput1.value) + Limits.minInputFilterGap);
-      }
-      stockValue2.textContent = stockInput2.value;
-      this.fillColor(stockInput1, stockInput2, stockTrack);
-    }
+    stockRange.input2.oninput = (): void => stockRange.onInput2();
 
-    stockInput1.onmouseup = () => {
-      this.filters.stockRange = [stockInput1.value, stockInput2.value];
+    stockRange.input1.onmouseup = (): void => {
+      stockRange.onMouseup1(this.filters, 'stockRange');
       this.rerenderCards();
     }
 
-    stockInput2.onmouseup = () => {
-      this.filters.stockRange = [stockInput1.value, stockInput2.value];
+    stockRange.input2.onmouseup = (): void => {
+      stockRange.onMouseup2(this.filters, 'stockRange');
       this.rerenderCards();
     }
 
-    priceTrack.onclick = (event) => {
-      let eventPosition = Math.round(event.offsetX / priceTrack.offsetWidth * (parseInt(priceInput1.max) - parseInt(priceInput1.min)));
-      eventPosition = Math.ceil(eventPosition * 1.1);
-      if (Math.abs(eventPosition - parseInt(priceInput1.value)) < Math.abs(eventPosition - parseInt(priceInput2.value))) {
-        priceInput1.value = String(eventPosition);
-        priceValue1.textContent = String(eventPosition);
-      } else {
-        priceInput2.value = String(eventPosition);
-        priceValue2.textContent = String(eventPosition);
-      }
-      this.fillColor(priceInput1, priceInput2, priceTrack);
-      this.filters.priceRange = [priceInput1.value, priceInput2.value];
+    priceRange.track.onclick = (event) => {
+      priceRange.clickOnTrack(event, this.filters, 'priceRange');
       this.rerenderCards();
     }
 
-    stockTrack.onclick = (event) => {
-      let eventPosition = Math.round(event.offsetX / stockTrack.offsetWidth * (parseInt(stockInput1.max) - parseInt(stockInput1.min)));
-      eventPosition = Math.ceil(eventPosition * 1.1);
-      if (Math.abs(eventPosition - parseInt(stockInput1.value)) < Math.abs(eventPosition - parseInt(stockInput2.value))) {
-        stockInput1.value = String(eventPosition);
-        stockValue1.textContent = String(eventPosition);
-      } else {
-        stockInput2.value = String(eventPosition);
-        stockValue2.textContent = String(eventPosition);
-      }
-      this.fillColor(stockInput1, stockInput2, stockTrack);
-      this.filters.stockRange = [stockInput1.value, stockInput2.value];
+    stockRange.track.onclick = (event) => {
+      stockRange.clickOnTrack(event, this.filters, 'stockRange');
       this.rerenderCards();
     }
 
@@ -164,8 +131,8 @@ class Controller {
       this.filters = {country: [],
                       variety: [],
                       season: [],
-                      priceRange: [],
-                      stockRange: [],
+                      priceRange: [String(this.dataManager.getMinOrMax('price', true)), String(this.dataManager.getMinOrMax('price', false))],
+                      stockRange: [String(this.dataManager.getMinOrMax('stock', true)), String(this.dataManager.getMinOrMax('stock', false))],
                       favorite: []
                     };
       this.removeClassesFromFilters(countryFilterButtons);
@@ -174,6 +141,11 @@ class Controller {
       this.removeClassesFromFilters(favoriteFilterButtons);
       this.searchInputValue = '';
       searchInput.value = '';
+
+      priceRange.reset(this.filters, 'priceRange');
+      
+      stockRange.reset(this.filters, 'stockRange');
+      
       this.rerenderCards();
     }
 
@@ -296,12 +268,6 @@ class Controller {
       this.page.cardContainer.innerHTML = '';
       this.page.cardContainer.classList.add('none');
     }
-  }
-
-  private fillColor(slider1: HTMLInputElement, slider2: HTMLInputElement, track: HTMLDivElement): void {
-    const percent1: number = (parseInt(slider1.value) / parseInt(slider1.max)) * 100;
-    const percent2: number = (parseInt(slider2.value) / parseInt(slider1.max)) * 100;
-    track.style.background = `linear-gradient(to right, #dadae5 ${percent1 - 2}% , #5fd65f ${percent1 - 2}% , #5fd65f ${percent2 - 2}%, #dadae5 ${percent2 - 2}%)`;
   }
 
 }
