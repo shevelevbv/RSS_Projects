@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "My webpack project",
   "main": "webpack.base.config.js",
+  "type": "commonjs",
   "scripts": {
     "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
     "build": "webpack --mode=production --node-env=production",
@@ -10,14 +11,20 @@
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "test": "jest"
   },
   "author": "Bronislav",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/jest": "^28.1.6",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "@webpack-cli/generators": "^0.1.9",
+    "babel-jest": "^28.1.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
@@ -36,6 +43,7 @@
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "svg-inline-loader": "^0.8.2",
+    "ts-jest": "^28.0.7",
     "ts-loader": "^9.3.1",
     "typescript": "^4.7.4",
     "webpack": "^5.73.0",
@@ -45,6 +53,7 @@
     "workbox-webpack-plugin": "^6.5.3"
   },
   "dependencies": {
-    "eslint-webpack-plugin": "^3.2.0"
+    "eslint-webpack-plugin": "^3.2.0",
+    "ts-node": "^10.9.1"
   }
 }

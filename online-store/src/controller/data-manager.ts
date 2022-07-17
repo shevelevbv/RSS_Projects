@@ -12,7 +12,7 @@ class DataManager {
     return [...this.originalData];
   }
 
-  private isItemInData(testValue: string, values: Array<string>): boolean {
+  public isItemInData(testValue: string, values: Array<string>): boolean {
     if (!values.length) return true;
     return values.includes(testValue);
   }
@@ -22,7 +22,7 @@ class DataManager {
     return title.toLowerCase().includes(testString.toLowerCase());
   }
 
-  private isInRange(testValue: number, range: Array<string>): boolean {
+  public isInRange(testValue: number, range: Array<string>): boolean {
     return testValue >= parseInt(range[0]) && testValue <= parseInt(range[1]);
   }
 
@@ -58,4 +58,5 @@ class DataManager {
 }
 
 export default DataManager;
+
 
