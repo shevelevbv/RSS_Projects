@@ -24,8 +24,8 @@ class Controller {
     this.filters = {country: [],
                     variety: [],
                     season: [],
-                    priceRange: [String(this.dataManager.getMinOrMax('price', true)), String(this.dataManager.getMinOrMax('price', false))],
-                    stockRange: [String(this.dataManager.getMinOrMax('stock', true)), String(this.dataManager.getMinOrMax('stock', false))],
+                    priceRange: [],
+                    stockRange: [],
                     favorite: []
                   };
     this.filteringData = this.dataManager.getOriginalData();
@@ -117,12 +117,12 @@ class Controller {
       this.rerenderCards();
     }
 
-    priceRange.track.onclick = (event) => {
+    priceRange.track.onclick = (event): void => {
       priceRange.clickOnTrack(event, this.filters, 'priceRange');
       this.rerenderCards();
     }
 
-    stockRange.track.onclick = (event) => {
+    stockRange.track.onclick = (event): void => {
       stockRange.clickOnTrack(event, this.filters, 'stockRange');
       this.rerenderCards();
     }

@@ -65,7 +65,7 @@ class Range {
     filters[key as keyof IFilter] = [this.input1.value, this.input2.value];
   }
 
-  public reset(filters: IFilter, key: string) {
+  public reset(filters: IFilter, key: string): void {
     this.input1.value = filters[key as keyof IFilter][0];
     this.value1.textContent = filters[key as keyof IFilter][0];
     this.input2.value = filters[key as keyof IFilter][1];
