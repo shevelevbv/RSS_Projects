@@ -22,10 +22,16 @@ class DataManager {
     return title.toLowerCase().includes(testString.toLowerCase());
   }
 
+  private isInRange(testValue: number, range: Array<string>): boolean {
+    return testValue >= parseInt(range[0]) && testValue <= parseInt(range[1]);
+  }
+
   public applyFiltersToData(filters: IFilter, testString: string, algorithm: string): Array<ICard> {
     return this.originalData.filter(obj => this.isItemInData(obj.country, filters.country)
                                         && this.isItemInData(obj.variety, filters.variety)
                                         && this.isItemInData(obj.season, filters.season)
+                                        && this.isInRange(obj.price, filters.priceRange)
+                                        && this.isInRange(obj.stock, filters.stockRange)
                                         && this.isItemInData(obj.favorite, filters.favorite)
                                         && this.isStringInData(testString, obj.title)
                                     )

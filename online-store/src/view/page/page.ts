@@ -69,11 +69,12 @@ class Page {
     return filterButtons;
   }
 
-  public drawRangeInput(title: string, min: number, max: number) {
+  public drawRangeInput(title: string, min: number, max: number): [HTMLInputElement, HTMLInputElement, HTMLSpanElement, HTMLSpanElement, HTMLDivElement] {
     const inputRangeContainer: HTMLDivElement = createElement(this.filterElements, 'div', 'filter__range_container');
     createElement(inputRangeContainer, 'h2', 'filter__input_title', title);
     const inputContainer: HTMLDivElement = createElement(inputRangeContainer, 'div', 'filter__input_container');
-    createElement(inputContainer, 'div', 'filter__input_track');
+    const inputTrack: HTMLDivElement = createElement(inputContainer, 'div', 'filter__input_track');
+    const valuesContainer: HTMLDivElement = createElement(inputContainer, 'div', 'filter__input_values');
     const input1: HTMLInputElement = createElement(inputContainer, 'input', 'filter__input filter__input1');
     input1.min = String(min);
     input1.max = String(max);
@@ -84,8 +85,14 @@ class Page {
     input2.max = String(max);
     input2.type = 'range';
     input2.value = String(max);
+    const value1: HTMLSpanElement = createElement(valuesContainer, 'span', 'filter__input_value');
+    value1.textContent = input1.value;
+    createElement(valuesContainer, 'span', 'filter__input_value', '-');
+    const value2: HTMLSpanElement = createElement(valuesContainer, 'span', 'filter__input_value');
+    value2.textContent = input2.value;
 
-    return [input1, input2];
+
+    return [input1, input2, value1, value2, inputTrack];
 
   }
 
