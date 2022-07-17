@@ -38,8 +38,6 @@ class Controller {
 
     this.getLocalStorage();
     this.page.drawCartLabel(this.cart.getSize());
-    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue, this.sorter.value);
-    this.cards = this.page.fillCardContainer(this.filteringData);
 
     const searchInput: HTMLInputElement = this.page.drawSearch();
     searchInput.value = this.searchInputValue;
@@ -60,6 +58,9 @@ class Controller {
 
     priceRange.reset(this.filters, 'priceRange');
     stockRange.reset(this.filters, 'stockRange');
+
+    this.filteringData = this.dataManager.applyFiltersToData(this.filters, this.searchInputValue, this.sorter.value);
+    this.cards = this.page.fillCardContainer(this.filteringData);
 
     const favoriteFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('favorite', ['yes']);
 
@@ -131,8 +132,8 @@ class Controller {
       this.filters = {country: [],
                       variety: [],
                       season: [],
-                      priceRange: [String(this.dataManager.getMinOrMax('price', true)), String(this.dataManager.getMinOrMax('price', false))],
-                      stockRange: [String(this.dataManager.getMinOrMax('stock', true)), String(this.dataManager.getMinOrMax('stock', false))],
+                      priceRange: [],
+                      stockRange: [],
                       favorite: []
                     };
       this.removeClassesFromFilters(countryFilterButtons);

@@ -52,8 +52,7 @@ class Range {
   }
 
   public clickOnTrack(event: MouseEvent, filters: IFilter, key: string): void {
-    let eventPosition = Math.round(event.offsetX / this.track.offsetWidth * (parseInt(this.input1.max) - parseInt(this.input1.min)));
-    eventPosition = Math.ceil(eventPosition * 1.1);
+    const eventPosition: number = Math.round(event.offsetX / this.track.offsetWidth * (parseInt(this.input1.max) - parseInt(this.input1.min)) + parseInt(this.input1.min));
     if (Math.abs(eventPosition - parseInt(this.input1.value)) < Math.abs(eventPosition - parseInt(this.input2.value))) {
       this.input1.value = String(eventPosition);
       this.value1.textContent = String(eventPosition);
@@ -66,10 +65,19 @@ class Range {
   }
 
   public reset(filters: IFilter, key: string): void {
-    this.input1.value = filters[key as keyof IFilter][0];
-    this.value1.textContent = filters[key as keyof IFilter][0];
-    this.input2.value = filters[key as keyof IFilter][1];
-    this.value2.textContent = filters[key as keyof IFilter][1];
+    if (!filters[key as keyof IFilter].length) {
+      filters[key as keyof IFilter] = [this.min, this.max];
+      this.input1.value = this.min;
+      this.value1.textContent = this.min;
+      this.input2.value = this.max;
+      this.value2.textContent = this.max;
+    } else {
+      this.input1.value = filters[key as keyof IFilter][0];
+      this.value1.textContent = filters[key as keyof IFilter][0];
+      this.input2.value = filters[key as keyof IFilter][1];
+      this.value2.textContent = filters[key as keyof IFilter][1];
+    }
+    
     this.fillColor(this.input1, this.input2, this.track);
   }
 
