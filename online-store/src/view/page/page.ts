@@ -105,14 +105,15 @@ class Page {
     return button;
   }
 
-  public drawSearch(value = ''): HTMLInputElement {
+  public drawSearch(value = ''): [HTMLInputElement, HTMLButtonElement] {
     const searchContainer: HTMLDivElement = createElement(this.filterElements, 'div', 'filter__container_search');
+    const searchCancel: HTMLButtonElement = createElement(searchContainer, 'button', 'filter__button_search', 'x');
     const searchInput: HTMLInputElement = createElement(searchContainer, 'input', 'filter__input_search');
     searchInput.type = 'text';
     searchInput.value = value;
     searchInput.autofocus = true;
     searchInput.placeholder = 'Search';
-    return searchInput;
+    return [searchInput, searchCancel] ;
   }
 
   public drawSorter() {

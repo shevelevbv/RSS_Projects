@@ -39,7 +39,7 @@ class Controller {
     this.getLocalStorage();
     this.page.drawCartLabel(this.cart.getSize());
 
-    const searchInput: HTMLInputElement = this.page.drawSearch();
+    const [searchInput, searchCancel]: [HTMLInputElement, HTMLButtonElement] = this.page.drawSearch();
     searchInput.value = this.searchInputValue;
 
     const countryFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('country', ['India', 'China', 'Ceylon']);
@@ -87,6 +87,16 @@ class Controller {
 
     searchInput.oninput = (): void => {
       this.searchInputValue = searchInput.value;
+      searchInput.value ? searchCancel.classList.add('visible')
+                        : searchCancel.classList.remove('visible');
+      this.rerenderCards();
+    }
+
+    searchCancel.onclick = (): void => {
+      searchCancel.classList.remove('visible');
+      searchInput.value = '';
+      searchInput.focus();
+      this.searchInputValue = '';
       this.rerenderCards();
     }
 
