@@ -2,6 +2,7 @@ import './page.css';
 import Card from '../card/card';
 import { ICard } from '../../helpers/interfaces';
 import { createElement } from '../../helpers/functions';
+import Footer from '../footer/footer';
 
 class Page {
   private header: HTMLElement;
@@ -27,6 +28,8 @@ class Page {
     this.resetButtonContainer = createElement(this.filterContainer, 'div', 'filter__buttons_reset');
     this.sectionContent = createElement(this.main, 'section', 'section_content');
     this.cardContainer = createElement(this.sectionContent, 'div', 'container_cards');
+
+    new Footer();
   }
 
   private createHeader(): void {
