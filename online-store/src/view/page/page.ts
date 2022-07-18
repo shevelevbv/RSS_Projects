@@ -146,10 +146,6 @@ class Page {
     return cards;  
   }
 
-  public clearCardContainer(): void {
-    this.cardContainer.innerHTML = '';
-  }
-
 }
 
 

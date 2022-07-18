@@ -17,7 +17,7 @@ class DataManager {
     return values.includes(testValue);
   }
 
-  private isStringInData(testString: string, title: string): boolean {
+  public isStringInData(testString: string, title: string): boolean {
     if (!testString) return true;
     return title.toLowerCase().includes(testString.toLowerCase());
   }
