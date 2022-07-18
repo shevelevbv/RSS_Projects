@@ -10,7 +10,9 @@ class Card {
   }
 
   public createCard(): HTMLDivElement {
+
     const newCard: HTMLDivElement = createElement(null, 'div', 'card');
+    
     createElement(newCard, 'h2', 'card__title', this.data.title);
     const cardImageContainer: HTMLDivElement = createElement(newCard, 'div', 'card__container_img');
     

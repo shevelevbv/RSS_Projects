@@ -46,12 +46,12 @@ class Controller {
     const varietyFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('variety', ['Black', 'Green', 'White', 'Oolong', 'Puerh']);
     const seasonFilterButtons: Array<HTMLButtonElement> = this.page.drawFilter('season', ['Spring', 'Summer', 'Fall', 'Winter']);
 
-    const priceRange = new Range('Price',
+    const priceRange: Range = new Range('Price',
                                 String(this.dataManager.getMinOrMax('price', true)), 
                                 String(this.dataManager.getMinOrMax('price', false)),
                                 this.page);
                       
-    const stockRange = new Range('In stock',
+    const stockRange: Range = new Range('In stock',
                                 String(this.dataManager.getMinOrMax('stock', true)), 
                                 String(this.dataManager.getMinOrMax('stock', false)),
                                 this.page);
@@ -173,7 +173,7 @@ class Controller {
       this.rerenderCards();
     }
 
-    window.onload = () => {
+    window.onload = (): void => {
       if (!this.filteringData.length) this.page.cardContainer.classList.add('none');
       searchInput.focus();
     }

@@ -6,8 +6,8 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 
 class Page {
-  private main: HTMLElement;
   public header: Header;
+  private main: HTMLElement;
   private filterContainer: HTMLDivElement;
   private filterElements: HTMLDivElement;
   private resetButtonContainer: HTMLDivElement;

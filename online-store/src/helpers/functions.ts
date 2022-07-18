@@ -2,7 +2,7 @@ export function createElement<T extends HTMLElement> (parentElement: HTMLElement
                                                       tagName: string, 
                                                       classes = '', 
                                                       content = ''): T {
-  const newElement = document.createElement(tagName);
+  const newElement: HTMLElement = document.createElement(tagName);
   newElement.className = classes;
   newElement.textContent = content;
   if (parentElement) {
