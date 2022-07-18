@@ -39,14 +39,14 @@ class Page {
     logoImage.src = '../../img/leaf.svg';
     logoImage.width = 50;
     logoImage.height = 50;
-    createElement(logo, 'h1', '', 'Tea Shop');
+    createElement(logo, 'h1', 'logo__title', 'Tea Shop');
 
     this.header.append(this.cartContainer);
     
-    const cartImage: HTMLImageElement = createElement(this.cartContainer, 'img');
+    const cartImage: HTMLImageElement = createElement(this.cartContainer, 'img', 'cart__logo');
     cartImage.src = '../../img/cart.svg';
-    cartImage.width = 50;
-    cartImage.height = 50;
+    cartImage.width = 40;
+    cartImage.height = 40;
   }
 
   public drawCartLabel(num: number): void {
@@ -74,7 +74,7 @@ class Page {
 
   public drawRangeInput(title: string, min: number, max: number): [HTMLInputElement, HTMLInputElement, HTMLSpanElement, HTMLSpanElement, HTMLDivElement] {
     const inputRangeContainer: HTMLDivElement = createElement(this.filterElements, 'div', 'filter__range_container');
-    createElement(inputRangeContainer, 'h2', 'filter__input_title', title);
+    createElement(inputRangeContainer, 'h2', 'filter__title filter__input_title', title);
     const inputContainer: HTMLDivElement = createElement(inputRangeContainer, 'div', 'filter__input_container');
     const inputTrack: HTMLDivElement = createElement(inputContainer, 'div', 'filter__input_track');
     const valuesContainer: HTMLDivElement = createElement(inputContainer, 'div', 'filter__input_values');
@@ -88,10 +88,11 @@ class Page {
     input2.max = String(max);
     input2.type = 'range';
     input2.value = String(max);
-    const value1: HTMLSpanElement = createElement(valuesContainer, 'span', 'filter__input_value');
+    createElement(valuesContainer, 'span', 'filter__input_text', 'from');
+    const value1: HTMLSpanElement = createElement(valuesContainer, 'span', 'filter__input_value filter__input_value1');
     value1.textContent = input1.value;
-    createElement(valuesContainer, 'span', 'filter__input_value', '-');
-    const value2: HTMLSpanElement = createElement(valuesContainer, 'span', 'filter__input_value');
+    createElement(valuesContainer, 'span', 'filter__input_text', 'to');
+    const value2: HTMLSpanElement = createElement(valuesContainer, 'span', 'filter__input_value filter__input_value1');
     value2.textContent = input2.value;
 
 
@@ -121,17 +122,17 @@ class Page {
     sorterLabel.htmlFor = 'sorter';
     const sorter: HTMLSelectElement = createElement(sorterContainer, 'select', 'sorter__select');
     sorter.id = 'sorter';
-    const option1: HTMLOptionElement = createElement(sorter, 'option', 'option', 'name A-Z');
+    const option1: HTMLOptionElement = createElement(sorter, 'option', 'sorter__option', 'name A-Z');
     option1.value = 'nameAsc';
-    const option2: HTMLOptionElement = createElement(sorter, 'option', 'option', 'name Z-A');
+    const option2: HTMLOptionElement = createElement(sorter, 'option', 'sorter__option', 'name Z-A');
     option2.value = 'nameDesc';
-    const option3: HTMLOptionElement = createElement(sorter, 'option', 'option', 'year: earliest first');
+    const option3: HTMLOptionElement = createElement(sorter, 'option', 'sorter__option', 'year: earliest first');
     option3.value = 'yearAsc';
-    const option4: HTMLOptionElement = createElement(sorter, 'option', 'option', 'year: latest first');
+    const option4: HTMLOptionElement = createElement(sorter, 'option', 'sorter__option', 'year: latest first');
     option4.value = 'yearDesc';
-    const option5: HTMLOptionElement = createElement(sorter, 'option', 'option', 'price: lowest first');
+    const option5: HTMLOptionElement = createElement(sorter, 'option', 'sorter__option', 'price: lowest first');
     option5.value = 'priceAsc';
-    const option6: HTMLOptionElement = createElement(sorter, 'option', 'option', 'price: greatest first');
+    const option6: HTMLOptionElement = createElement(sorter, 'option', 'sorter__option', 'price: greatest first');
     option6.value = 'priceDesc';
 
     return sorter;
