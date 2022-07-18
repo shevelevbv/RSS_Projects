@@ -17,7 +17,7 @@ class Footer {
     createElement(footer, 'p', 'copyright', '2022');
     const schoolContainer: HTMLDivElement = createElement(footer, 'div', 'rs-school');
     const schoolLink: HTMLAnchorElement = createElement(schoolContainer, 'a', 'github__link');
-    schoolLink.href = 'https://github.com/shevelevbv';
+    schoolLink.href = 'https://rs.school/js';
     schoolLink.target = "_blank";
     const schoolLogo: HTMLImageElement = createElement(schoolLink, 'img', 'rs-school__logo footer__logo');
     schoolLogo.src = '../../img/rs_school_js.svg';

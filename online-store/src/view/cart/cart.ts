@@ -11,7 +11,7 @@ class Cart {
   }
 
   public removeItem(item: number): void {
-    this.items = this.items.filter(value => value != item);
+    this.items = this.items.filter((value: number): boolean => value != item);
   }
 
   public setItems(items: Array<number>) {

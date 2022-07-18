@@ -37,7 +37,7 @@ class Controller {
   public start(): void {
 
     this.getLocalStorage();
-    this.page.drawCartLabel(this.cart.getSize());
+    this.page.header.drawCartLabel(this.cart.getSize());
 
     const [searchInput, searchCancel]: [HTMLInputElement, HTMLButtonElement] = this.page.drawSearch();
     searchInput.value = this.searchInputValue;
@@ -164,13 +164,18 @@ class Controller {
       this.sorter.value = 'nameAsc';
       resetButton.click();
       this.cart.setItems([]);
-      this.page.drawCartLabel(this.cart.getSize());
+      this.page.header.drawCartLabel(this.cart.getSize());
       this.removeClassesFromCards(this.cards);
       localStorage.clear();
     }
 
     this.sorter.onchange = (): void => {
       this.rerenderCards();
+    }
+
+    window.onload = () => {
+      if (!this.filteringData.length) this.page.cardContainer.classList.add('none');
+      searchInput.focus();
     }
 
     window.onunload = (): void => {
@@ -221,7 +226,7 @@ class Controller {
         }
         card[1].classList.add('in-cart');
       }
-      this.page.drawCartLabel(this.cart.getSize());
+      this.page.header.drawCartLabel(this.cart.getSize());
     });
   }
 

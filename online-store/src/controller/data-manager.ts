@@ -27,13 +27,13 @@ class DataManager {
   }
 
   public applyFiltersToData(filters: IFilter, testString: string, algorithm: string): Array<ICard> {
-    return this.originalData.filter(obj => this.isItemInData(obj.country, filters.country)
-                                        && this.isItemInData(obj.variety, filters.variety)
-                                        && this.isItemInData(obj.season, filters.season)
-                                        && this.isInRange(obj.price, filters.priceRange)
-                                        && this.isInRange(obj.stock, filters.stockRange)
-                                        && this.isItemInData(obj.favorite, filters.favorite)
-                                        && this.isStringInData(testString, obj.title)
+    return this.originalData.filter((obj: ICard): boolean => this.isItemInData(obj.country, filters.country)
+                                                          && this.isItemInData(obj.variety, filters.variety)
+                                                          && this.isItemInData(obj.season, filters.season)
+                                                          && this.isInRange(obj.price, filters.priceRange)
+                                                          && this.isInRange(obj.stock, filters.stockRange)
+                                                          && this.isItemInData(obj.favorite, filters.favorite)
+                                                          && this.isStringInData(testString, obj.title)
                                     )
                             .sort((a: ICard, b: ICard): number => {
                               switch (algorithm) {
@@ -50,7 +50,7 @@ class DataManager {
 
   public getMinOrMax(key: string, isMin: boolean): number {
     const values: Array<number> = [];
-    this.originalData.forEach(obj => values.push(obj[key as keyof ICard] as number));
+    this.originalData.forEach((obj: ICard): number => values.push(obj[key as keyof ICard] as number));
     
     return isMin ? Math.min(...values) : Math.max(...values);
   }

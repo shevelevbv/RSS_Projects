@@ -2,19 +2,20 @@ footer {
   height: 100px;
   display: flex;
   margin-top: 30px;
-  background-color: rgb(237, 248, 239);
+  background-color: rgb(8, 64, 17);
   align-items: center;
   justify-content: space-around;
 }
 
 @media not all and (hover: none) {
   footer .footer__logo:hover {
-    filter: invert(52%) sepia(8%) saturate(2696%) hue-rotate(71deg) brightness(88%) contrast(80%);
+    filter: invert(77%) sepia(58%) saturate(570%) hue-rotate(39deg) brightness(104%) contrast(104%);
       transition: all 0.5s;
   }
 }
 
 footer .footer__logo {
+  filter: invert(94%) sepia(7%) saturate(129%) hue-rotate(314deg) brightness(87%) contrast(88%);
   transition: all 0.5s;
 }
 
@@ -23,21 +24,13 @@ footer .github {
   height: auto;
 }
 
-footer .github__logo {
-  filter: invert(61%) sepia(0%) saturate(1298%) hue-rotate(194deg) brightness(93%) contrast(86%) drop-shadow(1px 1px 0 rgb(0 0 0 / 0.4));;
-}
-
 footer .copyright {
   font-size: 14px;
-  color: #333;
+  color: rgb(207, 201, 201);
+  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
-footer .copyright a {
-  color: #444;
-}
-footer .copyright a:hover {
-  color: #555;
-}
+
 footer .copyright:before {
   content: '© ';
 }
@@ -45,8 +38,4 @@ footer .copyright:before {
 footer .rs-school {
   width: 70px;
   height: auto;
-}
-
-footer .rs-school__logo {
-  filter: invert(61%) sepia(0%) saturate(1298%) hue-rotate(194deg) brightness(93%) contrast(86%);
 }

@@ -3,12 +3,11 @@ import Card from '../card/card';
 import { ICard } from '../../helpers/interfaces';
 import { createElement } from '../../helpers/functions';
 import Footer from '../footer/footer';
+import Header from '../header/header';
 
 class Page {
-  private header: HTMLElement;
   private main: HTMLElement;
-  private cartContainer: HTMLDivElement;
-  private cartLabel: HTMLDivElement;
+  public header: Header;
   private filterContainer: HTMLDivElement;
   private filterElements: HTMLDivElement;
   private resetButtonContainer: HTMLDivElement;
@@ -16,13 +15,9 @@ class Page {
   public cardContainer: HTMLDivElement;
   
   constructor() {
-    this.header = createElement(document.body, 'header', 'header');
-    this.main = createElement(document.body, 'main', 'main');
-    this.cartContainer = createElement(null, 'div', 'cart__container');
-    this.cartLabel = document.createElement('p');
+    this.header = new Header();
 
-    this.createHeader();
-    
+    this.main = createElement(document.body, 'main', 'main');
     this.filterContainer = createElement(this.main, 'div', 'filter__container')
     this.filterElements = createElement(this.filterContainer, 'div', 'filter__elements');
     this.resetButtonContainer = createElement(this.filterContainer, 'div', 'filter__buttons_reset');
@@ -30,34 +25,6 @@ class Page {
     this.cardContainer = createElement(this.sectionContent, 'div', 'container_cards');
 
     new Footer();
-  }
-
-  private createHeader(): void {
-    const logo: HTMLDivElement = createElement(this.header, 'div', 'logo');
-    const logoImageContainer: HTMLDivElement = createElement(logo, 'div', 'logo__container_img');
-    const logoImage: HTMLImageElement = createElement(logoImageContainer, 'img', 'logo__image');
-    logoImage.src = '../../img/leaf.svg';
-    logoImage.width = 50;
-    logoImage.height = 50;
-    createElement(logo, 'h1', 'logo__title', 'Tea Shop');
-
-    this.header.append(this.cartContainer);
-    
-    const cartImage: HTMLImageElement = createElement(this.cartContainer, 'img', 'cart__logo');
-    cartImage.src = '../../img/cart.svg';
-    cartImage.width = 40;
-    cartImage.height = 40;
-  }
-
-  public drawCartLabel(num: number): void {
-    this.cartLabel.className = 'cart__label';
-    if (!num) {
-      this.cartLabel.classList.remove('visible');
-    } else {
-      this.cartLabel.classList.add('visible');
-      this.cartLabel.textContent = `${num}`;
-    }
-    this.cartContainer.append(this.cartLabel);
   }
 
   public drawFilter(key: string, textValues: Array<string>): Array<HTMLButtonElement> {
@@ -152,7 +119,5 @@ class Page {
   }
 
 }
-
-
 
 export default Page;
