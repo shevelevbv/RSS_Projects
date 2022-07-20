@@ -100,43 +100,8 @@ class Controller {
       this.rerenderCards();
     }
 
-    priceRange.input1.oninput = (): void => priceRange.onInput1();
-
-    priceRange.input2.oninput = (): void => priceRange.onInput2();
-
-    priceRange.input1.onmouseup = (): void => {
-      priceRange.onMouseup1(this.filters, 'priceRange');
-      this.rerenderCards();
-    }
-
-    priceRange.input2.onmouseup = (): void => {
-      priceRange.onMouseup2(this.filters, 'priceRange');
-      this.rerenderCards();
-    }
-
-    stockRange.input1.oninput = (): void => stockRange.onInput1();
-
-    stockRange.input2.oninput = (): void => stockRange.onInput2();
-
-    stockRange.input1.onmouseup = (): void => {
-      stockRange.onMouseup1(this.filters, 'stockRange');
-      this.rerenderCards();
-    }
-
-    stockRange.input2.onmouseup = (): void => {
-      stockRange.onMouseup2(this.filters, 'stockRange');
-      this.rerenderCards();
-    }
-
-    priceRange.track.onclick = (event): void => {
-      priceRange.clickOnTrack(event, this.filters, 'priceRange');
-      this.rerenderCards();
-    }
-
-    stockRange.track.onclick = (event): void => {
-      stockRange.clickOnTrack(event, this.filters, 'stockRange');
-      this.rerenderCards();
-    }
+    this.addEventListenersOnInputs(priceRange);
+    this.addEventListenersOnInputs(stockRange);
 
     resetButton.onclick = (): void => {
       this.filters = {country: [],
@@ -169,26 +134,43 @@ class Controller {
       localStorage.clear();
     }
 
-    this.sorter.onchange = (): void => {
+    this.sorter.addEventListener('change', (): void => {
       this.rerenderCards();
-    }
+    });
 
-    window.onload = (): void => {
+    window.addEventListener('load', (): void => {
       if (!this.filteringData.length) this.page.cardContainer.classList.add('none');
       searchInput.focus();
-    }
+    });
 
-    window.onunload = (): void => {
+    window.addEventListener('unload', (): void => {
       this.setLocalStorage();
-    }
+    });
+
   }
 
-  public setLocalStorage(): void {
-    localStorage.setItem('cart', JSON.stringify(this.cart.getItems()));
-    localStorage.setItem('filters', JSON.stringify(this.filters));
-    localStorage.setItem('search', this.searchInputValue);
-    localStorage.setItem('sorter', this.sorter.value);
+  private addEventListenersOnInputs(inputObject: Range) {
+    const inputObjectName = Object.keys({inputObject});
+    inputObject.leftInput.addEventListener('input', (): void => inputObject.onLeftInput());
+
+    inputObject.rightInput.addEventListener('input', (): void => inputObject.onRightInput());
+
+    inputObject.leftInput.addEventListener('mouseup', (): void => {
+      inputObject.onMouseup1(this.filters, `${inputObjectName}`);
+      this.rerenderCards();
+    });
+
+    inputObject.rightInput.addEventListener('mouseup', (): void => {
+      inputObject.onMouseup2(this.filters, `${inputObjectName}`);
+      this.rerenderCards();
+    });
+
+    inputObject.track.addEventListener('click', (event: MouseEvent): void => {
+      inputObject.clickOnTrack(event, this.filters, `${inputObjectName}`);
+      this.rerenderCards();
+    });
   }
+
 
   public getLocalStorage(): void {
     if (localStorage.getItem('cart')) {
@@ -203,6 +185,13 @@ class Controller {
     if (localStorage.getItem('sorter')) {
       this.sorter.value = localStorage.getItem('sorter') as string;
     }
+  }
+
+  public setLocalStorage(): void {
+    localStorage.setItem('cart', JSON.stringify(this.cart.getItems()));
+    localStorage.setItem('filters', JSON.stringify(this.filters));
+    localStorage.setItem('search', this.searchInputValue);
+    localStorage.setItem('sorter', this.sorter.value);
   }
 
   private addListenerOnCards(cards: Array<Tuple>): void {
