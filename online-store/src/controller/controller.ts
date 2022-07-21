@@ -5,7 +5,7 @@ import Page from '../view/page/page';
 import DataManager from './data-manager';
 import { Limits } from '../helpers/enums';
 
-type Tuple = [ICard, HTMLElement];
+type numAndHTMLTuple = [number, HTMLElement];
 
 class Controller {
   private page: Page;
@@ -15,7 +15,7 @@ class Controller {
   private filteringData: Array<ICard>
   private searchInputValue: string;
   private sorter: HTMLSelectElement;
-  private cards: Array<Tuple>;
+  private cards: Array<numAndHTMLTuple>;
 
   constructor() {
     this.page = new Page();
@@ -73,9 +73,9 @@ class Controller {
     this.addClassesOnFilters('favorite', favoriteFilterButtons);
 
     if (this.cart.getSize()) {
-      this.cards.filter((card: Tuple): boolean => this.cart.getItems().includes(card[0].id))
-           .forEach((item: Tuple): void => {item[1].classList.add('in-cart');
-      })
+      this.cards.filter((card: numAndHTMLTuple): boolean => this.cart.getItems().includes(card[0]))
+           .forEach((item: numAndHTMLTuple): void => {item[1].classList.add('in-cart');
+      });
     }
 
     this.addListenerOnCards(this.cards);
@@ -85,25 +85,25 @@ class Controller {
     this.addListenerOnFilters('season', seasonFilterButtons);
     this.addListenerOnFilters('favorite', favoriteFilterButtons);
 
-    searchInput.oninput = (): void => {
+    searchInput.addEventListener('input', (): void => {
       this.searchInputValue = searchInput.value;
       searchInput.value ? searchCancel.classList.add('visible')
                         : searchCancel.classList.remove('visible');
       this.rerenderCards();
-    }
+    });
 
-    searchCancel.onclick = (): void => {
+    searchCancel.addEventListener('input', (): void => {
       searchCancel.classList.remove('visible');
       searchInput.value = '';
       searchInput.focus();
       this.searchInputValue = '';
       this.rerenderCards();
-    }
+    });
 
-    this.addEventListenersOnInputs(priceRange);
-    this.addEventListenersOnInputs(stockRange);
+    this.addEventListenersOnInputs(priceRange, 'priceRange');
+    this.addEventListenersOnInputs(stockRange, 'stockRange');
 
-    resetButton.onclick = (): void => {
+    resetButton.addEventListener('click', (): void => {
       this.filters = {country: [],
                       variety: [],
                       season: [],
@@ -119,20 +119,19 @@ class Controller {
       searchInput.value = '';
 
       priceRange.reset(this.filters, 'priceRange');
-      
       stockRange.reset(this.filters, 'stockRange');
       
       this.rerenderCards();
-    }
+    });
 
-    resetAllButton.onclick = (): void => {
+    resetAllButton.addEventListener('click', (): void => {
       this.sorter.value = 'nameAsc';
       resetButton.click();
       this.cart.setItems([]);
       this.page.header.drawCartLabel(this.cart.getSize());
       this.removeClassesFromCards(this.cards);
       localStorage.clear();
-    }
+    });
 
     this.sorter.addEventListener('change', (): void => {
       this.rerenderCards();
@@ -149,24 +148,23 @@ class Controller {
 
   }
 
-  private addEventListenersOnInputs(inputObject: Range) {
-    const inputObjectName = Object.keys({inputObject});
-    inputObject.leftInput.addEventListener('input', (): void => inputObject.onLeftInput());
+  private addEventListenersOnInputs(inputRangeObject: Range, key: string) {
+    inputRangeObject.leftInput.addEventListener('input', (): void => inputRangeObject.onLeftInput());
 
-    inputObject.rightInput.addEventListener('input', (): void => inputObject.onRightInput());
+    inputRangeObject.rightInput.addEventListener('input', (): void => inputRangeObject.onRightInput());
 
-    inputObject.leftInput.addEventListener('mouseup', (): void => {
-      inputObject.onMouseup1(this.filters, `${inputObjectName}`);
+    inputRangeObject.leftInput.addEventListener('mouseup', (): void => {
+      inputRangeObject.onMouseup1(this.filters, key);
       this.rerenderCards();
     });
 
-    inputObject.rightInput.addEventListener('mouseup', (): void => {
-      inputObject.onMouseup2(this.filters, `${inputObjectName}`);
+    inputRangeObject.rightInput.addEventListener('mouseup', (): void => {
+      inputRangeObject.onMouseup2(this.filters, key);
       this.rerenderCards();
     });
 
-    inputObject.track.addEventListener('click', (event: MouseEvent): void => {
-      inputObject.clickOnTrack(event, this.filters, `${inputObjectName}`);
+    inputRangeObject.track.addEventListener('click', (event: MouseEvent): void => {
+      inputRangeObject.clickOnTrack(event, this.filters, key);
       this.rerenderCards();
     });
   }
@@ -194,29 +192,31 @@ class Controller {
     localStorage.setItem('sorter', this.sorter.value);
   }
 
-  private addListenerOnCards(cards: Array<Tuple>): void {
-    let extraCard: Tuple | null;
-    cards.forEach((card: Tuple) => card[1].onclick = (): void => {
-      if (this.cart.getItems().includes(card[0].id)) {
-        this.cart.removeItem(card[0].id);
-        card[1].classList.remove('in-cart');
-        card[1].classList.remove('exceed-limit');
+  private addListenerOnCards(cards: Array<numAndHTMLTuple>): void {
+    let extraCard: numAndHTMLTuple | null;
+
+    cards.forEach(([cardID, cardHTMLObject]: numAndHTMLTuple) => cardHTMLObject.addEventListener('click', (): void => {
+      if (this.cart.getItems().includes(cardID)) {
+        this.cart.removeItem(cardID);
+        cardHTMLObject.classList.remove('in-cart');
+        cardHTMLObject.classList.remove('exceed-limit');
         if (extraCard) {
-          extraCard[1].classList.remove('exceed-limit');
+          const extraCardHTMLObject = extraCard[1];
+          extraCardHTMLObject.classList.remove('exceed-limit');
           extraCard = null;
         }
       } else {
-        this.cart.addItem(card[0].id);
+        this.cart.addItem(cardID);
         if (this.cart.getSize() > Limits.maxCartItems) {
-          extraCard = card;
-          card[1].classList.add('exceed-limit');
-          this.cart.removeItem(card[0].id);
+          extraCard = [cardID, cardHTMLObject];
+          cardHTMLObject.classList.add('exceed-limit');
+          this.cart.removeItem(cardID);
           return;
         }
-        card[1].classList.add('in-cart');
+        cardHTMLObject.classList.add('in-cart');
       }
       this.page.header.drawCartLabel(this.cart.getSize());
-    });
+    }));
   }
 
   private addClassesOnFilters(key: string, filterButtons: Array<HTMLButtonElement>): void {
@@ -233,33 +233,36 @@ class Controller {
     });
   }
 
-  private addClassesOnCards(cards: Array<Tuple>): void {
-    cards.forEach((card: Tuple) => {
-      if (this.cart.getItems().includes(card[0].id)) {
+  private addClassesOnCards(cards: Array<numAndHTMLTuple>): void {
+    cards.forEach(([cardID, cardHTMLObject]: numAndHTMLTuple): void => {
+      if (this.cart.getItems().includes(cardID)) {
     
-        card[1].classList.add('in-cart');
+        cardHTMLObject.classList.add('in-cart');
       } 
     });
   }
 
-  private removeClassesFromCards(cards: Array<Tuple>): void {
-    cards.forEach((card: Tuple) => {
-        card[1].classList.remove('in-cart');
+  private removeClassesFromCards(cards: Array<numAndHTMLTuple>): void {
+    cards.forEach((card: numAndHTMLTuple) => {
+        const cardHTMLObject = card[1];
+        cardHTMLObject.classList.remove('in-cart');
     });
   }
 
   private addListenerOnFilters(key: string, filterButtons: Array<HTMLButtonElement>): void {
-    filterButtons.forEach((button: HTMLButtonElement) => button.onclick = (): void => {
+    filterButtons.forEach((button: HTMLButtonElement) => button.addEventListener('click', (): void => {
 
       if (this.filters[key as keyof IFilter].includes(`${button.textContent}`)) {
-        this.filters[key as keyof IFilter] = this.filters[key as keyof IFilter].filter(value => value !== `${button.textContent}`);
-        button.classList.remove('selected');
+        const filteredValues = this.filters[key as keyof IFilter].filter((value: string): boolean => {
+          return value !== `${button.textContent}`;
+        });
+        this.filters[key as keyof IFilter] = filteredValues;
       } else {
         this.filters[key as keyof IFilter].push(`${button.textContent}`);
-        button.classList.add('selected');
       }
+      button.classList.toggle('selected');
       this.rerenderCards();  
-    });
+    }));
   }
 
   private rerenderCards(): void {

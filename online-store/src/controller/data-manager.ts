@@ -13,13 +13,11 @@ class DataManager {
   }
 
   public isItemInData(testValue: string, values: Array<string>): boolean {
-    if (!values.length) return true;
-    return values.includes(testValue);
+    return !values.length || values.includes(testValue);
   }
 
   public isStringInData(testString: string, title: string): boolean {
-    if (!testString) return true;
-    return title.toLowerCase().includes(testString.toLowerCase());
+    return !testString || title.toLowerCase().includes(testString.toLowerCase());
   }
 
   public isInRange(testValue: number, range: Array<string>): boolean {
@@ -54,7 +52,7 @@ class DataManager {
 
   public getMinOrMax(key: string, isMin: boolean): number {
     const values: Array<number> = [];
-    this.originalData.forEach((obj: ICard): number => values.push(obj[key as keyof ICard] as number));
+    this.originalData.forEach((obj: ICard): number => values.push(Number(obj[key as keyof ICard])));
     
     return isMin ? Math.min(...values) : Math.max(...values);
   }

@@ -2,7 +2,6 @@ import Page from '../view/page/page';
 import { Limits } from '../helpers/enums';
 import { IFilter } from '../helpers/interfaces';
 
-
 class Range {
   name: string;
   min: string;
@@ -73,10 +72,11 @@ class Range {
     if (!filters[key as keyof IFilter].length) {
       filters[key as keyof IFilter] = [this.min, this.max];
     }
-    this.leftInput.value = filters[key as keyof IFilter][0];
-    this.fromValue.textContent = filters[key as keyof IFilter][0];
-    this.rightInput.value = filters[key as keyof IFilter][1];
-    this.toValue.textContent = filters[key as keyof IFilter][1];
+    const [fromValue, toValue] = filters[key as keyof IFilter];
+    this.leftInput.value = fromValue;
+    this.fromValue.textContent = fromValue;
+    this.rightInput.value = toValue;
+    this.toValue.textContent = toValue;
     
     this.fillColor(this.leftInput, this.rightInput, this.track);
   }

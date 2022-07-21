@@ -107,13 +107,13 @@ class Page {
       
   }
 
-  public fillCardContainer(data: Array<ICard>): Array<[ICard, HTMLElement]> {
+  public fillCardContainer(data: Array<ICard>): Array<[number, HTMLElement]> {
     this.cardContainer.innerHTML = '';
-    const cards: Array<[ICard, HTMLElement]> = []; 
+    const cards: Array<[number, HTMLElement]> = []; 
     data.forEach((item: ICard): void => {
       const card: HTMLDivElement = new Card(item).createCard();
       this.cardContainer.append(card);
-      cards.push([item, card]);
+      cards.push([item.id, card]);
     });
     return cards;  
   }
