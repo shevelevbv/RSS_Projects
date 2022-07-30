@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-  entry: './src/index.ts',
+  entry: path.resolve(__dirname, './src/index'),
   output: {
     path: path.resolve(__dirname, 'dist'),
   },
@@ -31,7 +31,11 @@ const config = {
     new EslintPlugin({ extensions: '.ts' }),
     new CopyPlugin({
       patterns: [
-        { from: './img', to: './img' },
+        {
+          from: './img',
+          to: './img',
+          noErrorOnMissing: true,
+        },
       ],
     }),
 
@@ -55,7 +59,7 @@ const config = {
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: 'asset',
+        type: 'asset/resource',
       },
 
       // Add your rules for custom modules here
@@ -70,6 +74,7 @@ const config = {
 module.exports = () => {
   if (isProduction) {
     config.mode = 'production';
+    config.plugins.push(new MiniCssExtractPlugin());
   } else {
     config.mode = 'development';
   }
