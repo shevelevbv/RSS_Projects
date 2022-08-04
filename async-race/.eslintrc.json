@@ -16,6 +16,11 @@
         "@typescript-eslint"
     ],
     "rules": { 
+        // "no-undef": "off",
+        // "no-unused-vars": "off",
+        // "import/named": "off",
+        // "import/no-unresolved": "off",
+        // "no-shadow": "off",
         "no-console": "off",
         "import/extensions": [
             "error",
