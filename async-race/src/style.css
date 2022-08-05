@@ -3,16 +3,14 @@ body {
   background-size: 100%;
 }
 
-.car__track_container {
+.container {
   background-color: black;
+}
+
+.car__track_container {
   display: flex;
   align-items: center;
   gap: 5px;
-}
-
-.button {
-  width: 50px;
-  height: 50px;
 }
 
 .car__svg_container {

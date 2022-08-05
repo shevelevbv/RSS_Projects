@@ -4,14 +4,43 @@ import { ICar } from '../helpers/interfaces';
 import '../style.css';
 
 class Garage {
+  public createCarTextInput: HTMLInputElement;
+
+  public createCarColorInput: HTMLInputElement;
+
+  public createCarButton: HTMLButtonElement;
+
+  public updateCarTextInput: HTMLInputElement;
+
   public updateCarColorInput: HTMLInputElement;
+
+  public updateCarButton: HTMLButtonElement;
 
   public carControlsContainer: HTMLDivElement;
 
   constructor() {
-    this.updateCarColorInput = createElement(document.body, 'input', 'input__color');
+    this.createCarTextInput = createElement(null, 'input', 'input__text');
+    this.createCarColorInput = createElement(null, 'input', 'input__color');
+    this.createCarButton = createElement(null, 'button', 'button', 'CREATE');
+    this.updateCarTextInput = createElement(null, 'input', 'input__text');
+    this.updateCarColorInput = createElement(null, 'input', 'input__color');
+    this.carControlsContainer = createElement(null, 'div', 'car__objects_container');
+    this.updateCarButton = createElement(null, 'button', 'button', 'UPDATE');
+  }
+
+  public renderGarage(main: HTMLDivElement) {
+    const createTools = createElement(main, 'div', 'create-tools_container');
+    createTools.append(this.createCarTextInput, this.createCarColorInput, this.createCarButton);
+
+    const updateTools = createElement(main, 'div', 'update-tools_container');
+    updateTools.append(this.updateCarTextInput, this.updateCarColorInput, this.updateCarButton);
+
+    this.createCarTextInput.type = 'text';
+    this.updateCarTextInput.type = 'text';
+    this.createCarColorInput.type = 'color';
     this.updateCarColorInput.type = 'color';
-    this.carControlsContainer = createElement(document.body, 'div', 'car__objects_container');
+
+    main.append(this.carControlsContainer);
   }
 
   public async renderCarContainers(carObjects: Promise<Array<ICar>>): Promise<void> {
