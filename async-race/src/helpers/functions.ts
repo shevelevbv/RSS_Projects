@@ -12,3 +12,10 @@ export default function createElement<T extends HTMLElement>(
   }
   return newElement as T;
 }
+
+export function checkForNull<T>(item: T): Exclude<T, null> {
+  if (!item) {
+    throw new Error('Error');
+  }
+  return item as Exclude<T, null>;
+}

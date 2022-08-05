@@ -53,6 +53,7 @@ class Garage {
   }
 
   public async renderCarContainers(carObjects: Promise<Array<ICar>>): Promise<void> {
+    this.carControlsContainer.innerHTML = '';
     const cars = await carObjects;
     cars.forEach((carObject: ICar): void => this.renderCarContainer(carObject));
   }

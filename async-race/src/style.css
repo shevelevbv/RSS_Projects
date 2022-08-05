@@ -21,7 +21,13 @@ body {
 .car {
   width: 100px;
   height: 100px;
+  stroke: white;
+  stroke-width: 5rem;
   transform: rotate(90deg);
-  fill: red;
+  fill: rgb(118, 222, 234);
+}
+
+.car__span_name {
+  color: white;
 }
 
