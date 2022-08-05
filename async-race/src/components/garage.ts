@@ -18,6 +18,10 @@ class Garage {
 
   public carControlsContainer: HTMLDivElement;
 
+  public backButton: HTMLButtonElement;
+
+  public nextButton: HTMLButtonElement;
+
   constructor() {
     this.createCarTextInput = createElement(null, 'input', 'input__text');
     this.createCarColorInput = createElement(null, 'input', 'input__color');
@@ -26,6 +30,8 @@ class Garage {
     this.updateCarColorInput = createElement(null, 'input', 'input__color');
     this.carControlsContainer = createElement(null, 'div', 'car__objects_container');
     this.updateCarButton = createElement(null, 'button', 'button', 'UPDATE');
+    this.backButton = createElement(null, 'button', 'button', 'BACK');
+    this.nextButton = createElement(null, 'button', 'button', 'NEXT');
   }
 
   public renderGarage(main: HTMLDivElement) {
@@ -41,6 +47,9 @@ class Garage {
     this.updateCarColorInput.type = 'color';
 
     main.append(this.carControlsContainer);
+
+    const navButtons: HTMLDivElement = createElement(main, 'div', 'nav-buttons_container');
+    navButtons.append(this.backButton, this.nextButton);
   }
 
   public async renderCarContainers(carObjects: Promise<Array<ICar>>): Promise<void> {
