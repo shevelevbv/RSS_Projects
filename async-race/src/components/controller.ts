@@ -7,31 +7,27 @@ import { checkForNull } from '../helpers/functions';
 import { INewCar } from '../helpers/interfaces';
 
 class Controller {
-  private connector: Connector | null;
+  private connector: Connector;
 
-  private state: State | null;
+  private state: State;
 
-  private garage: Garage | null;
+  private garage: Garage;
 
-  private winners: Winners | null;
+  private winners: Winners;
 
-  private page: Page | null;
+  private page: Page;
 
   constructor() {
-    this.connector = null;
-    this.state = null;
-    this.garage = null;
-    this.winners = null;
-    this.page = null;
-  }
-
-  public start(): void {
     this.page = new Page();
-    this.page.renderHeader();
-    this.page.renderMain();
     this.connector = new Connector();
     this.state = new State(this.connector.getCars());
     this.garage = new Garage();
+    this.winners = new Winners();
+  }
+
+  public start(): void {
+    this.page.renderHeader();
+    this.page.renderMain();
     this.selectView();
   }
 
@@ -47,19 +43,11 @@ class Controller {
   }
 
   private operateInGarage() {
-    this.garage = checkForNull(this.garage);
-    this.page = checkForNull(this.page);
-    this.state = checkForNull(this.state);
-    this.connector = checkForNull(this.connector);
     this.page.resetMain();
     this.garage.renderGarage(this.page.main);
     this.garage.renderCarContainers(this.state.cars);
 
     this.garage.createCarButton.addEventListener('click', () => {
-      this.connector = checkForNull(this.connector);
-      this.state = checkForNull(this.state);
-      this.garage = checkForNull(this.garage);
-      this.page = checkForNull(this.page);
       const newCar: INewCar = {
         name: this.garage.createCarTextInput.value as string,
         color: this.garage.createCarColorInput.value as string,
