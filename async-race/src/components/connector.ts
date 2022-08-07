@@ -10,13 +10,17 @@ class Connector {
     this.garageURL = `${this.serverURL}garage`;
   }
 
-  public async getCars(): Promise<Array<ICar>> {
-    const response: Response = await fetch(this.garageURL);
-    const data: Promise<Array<ICar>> = await response.json();
-    return data;
-  }
+  public getCars = async (page: number, limit: number):
+  Promise<{cars: Array<ICar>, total: number}> => {
+    const response = await fetch(`${this.garageURL}?_page=${page}&_limit=${limit}`);
 
-  public async createCar(car: INewCar): Promise<void> {
+    return {
+      cars: await response.json(),
+      total: Number(response.headers.get('X-Total-Count')),
+    };
+  };
+
+  public createCar = async (car: INewCar): Promise<void> => {
     await fetch(this.garageURL, {
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +28,7 @@ class Connector {
       method: 'POST',
       body: JSON.stringify(car),
     });
-  }
+  };
 }
 
 export default Connector;

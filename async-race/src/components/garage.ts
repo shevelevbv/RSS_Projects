@@ -22,10 +22,14 @@ class Garage {
 
   public nextButton: HTMLButtonElement;
 
+  public carsPerPage = 7;
+
+  public pageCount = 1;
+
   constructor() {
     this.createCarTextInput = createElement(null, 'input', 'input__text');
     this.createCarColorInput = createElement(null, 'input', 'input__color');
-    this.createCarButton = createElement(null, 'button', 'button', 'CREATE');
+    this.createCarButton = createElement(null, 'button', 'button button_create', 'CREATE');
     this.updateCarTextInput = createElement(null, 'input', 'input__text');
     this.updateCarColorInput = createElement(null, 'input', 'input__color');
     this.carControlsContainer = createElement(null, 'div', 'car__objects_container');
@@ -52,9 +56,10 @@ class Garage {
     navButtons.append(this.backButton, this.nextButton);
   }
 
-  public async renderCarContainers(carObjects: Promise<Array<ICar>>): Promise<void> {
+  public async renderCarContainers(carObjects: Promise<{cars: Array<ICar>, total: number}>):
+  Promise<void> {
     this.carControlsContainer.innerHTML = '';
-    const cars = await carObjects;
+    const { cars } = await carObjects;
     cars.forEach((carObject: ICar): void => this.renderCarContainer(carObject));
   }
 
