@@ -20,6 +20,11 @@ class Connector {
     };
   };
 
+  public getCar = async (id: number): Promise<ICar> => {
+    const response = await fetch(`${this.garageURL}/${id}`);
+    return response.json();
+  };
+
   public createCar = async (car: INewCar): Promise<void> => {
     await fetch(this.garageURL, {
       method: 'POST',

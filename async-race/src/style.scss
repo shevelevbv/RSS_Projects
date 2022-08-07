@@ -4,18 +4,8 @@ body {
 }
 
 .container {
+  margin-top: 10px;
   background-color: black;
-}
-
-.car__track_container {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.car__svg_container {
-  width: 100px;
-  height: 100px;
 }
 
 .car {
@@ -25,9 +15,23 @@ body {
   stroke-width: 5rem;
   transform: rotate(90deg);
   fill: rgb(118, 222, 234);
+
+    &__track_container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &__svg_container {
+      width: 100px;
+      height: 100px;
+    }
+
+    &__span_name {
+      color: white;
+    }
+
 }
 
-.car__span_name {
-  color: white;
-}
+
 

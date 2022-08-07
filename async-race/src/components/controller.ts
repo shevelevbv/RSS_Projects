@@ -46,6 +46,21 @@ class Controller {
 
   private addListeners = () => {
     this.garage.createCarButton.addEventListener('click', this.renderCreatedCars);
+    this.page.main.addEventListener('click', (e: MouseEvent) => {
+      this.handleEventsOnMain(e);
+    });
+  };
+
+  private handleEventsOnMain = async (e: MouseEvent) => {
+    if ((e.target as HTMLElement).classList.contains('car__button_select')) {
+      const carID = Number((e.target as HTMLElement).id.split('button_select_')[1]);
+      const car = await this.connector.getCar(carID);
+      this.garage.updateCarTextInput.value = car.name;
+      this.garage.updateCarColorInput.value = car.color;
+      this.garage.updateCarTextInput.disabled = false;
+      this.garage.updateCarColorInput.disabled = false;
+      this.garage.updateCarButton.disabled = false;
+    }
   };
 
   private renderCreatedCars = async () => {

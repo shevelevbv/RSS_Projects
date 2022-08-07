@@ -1,7 +1,7 @@
 import createElement from '../helpers/functions';
 import Car from './car';
 import { ICar } from '../helpers/interfaces';
-import '../style.css';
+import '../style.scss';
 
 class Garage {
   public createCarTextInput: HTMLInputElement;
@@ -43,6 +43,9 @@ class Garage {
     createTools.append(this.createCarTextInput, this.createCarColorInput, this.createCarButton);
 
     const updateTools = createElement(main, 'div', 'update-tools_container');
+    this.updateCarTextInput.disabled = true;
+    this.updateCarColorInput.disabled = true;
+    this.updateCarButton.disabled = true;
     updateTools.append(this.updateCarTextInput, this.updateCarColorInput, this.updateCarButton);
 
     this.createCarTextInput.type = 'text';
