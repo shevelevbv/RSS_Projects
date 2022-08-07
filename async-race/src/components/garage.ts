@@ -66,15 +66,17 @@ class Garage {
   private renderCarContainer(carObject: ICar): void {
     const carContainer: HTMLDivElement = createElement(this.carControlsContainer, 'div', 'container');
     const carControls: HTMLDivElement = createElement(carContainer, 'div', 'car__controls');
-    createElement(carControls, 'button', 'car__button_select', 'SELECT');
-    createElement(carControls, 'button', 'car__button_remove', 'REMOVE');
+    const selectButton: HTMLButtonElement = createElement(carControls, 'button', 'car__button_select', 'SELECT');
+    selectButton.id = `button_select_${carObject.id}`;
+    const removeButton: HTMLButtonElement = createElement(carControls, 'button', 'car__button_remove', 'REMOVE');
+    removeButton.id = `button_remove_${carObject.id}`;
     createElement(carControls, 'span', 'car__span_name', carObject.name);
     const raceTrackContainer: HTMLDivElement = createElement(carContainer, 'div', 'car__track_container');
     createElement(raceTrackContainer, 'button', 'button button_start', 'A');
     createElement(raceTrackContainer, 'button', 'button button_stop', 'B');
     const raceTrack: HTMLDivElement = createElement(raceTrackContainer, 'div', 'car__track');
     const SVGContainer: HTMLDivElement = createElement(raceTrack, 'div', 'car__svg_container');
-    SVGContainer.append(new Car(carObject).renderCar());
+    SVGContainer.append(new Car(carObject).renderCar(carObject.id));
   }
 }
 

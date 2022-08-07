@@ -22,11 +22,27 @@ class Connector {
 
   public createCar = async (car: INewCar): Promise<void> => {
     await fetch(this.garageURL, {
+      method: 'POST',
+      body: JSON.stringify(car),
       headers: {
         'Content-Type': 'application/json',
       },
-      method: 'POST',
+    });
+  };
+
+  public deleteCar = async (id: number): Promise<void> => {
+    await fetch(`${this.garageURL}/${id}`, {
+      method: 'DELETE',
+    });
+  };
+
+  public updateCar = async (id: number, car: INewCar): Promise<void> => {
+    await fetch(`${this.garageURL}/${id}`, {
+      method: 'PUT',
       body: JSON.stringify(car),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   };
 }
