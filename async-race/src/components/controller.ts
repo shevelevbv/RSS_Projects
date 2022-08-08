@@ -60,6 +60,9 @@ class Controller {
     } else if ((e.target as HTMLElement).classList.contains('button_back')) {
       this.garage.pageCount -= 1;
       this.renderUpdatedCars();
+    } else if ((e.target as HTMLElement).classList.contains('button_generate')) {
+      this.connector.generateCars();
+      this.renderUpdatedCars();
     }
   };
 

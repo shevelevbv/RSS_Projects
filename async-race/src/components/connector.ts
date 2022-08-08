@@ -5,9 +5,18 @@ class Connector {
 
   private garageURL: string;
 
+  private models: Array<string>;
+
+  private makes: Array<string>;
+
+  private numCarsToGenerate: number;
+
   constructor() {
     this.serverURL = 'http://127.0.0.1:3000/';
     this.garageURL = `${this.serverURL}garage`;
+    this.models = ['Volvo', 'Chevrolet', 'Jaguar', 'Peugeot', 'Renault', 'Mustang', 'Fiat', 'Kia', 'Volkswagen', 'Nissan'];
+    this.makes = ['Rio', 'F', 'Logan', 'Passat', 'Lacetti', 'XC60', 'GT', 'Panda', 'Beetle', '308'];
+    this.numCarsToGenerate = 100;
   }
 
   public getCars = async (page: number, limit: number):
@@ -49,6 +58,20 @@ class Connector {
         'Content-Type': 'application/json',
       },
     });
+  };
+
+  public generateCars = async () => {
+    for (let i = 0; i < this.numCarsToGenerate; i += 1) {
+      const model = this.models[Math.round(Math.random() * this.models.length)];
+      const make = this.makes[Math.round(Math.random() * this.makes.length)];
+      const hexDigits = '0123456789ABCDEF';
+      let newColor = '#';
+      const hexColorLength = 6;
+      for (let j = 0; j < hexColorLength; j += 1) {
+        newColor += hexDigits[Math.round(Math.random() * hexDigits.length)];
+      }
+      this.createCar({ name: `${model} ${make}`, color: newColor });
+    }
   };
 }
 

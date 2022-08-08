@@ -42,7 +42,7 @@ class Garage {
     this.updateCarButton = createElement(null, 'button', 'button', 'UPDATE');
     this.raceButton = createElement(null, 'button', 'button', 'RACE');
     this.resetButton = createElement(null, 'button', 'button', 'RESET');
-    this.generateButton = createElement(null, 'button', 'button', 'GENERATE CARS');
+    this.generateButton = createElement(null, 'button', 'button button_generate', 'GENERATE CARS');
     this.backButton = createElement(null, 'button', 'button button_back', 'BACK');
     this.nextButton = createElement(null, 'button', 'button button_next', 'NEXT');
     this.carsPerPage = 7;
@@ -66,7 +66,7 @@ class Garage {
     this.updateCarColorInput.type = 'color';
 
     createElement(garageContainer, 'h2', 'title__total', `Garage (${total})`);
-    createElement(garageContainer, 'h3', 'title__page', `Page #(${this.pageCount})`);
+    createElement(garageContainer, 'h3', 'title__page', `Page #${this.pageCount}`);
 
     const actionButtonContainer: HTMLDivElement = createElement(garageContainer, 'div', 'action_button_container');
 
