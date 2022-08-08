@@ -65,14 +65,19 @@ class Garage {
     this.createCarColorInput.type = 'color';
     this.updateCarColorInput.type = 'color';
 
-    createElement(garageContainer, 'h2', 'button', `Garage (${total})`);
+    createElement(garageContainer, 'h2', 'title__total', `Garage (${total})`);
+    createElement(garageContainer, 'h3', 'title__page', `Page #(${this.pageCount})`);
 
-    garageContainer.append(
-      this.raceButton,
-      this.resetButton,
-      this.generateButton,
-      this.carControlsContainer,
-    );
+    const actionButtonContainer: HTMLDivElement = createElement(garageContainer, 'div', 'action_button_container');
+
+    actionButtonContainer.append(this.raceButton, this.resetButton, this.generateButton);
+    if (this.pageCount === 1) {
+      this.backButton.disabled = true;
+    } else {
+      this.backButton.disabled = false;
+    }
+
+    garageContainer.append(this.carControlsContainer);
 
     const navButtons: HTMLDivElement = createElement(garageContainer, 'div', 'nav-buttons_container');
     navButtons.append(this.backButton, this.nextButton);
