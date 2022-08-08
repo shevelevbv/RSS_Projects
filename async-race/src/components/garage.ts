@@ -114,7 +114,7 @@ class Garage {
     const raceTrack: HTMLDivElement = createElement(raceTrackContainer, 'div', 'car__track');
     raceTrack.append(new Car(carObject).renderCar(carObject.id));
     const flagContainer: HTMLDivElement = createElement(raceTrack, 'div', 'flag__icon_container');
-    flagContainer.id = `flag__${carObject.id}`;
+    flagContainer.id = `flag_${carObject.id}`;
     const flagLogo: HTMLImageElement = createElement(flagContainer, 'img', 'flag__icon');
     flagLogo.src = '../img/checkerboard.svg';
   };

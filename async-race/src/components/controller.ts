@@ -55,22 +55,22 @@ class Controller {
   };
 
   private handleEventsOnMain = (e: MouseEvent): void => {
-    if ((e.target as HTMLElement).classList.contains('car__button_select')) {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('car__button_select')) {
       this.selectCar(e);
-    } else if ((e.target as HTMLElement).classList.contains('car__button_remove')) {
+    } else if (target.classList.contains('car__button_remove')) {
       this.removeCar(e);
-    } else if ((e.target as HTMLElement).classList.contains('button_next')) {
+    } else if (target.classList.contains('button_next')) {
       this.garage.pageCount += 1;
       this.renderUpdatedCars();
-    } else if ((e.target as HTMLElement).classList.contains('button_back')) {
+    } else if (target.classList.contains('button_back')) {
       this.garage.pageCount -= 1;
       this.renderUpdatedCars();
-    } else if ((e.target as HTMLElement).classList.contains('button_generate')) {
+    } else if (target.classList.contains('button_generate')) {
       this.connector.generateCars();
       this.renderUpdatedCars();
-    } else if ((e.target as HTMLElement).classList.contains('button_start')) {
-      this.connector.generateCars();
-      this.renderUpdatedCars();
+    } else if (target.classList.contains('button_start')) {
+      this.carId = Number(target.id.split('button_start_')[1]);
     }
   };
 
@@ -122,6 +122,23 @@ class Controller {
     const { total: carsTotal } = await this.state.cars;
     this.garage.renderGarage(this.page.main, carsTotal);
     await this.garage.renderCarContainers(this.state.cars);
+  };
+
+  private static getPositionAtCenter = (element: HTMLElement) => {
+    const {
+      top, left, width, height,
+    } = element.getBoundingClientRect();
+    return {
+      x: left + width / 2,
+      y: top + height / 2,
+    };
+  };
+
+  private static getDistanceBetweenElements = (left: HTMLElement, right: HTMLElement) => {
+    const leftPosition = Controller.getPositionAtCenter(left);
+    const rightPosition = Controller.getPositionAtCenter(right);
+
+    return Math.hypot(leftPosition.x - rightPosition.x, leftPosition.y - rightPosition.y);
   };
 }
 

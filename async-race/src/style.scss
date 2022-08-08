@@ -18,6 +18,10 @@ body {
 
 .car {
 
+  &__icon_container {
+    display: inline-block;
+  }
+
   &__icon {
     width: 100px;
     height: 100px;

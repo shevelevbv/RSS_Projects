@@ -1,3 +1,4 @@
+import createElement from '../helpers/functions';
 import { ICar } from '../helpers/interfaces';
 
 class Car {
@@ -7,14 +8,16 @@ class Car {
     this.carObject = carObject;
   }
 
-  public renderCar = (id: number): SVGSVGElement => {
-    const car: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    car.setAttribute('class', 'icon car__icon');
-    car.setAttribute('id', `car_${id}`);
-    car.style.fill = this.carObject.color;
+  public renderCar = (id: number): HTMLDivElement => {
+    const car: HTMLDivElement = createElement(null, 'div', 'car__icon_container');
+    car.id = `car_${id}`;
+    const carIcon: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    carIcon.setAttribute('class', 'icon car__icon');
+    carIcon.style.fill = this.carObject.color;
     const useSVG: SVGUseElement = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     useSVG.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '../img/sprite.svg#car');
-    car.append(useSVG);
+    carIcon.append(useSVG);
+    car.append(carIcon);
     return car;
   };
 }
