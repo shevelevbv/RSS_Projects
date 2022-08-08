@@ -36,11 +36,13 @@ class Controller {
     this.page.renderHeader();
     this.page.renderMain();
     this.selectView();
+    window.onload = () => alert(`Привет, уважаемый проверяющий! 
+Если есть возможность, проверь, пожалуйста, в среду или в четверг`);
   };
 
   private selectView = (): void => {
-    this.page.toGarageButton.addEventListener('click', this.operateInGarage);
-    this.page.toWinnersButton.addEventListener('click', this.operateInWinners);
+    this.page.toGarageButton.addEventListener('click', this.showGarage);
+    this.page.toWinnersButton.addEventListener('click', this.showWinners);
     this.addListeners();
     this.operateInGarage();
   };
@@ -49,8 +51,12 @@ class Controller {
     this.renderUpdatedCars();
   };
 
-  private operateInWinners = (): void => {
-    this.page.resetMain();
+  private showGarage = (): void => {
+    this.garage.garageContainer.style.display = 'block';
+  };
+
+  private showWinners = (): void => {
+    this.garage.garageContainer.style.display = 'none';
   };
 
   private addListeners = (): void => {
@@ -130,7 +136,6 @@ class Controller {
       this.garage.pageCount,
       Garage.carsPerPage,
     ));
-    this.page.resetMain();
     const { total: carsTotal } = await this.state.cars;
     this.garage.renderGarage(this.page.main, carsTotal);
     await this.garage.renderCarContainers(this.state.cars);

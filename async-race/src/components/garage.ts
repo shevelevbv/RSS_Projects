@@ -4,6 +4,8 @@ import { ICar } from '../helpers/interfaces';
 import '../style.scss';
 
 class Garage {
+  public garageContainer: HTMLDivElement;
+
   public createCarTextInput: HTMLInputElement;
 
   public createCarColorInput: HTMLInputElement;
@@ -33,6 +35,7 @@ class Garage {
   public static readonly carsPerPage = 7;
 
   constructor() {
+    this.garageContainer = createElement(null, 'div', 'garage-container');
     this.createCarTextInput = createElement(null, 'input', 'input__text');
     this.createCarColorInput = createElement(null, 'input', 'input__color');
     this.createCarButton = createElement(null, 'button', 'button button_create', 'CREATE');
@@ -49,11 +52,12 @@ class Garage {
   }
 
   public renderGarage = (main: HTMLDivElement, total: number): void => {
-    const garageContainer = createElement(main, 'div', 'garage-container');
-    const createTools = createElement(garageContainer, 'div', 'create-tools_container');
+    this.garageContainer.innerHTML = '';
+    main.append(this.garageContainer);
+    const createTools = createElement(this.garageContainer, 'div', 'create-tools_container');
     createTools.append(this.createCarTextInput, this.createCarColorInput, this.createCarButton);
 
-    const updateTools = createElement(garageContainer, 'div', 'update-tools_container');
+    const updateTools = createElement(this.garageContainer, 'div', 'update-tools_container');
     this.updateCarTextInput.disabled = true;
     this.updateCarColorInput.disabled = true;
     this.updateCarButton.disabled = true;
@@ -64,10 +68,10 @@ class Garage {
     this.createCarColorInput.type = 'color';
     this.updateCarColorInput.type = 'color';
 
-    createElement(garageContainer, 'h2', 'title__total', `Garage (${total})`);
-    createElement(garageContainer, 'h3', 'title__page', `Page #${this.pageCount}`);
+    createElement(this.garageContainer, 'h2', 'title__total', `Garage (${total})`);
+    createElement(this.garageContainer, 'h3', 'title__page', `Page #${this.pageCount}`);
 
-    const actionButtonContainer: HTMLDivElement = createElement(garageContainer, 'div', 'action_button_container');
+    const actionButtonContainer: HTMLDivElement = createElement(this.garageContainer, 'div', 'action_button_container');
 
     actionButtonContainer.append(this.raceButton, this.resetButton, this.generateButton);
 
@@ -85,9 +89,9 @@ class Garage {
       this.nextButton.disabled = false;
     }
 
-    garageContainer.append(this.carControlsContainer);
+    this.garageContainer.append(this.carControlsContainer);
 
-    const navButtons: HTMLDivElement = createElement(garageContainer, 'div', 'nav-buttons_container');
+    const navButtons: HTMLDivElement = createElement(this.garageContainer, 'div', 'nav-buttons_container');
     navButtons.append(this.backButton, this.nextButton);
   };
 
