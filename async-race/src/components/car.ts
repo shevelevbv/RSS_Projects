@@ -10,6 +10,7 @@ class Car {
 
   public renderCar = (id: number): HTMLDivElement => {
     const car: HTMLDivElement = createElement(null, 'div', 'car__icon_container');
+    createElement(car, 'div', 'car__inner-layer');
     car.id = `car_${id}`;
     const carIcon: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     carIcon.setAttribute('class', 'icon car__icon');

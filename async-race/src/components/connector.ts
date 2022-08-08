@@ -13,7 +13,19 @@ class Connector {
 
   private static readonly numCarsToGenerate = 100;
 
-  private static readonly engineStatuses = { started: 'started', drive: 'drive', stopped: 'stopped' };
+  private static readonly engineStatuses = {
+    started: 'started',
+    drive: 'drive',
+    stopped: 'stopped',
+  };
+
+  private static readonly HTTPMethods = {
+    get: 'GET',
+    post: 'POST',
+    put: 'PUT',
+    patch: 'PATCH',
+    delete: 'DELETE',
+  };
 
   private static readonly statusSuccess = 200;
 
@@ -42,7 +54,7 @@ class Connector {
 
   public createCar = async (car: INewCar): Promise<void> => {
     await fetch(this.garageURL, {
-      method: 'POST',
+      method: Connector.HTTPMethods.post,
       body: JSON.stringify(car),
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +64,7 @@ class Connector {
 
   public removeCar = async (id: number): Promise<void> => {
     await fetch(`${this.garageURL}/${id}`, {
-      method: 'DELETE',
+      method: Connector.HTTPMethods.delete,
     });
   };
 
@@ -90,7 +102,7 @@ class Connector {
     const response: Response = await fetch(
       `${this.engineURL}?id=${id}&status=${Connector.engineStatuses.started}`,
       {
-        method: 'PATCH',
+        method: Connector.HTTPMethods.patch,
       },
     );
     return response.json();
@@ -100,11 +112,11 @@ class Connector {
     const response: Response = await fetch(
       `${this.engineURL}?id=${id}&status=${Connector.engineStatuses.drive}`,
       {
-        method: 'PATCH',
+        method: Connector.HTTPMethods.patch,
       },
     )
       .catch();
-    return response.status === Connector.statusSuccess ? { ...response.json() }
+    return response.status === Connector.statusSuccess ? response.json()
       : { success: false };
   };
 }
