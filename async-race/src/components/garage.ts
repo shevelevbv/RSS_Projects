@@ -18,13 +18,19 @@ class Garage {
 
   public carControlsContainer: HTMLDivElement;
 
+  public raceButton: HTMLButtonElement;
+
+  public resetButton: HTMLButtonElement;
+
+  public generateButton: HTMLButtonElement;
+
   public backButton: HTMLButtonElement;
 
   public nextButton: HTMLButtonElement;
 
-  public carsPerPage = 7;
+  public carsPerPage: number;
 
-  public pageCount = 1;
+  public pageCount: number;
 
   constructor() {
     this.createCarTextInput = createElement(null, 'input', 'input__text');
@@ -34,11 +40,16 @@ class Garage {
     this.updateCarColorInput = createElement(null, 'input', 'input__color');
     this.carControlsContainer = createElement(null, 'div', 'car__objects_container');
     this.updateCarButton = createElement(null, 'button', 'button', 'UPDATE');
+    this.raceButton = createElement(null, 'button', 'button', 'RACE');
+    this.resetButton = createElement(null, 'button', 'button', 'RESET');
+    this.generateButton = createElement(null, 'button', 'button', 'GENERATE CARS');
     this.backButton = createElement(null, 'button', 'button', 'BACK');
     this.nextButton = createElement(null, 'button', 'button', 'NEXT');
+    this.carsPerPage = 7;
+    this.pageCount = 1;
   }
 
-  public renderGarage(main: HTMLDivElement) {
+  public renderGarage(main: HTMLDivElement, total: number) {
     const garageContainer = createElement(main, 'div', 'garage-container');
     const createTools = createElement(garageContainer, 'div', 'create-tools_container');
     createTools.append(this.createCarTextInput, this.createCarColorInput, this.createCarButton);
@@ -54,7 +65,14 @@ class Garage {
     this.createCarColorInput.type = 'color';
     this.updateCarColorInput.type = 'color';
 
-    garageContainer.append(this.carControlsContainer);
+    createElement(garageContainer, 'h2', 'button', `Garage (${total})`);
+
+    garageContainer.append(
+      this.raceButton,
+      this.resetButton,
+      this.generateButton,
+      this.carControlsContainer,
+    );
 
     const navButtons: HTMLDivElement = createElement(garageContainer, 'div', 'nav-buttons_container');
     navButtons.append(this.backButton, this.nextButton);

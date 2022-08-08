@@ -36,10 +36,8 @@ class Controller {
     this.operateInGarage();
   };
 
-  private operateInGarage = async () => {
-    this.page.resetMain();
-    this.garage.renderGarage(this.page.main);
-    await this.garage.renderCarContainers(this.state.cars);
+  private operateInGarage = () => {
+    this.renderUpdatedCars();
 
     this.addListeners();
   };
@@ -109,6 +107,9 @@ class Controller {
       this.garage.pageCount,
       this.garage.carsPerPage,
     ));
+    this.page.resetMain();
+    const { total: carsTotal } = await this.state.cars;
+    this.garage.renderGarage(this.page.main, carsTotal);
     await this.garage.renderCarContainers(this.state.cars);
   };
 
