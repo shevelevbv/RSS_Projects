@@ -39,10 +39,11 @@ class Garage {
   }
 
   public renderGarage(main: HTMLDivElement) {
-    const createTools = createElement(main, 'div', 'create-tools_container');
+    const garageContainer = createElement(main, 'div', 'garage-container');
+    const createTools = createElement(garageContainer, 'div', 'create-tools_container');
     createTools.append(this.createCarTextInput, this.createCarColorInput, this.createCarButton);
 
-    const updateTools = createElement(main, 'div', 'update-tools_container');
+    const updateTools = createElement(garageContainer, 'div', 'update-tools_container');
     this.updateCarTextInput.disabled = true;
     this.updateCarColorInput.disabled = true;
     this.updateCarButton.disabled = true;
@@ -53,9 +54,9 @@ class Garage {
     this.createCarColorInput.type = 'color';
     this.updateCarColorInput.type = 'color';
 
-    main.append(this.carControlsContainer);
+    garageContainer.append(this.carControlsContainer);
 
-    const navButtons: HTMLDivElement = createElement(main, 'div', 'nav-buttons_container');
+    const navButtons: HTMLDivElement = createElement(garageContainer, 'div', 'nav-buttons_container');
     navButtons.append(this.backButton, this.nextButton);
   }
 

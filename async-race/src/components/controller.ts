@@ -54,6 +54,8 @@ class Controller {
   private handleEventsOnMain = (e: MouseEvent) => {
     if ((e.target as HTMLElement).classList.contains('car__button_select')) {
       this.selectCar(e);
+    } else if ((e.target as HTMLElement).classList.contains('car__button_remove')) {
+      this.removeCar(e);
     }
   };
 
@@ -94,6 +96,12 @@ class Controller {
     this.garage.updateCarButton.removeEventListener('click', async () => {
       this.updateCar(carID);
     });
+  };
+
+  private removeCar = async (e: MouseEvent) => {
+    const carID = Number((e.target as HTMLElement).id.split('button_remove_')[1]);
+    this.connector.removeCar(carID);
+    this.renderUpdatedCars();
   };
 
   private renderUpdatedCars = async () => {

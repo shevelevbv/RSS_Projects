@@ -35,7 +35,7 @@ class Connector {
     });
   };
 
-  public deleteCar = async (id: number): Promise<void> => {
+  public removeCar = async (id: number): Promise<void> => {
     await fetch(`${this.garageURL}/${id}`, {
       method: 'DELETE',
     });
