@@ -45,30 +45,58 @@ class Controller {
   };
 
   private addListeners = () => {
-    this.garage.createCarButton.addEventListener('click', this.renderCreatedCars);
+    this.garage.createCarButton.addEventListener('click', this.createCar);
     this.page.main.addEventListener('click', (e: MouseEvent) => {
       this.handleEventsOnMain(e);
     });
   };
 
-  private handleEventsOnMain = async (e: MouseEvent) => {
+  private handleEventsOnMain = (e: MouseEvent) => {
     if ((e.target as HTMLElement).classList.contains('car__button_select')) {
-      const carID = Number((e.target as HTMLElement).id.split('button_select_')[1]);
-      const car = await this.connector.getCar(carID);
-      this.garage.updateCarTextInput.value = car.name;
-      this.garage.updateCarColorInput.value = car.color;
-      this.garage.updateCarTextInput.disabled = false;
-      this.garage.updateCarColorInput.disabled = false;
-      this.garage.updateCarButton.disabled = false;
+      this.selectCar(e);
     }
   };
 
-  private renderCreatedCars = async () => {
+  private selectCar = async (e: MouseEvent) => {
+    const carID = Number((e.target as HTMLElement).id.split('button_select_')[1]);
+    const car = await this.connector.getCar(carID);
+    this.garage.updateCarTextInput.value = car.name;
+    this.garage.updateCarColorInput.value = car.color;
+    this.garage.updateCarTextInput.disabled = false;
+    this.garage.updateCarColorInput.disabled = false;
+    this.garage.updateCarButton.disabled = false;
+    this.garage.updateCarButton.addEventListener('click', async () => {
+      this.updateCar(carID);
+    });
+  };
+
+  private createCar = async () => {
     const newCar: INewCar = {
       name: this.garage.createCarTextInput.value,
       color: this.garage.createCarColorInput.value,
     };
     await this.connector.createCar(newCar);
+    this.renderUpdatedCars();
+  };
+
+  private updateCar = async (carID: number) => {
+    const newCar: INewCar = {
+      name: this.garage.updateCarTextInput.value,
+      color: this.garage.updateCarColorInput.value,
+    };
+    await this.connector.updateCar(carID, newCar);
+    this.renderUpdatedCars();
+    this.garage.updateCarTextInput.disabled = true;
+    this.garage.updateCarColorInput.disabled = true;
+    this.garage.updateCarTextInput.value = '';
+    this.garage.updateCarColorInput.value = '#000000';
+    this.garage.updateCarButton.disabled = true;
+    this.garage.updateCarButton.removeEventListener('click', async () => {
+      this.updateCar(carID);
+    });
+  };
+
+  private renderUpdatedCars = async () => {
     await this.state.updateState(this.connector.getCars(
       this.garage.pageCount,
       this.garage.carsPerPage,
