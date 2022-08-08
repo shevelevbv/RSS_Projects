@@ -49,7 +49,7 @@ class Garage {
     this.pageCount = 1;
   }
 
-  public renderGarage(main: HTMLDivElement, total: number) {
+  public renderGarage = (main: HTMLDivElement, total: number): void => {
     const garageContainer = createElement(main, 'div', 'garage-container');
     const createTools = createElement(garageContainer, 'div', 'create-tools_container');
     createTools.append(this.createCarTextInput, this.createCarColorInput, this.createCarButton);
@@ -72,7 +72,9 @@ class Garage {
 
     actionButtonContainer.append(this.raceButton, this.resetButton, this.generateButton);
 
-    if (this.pageCount === 1) {
+    const isFirstPage = this.pageCount === 1;
+
+    if (isFirstPage) {
       this.backButton.disabled = true;
     } else {
       this.backButton.disabled = false;
@@ -88,16 +90,16 @@ class Garage {
 
     const navButtons: HTMLDivElement = createElement(garageContainer, 'div', 'nav-buttons_container');
     navButtons.append(this.backButton, this.nextButton);
-  }
+  };
 
-  public async renderCarContainers(carObjects: Promise<{cars: Array<ICar>, total: number}>):
-  Promise<void> {
+  public renderCarContainers = async (carObjects: Promise<{cars: Array<ICar>, total: number}>):
+  Promise<void> => {
     this.carControlsContainer.innerHTML = '';
     const { cars } = await carObjects;
     cars.forEach((carObject: ICar): void => this.renderCarContainer(carObject));
-  }
+  };
 
-  private renderCarContainer(carObject: ICar): void {
+  private renderCarContainer = (carObject: ICar): void => {
     const carContainer: HTMLDivElement = createElement(this.carControlsContainer, 'div', 'container');
     const carControls: HTMLDivElement = createElement(carContainer, 'div', 'car__controls');
     const selectButton: HTMLButtonElement = createElement(carControls, 'button', 'car__button_select', 'SELECT');
@@ -113,7 +115,7 @@ class Garage {
     const flagContainer: HTMLDivElement = createElement(raceTrack, 'div', 'flag__icon_container');
     const flagLogo: HTMLImageElement = createElement(flagContainer, 'img', 'flag__icon');
     flagLogo.src = '../img/checkerboard.svg';
-  }
+  };
 }
 
 export default Garage;

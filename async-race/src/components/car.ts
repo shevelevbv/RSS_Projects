@@ -7,7 +7,7 @@ class Car {
     this.carObject = carObject;
   }
 
-  public renderCar(id: number): SVGSVGElement {
+  public renderCar = (id: number): SVGSVGElement => {
     const car: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     car.setAttribute('class', 'icon car__icon');
     car.setAttribute('id', `car_${id}`);
@@ -16,7 +16,7 @@ class Car {
     useSVG.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '../img/sprite.svg#car');
     car.append(useSVG);
     return car;
-  }
+  };
 }
 
 export default Car;

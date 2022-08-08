@@ -60,18 +60,24 @@ class Connector {
     });
   };
 
-  public generateCars = async () => {
-    for (let i = 0; i < this.numCarsToGenerate; i += 1) {
-      const model = this.models[Math.round(Math.random() * this.models.length)];
-      const make = this.makes[Math.round(Math.random() * this.makes.length)];
-      const hexDigits = '0123456789ABCDEF';
-      let newColor = '#';
-      const hexColorLength = 6;
-      for (let j = 0; j < hexColorLength; j += 1) {
-        newColor += hexDigits[Math.round(Math.random() * hexDigits.length)];
+  private makeCars = (): Array<INewCar> => {
+    const cars: Array<INewCar> = [];
+    for (let i: number = 0; i < this.numCarsToGenerate; i += 1) {
+      const model: string = this.models[Math.floor(Math.random() * this.models.length)];
+      const make: string = this.makes[Math.floor(Math.random() * this.makes.length)];
+      const hexDigits: string = '0123456789ABCDEF';
+      let newColor: string = '#';
+      const hexColorLength: number = 6;
+      for (let j: number = 0; j < hexColorLength; j += 1) {
+        newColor += hexDigits[Math.floor(Math.random() * hexDigits.length)];
       }
-      this.createCar({ name: `${model} ${make}`, color: newColor });
+      cars.push({ name: `${model} ${make}`, color: newColor });
     }
+    return cars;
+  };
+
+  public generateCars = async (): Promise<void> => {
+    Promise.all(this.makeCars().map(async (car: INewCar): Promise<void> => this.createCar(car)));
   };
 }
 

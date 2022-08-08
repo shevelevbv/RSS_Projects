@@ -13,18 +13,18 @@ class Page {
     this.main = createElement(null, 'main', 'main');
   }
 
-  public renderHeader(): void {
+  public renderHeader = (): void => {
     const header = createElement(document.body, 'header', 'header');
     header.append(this.toGarageButton, this.toWinnersButton);
-  }
+  };
 
-  public renderMain(): void {
+  public renderMain = (): void => {
     document.body.append(this.main);
-  }
+  };
 
-  public resetMain(): void {
+  public resetMain = (): void => {
     this.main.innerHTML = '';
-  }
+  };
 }
 
 export default Page;

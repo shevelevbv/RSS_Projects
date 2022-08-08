@@ -7,9 +7,9 @@ class State {
     this.cars = cars;
   }
 
-  public async updateState(cars: Promise<{cars: Array<ICar>, total: number}>) {
+  public updateState = async (cars: Promise<{cars: Array<ICar>, total: number}>) => {
     await (this.cars = cars);
-  }
+  };
 }
 
 export default State;
