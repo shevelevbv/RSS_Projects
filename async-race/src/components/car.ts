@@ -9,7 +9,7 @@ class Car {
 
   public renderCar(id: number): SVGSVGElement {
     const car: SVGSVGElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    car.setAttribute('class', 'icon car');
+    car.setAttribute('class', 'icon car__icon');
     car.setAttribute('id', `car_${id}`);
     car.style.fill = this.carObject.color;
     const useSVG: SVGUseElement = document.createElementNS('http://www.w3.org/2000/svg', 'use');

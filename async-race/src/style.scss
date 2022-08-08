@@ -3,35 +3,64 @@ body {
   background-size: 100%;
 }
 
+.title {
+
+  &__total,
+  &__page {
+    color: white;
+  }
+}
+
 .container {
   margin-top: 10px;
   background-color: black;
 }
 
 .car {
-  width: 100px;
-  height: 100px;
-  stroke: white;
-  stroke-width: 5rem;
-  transform: rotate(90deg);
-  fill: rgb(118, 222, 234);
 
-    &__track_container {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+  &__icon {
+    width: 100px;
+    height: 100px;
+    stroke: white;
+    stroke-width: 5rem;
+    transform: rotate(90deg);
+    fill: rgb(118, 222, 234);
+  }
 
-    &__svg_container {
-      width: 100px;
-      height: 100px;
-    }
+  &__track {
+    position: relative;
+    width: 95%;
+  }
+  
+  &__track_container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 
-    &__span_name {
-      color: white;
-    }
+  &__span_name {
+    color: white;
+  }
 
 }
 
+.flag {
+
+  &__icon_container {
+    width: auto;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  &__icon {
+    width: 100px;
+    height: 100px;
+    transform: rotate(90deg);
+  }
+
+}
 
 

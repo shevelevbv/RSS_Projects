@@ -109,8 +109,10 @@ class Garage {
     createElement(raceTrackContainer, 'button', 'button button_start', 'A');
     createElement(raceTrackContainer, 'button', 'button button_stop', 'B');
     const raceTrack: HTMLDivElement = createElement(raceTrackContainer, 'div', 'car__track');
-    const SVGContainer: HTMLDivElement = createElement(raceTrack, 'div', 'car__svg_container');
-    SVGContainer.append(new Car(carObject).renderCar(carObject.id));
+    raceTrack.append(new Car(carObject).renderCar(carObject.id));
+    const flagContainer: HTMLDivElement = createElement(raceTrack, 'div', 'flag__icon_container');
+    const flagLogo: HTMLImageElement = createElement(flagContainer, 'img', 'flag__icon');
+    flagLogo.src = '../img/checkerboard.svg';
   }
 }
 
