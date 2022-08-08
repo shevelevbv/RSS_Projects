@@ -107,11 +107,14 @@ class Garage {
     removeButton.id = `button_remove_${carObject.id}`;
     createElement(carControls, 'span', 'car__span_name', carObject.name);
     const raceTrackContainer: HTMLDivElement = createElement(carContainer, 'div', 'car__track_container');
-    createElement(raceTrackContainer, 'button', 'button button_start', 'A');
-    createElement(raceTrackContainer, 'button', 'button button_stop', 'B');
+    const startEngineButton = createElement(raceTrackContainer, 'button', 'button button_start', 'A');
+    startEngineButton.id = `button_start_${carObject.id}`;
+    const stopEngineButton = createElement(raceTrackContainer, 'button', 'button button_stop', 'B');
+    stopEngineButton.id = `button_stop_${carObject.id}`;
     const raceTrack: HTMLDivElement = createElement(raceTrackContainer, 'div', 'car__track');
     raceTrack.append(new Car(carObject).renderCar(carObject.id));
     const flagContainer: HTMLDivElement = createElement(raceTrack, 'div', 'flag__icon_container');
+    flagContainer.id = `flag__${carObject.id}`;
     const flagLogo: HTMLImageElement = createElement(flagContainer, 'img', 'flag__icon');
     flagLogo.src = '../img/checkerboard.svg';
   };

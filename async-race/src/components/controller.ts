@@ -44,6 +44,10 @@ class Controller {
     this.renderUpdatedCars();
   };
 
+  private operateInWinners = (): void => {
+    this.page.resetMain();
+  };
+
   private addListeners = (): void => {
     this.garage.createCarButton.addEventListener('click', this.createCar);
     this.garage.updateCarButton.addEventListener('click', this.updateCar);
@@ -62,6 +66,9 @@ class Controller {
       this.garage.pageCount -= 1;
       this.renderUpdatedCars();
     } else if ((e.target as HTMLElement).classList.contains('button_generate')) {
+      this.connector.generateCars();
+      this.renderUpdatedCars();
+    } else if ((e.target as HTMLElement).classList.contains('button_start')) {
       this.connector.generateCars();
       this.renderUpdatedCars();
     }
@@ -115,10 +122,6 @@ class Controller {
     const { total: carsTotal } = await this.state.cars;
     this.garage.renderGarage(this.page.main, carsTotal);
     await this.garage.renderCarContainers(this.state.cars);
-  };
-
-  private operateInWinners = (): void => {
-    this.page.resetMain();
   };
 }
 

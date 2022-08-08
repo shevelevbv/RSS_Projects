@@ -1,9 +1,11 @@
-import { ICar, INewCar } from '../helpers/interfaces';
+import { ICar, INewCar, ICarData } from '../helpers/interfaces';
 
 class Connector {
   private serverURL: string;
 
   private garageURL: string;
+
+  private engineURL: string;
 
   private models: Array<string>;
 
@@ -14,6 +16,7 @@ class Connector {
   constructor() {
     this.serverURL = 'http://127.0.0.1:3000/';
     this.garageURL = `${this.serverURL}garage`;
+    this.engineURL = `${this.serverURL}engine`;
     this.models = ['Volvo', 'Chevrolet', 'Jaguar', 'Peugeot', 'Renault', 'Mustang', 'Fiat', 'Kia', 'Volkswagen', 'Nissan'];
     this.makes = ['Rio', 'F', 'Logan', 'Passat', 'Lacetti', 'XC60', 'GT', 'Panda', 'Beetle', '308'];
   }
@@ -77,6 +80,11 @@ class Connector {
 
   public generateCars = async (): Promise<void> => {
     Promise.all(this.makeCars().map(async (car: INewCar): Promise<void> => this.createCar(car)));
+  };
+
+  public startEngine = async (id: number): Promise<ICarData> => {
+    const response = await fetch(`${this.engineURL}/id=${id}&status=started`);
+    return response.json();
   };
 }
 

@@ -8,3 +8,8 @@ export interface INewCar {
   name: string;
   color: string;
 }
+
+export interface ICarData {
+  velocity: number;
+  distance: number;
+}
