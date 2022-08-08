@@ -100,7 +100,7 @@ class Controller {
 
   private removeCar = async (e: MouseEvent) => {
     const carID = Number((e.target as HTMLElement).id.split('button_remove_')[1]);
-    this.connector.removeCar(carID);
+    await this.connector.removeCar(carID);
     this.renderUpdatedCars();
   };
 
