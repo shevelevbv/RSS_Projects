@@ -43,8 +43,8 @@ class Garage {
     this.raceButton = createElement(null, 'button', 'button', 'RACE');
     this.resetButton = createElement(null, 'button', 'button', 'RESET');
     this.generateButton = createElement(null, 'button', 'button', 'GENERATE CARS');
-    this.backButton = createElement(null, 'button', 'button', 'BACK');
-    this.nextButton = createElement(null, 'button', 'button', 'NEXT');
+    this.backButton = createElement(null, 'button', 'button button_back', 'BACK');
+    this.nextButton = createElement(null, 'button', 'button button_next', 'NEXT');
     this.carsPerPage = 7;
     this.pageCount = 1;
   }
@@ -71,10 +71,17 @@ class Garage {
     const actionButtonContainer: HTMLDivElement = createElement(garageContainer, 'div', 'action_button_container');
 
     actionButtonContainer.append(this.raceButton, this.resetButton, this.generateButton);
+
     if (this.pageCount === 1) {
       this.backButton.disabled = true;
     } else {
       this.backButton.disabled = false;
+    }
+
+    if (total <= this.carsPerPage * this.pageCount) {
+      this.nextButton.disabled = true;
+    } else {
+      this.nextButton.disabled = false;
     }
 
     garageContainer.append(this.carControlsContainer);

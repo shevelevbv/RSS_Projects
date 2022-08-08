@@ -54,6 +54,12 @@ class Controller {
       this.selectCar(e);
     } else if ((e.target as HTMLElement).classList.contains('car__button_remove')) {
       this.removeCar(e);
+    } else if ((e.target as HTMLElement).classList.contains('button_next')) {
+      this.garage.pageCount += 1;
+      this.renderUpdatedCars();
+    } else if ((e.target as HTMLElement).classList.contains('button_back')) {
+      this.garage.pageCount -= 1;
+      this.renderUpdatedCars();
     }
   };
 
