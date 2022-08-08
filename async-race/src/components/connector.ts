@@ -13,6 +13,10 @@ class Connector {
 
   private static readonly numCarsToGenerate = 100;
 
+  private static readonly engineStatuses = { started: 'started', drive: 'drive', stopped: 'stopped' };
+
+  private static readonly statusSuccess = 200;
+
   constructor() {
     this.serverURL = 'http://127.0.0.1:3000/';
     this.garageURL = `${this.serverURL}garage`;
@@ -83,8 +87,25 @@ class Connector {
   };
 
   public startEngine = async (id: number): Promise<ICarData> => {
-    const response = await fetch(`${this.engineURL}/id=${id}&status=started`);
+    const response: Response = await fetch(
+      `${this.engineURL}?id=${id}&status=${Connector.engineStatuses.started}`,
+      {
+        method: 'PATCH',
+      },
+    );
     return response.json();
+  };
+
+  public moveCar = async (id: number): Promise<{success: boolean}> => {
+    const response: Response = await fetch(
+      `${this.engineURL}?id=${id}&status=${Connector.engineStatuses.drive}`,
+      {
+        method: 'PATCH',
+      },
+    )
+      .catch();
+    return response.status === Connector.statusSuccess ? { ...response.json() }
+      : { success: false };
   };
 }
 

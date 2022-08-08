@@ -13,3 +13,8 @@ export interface ICarData {
   velocity: number;
   distance: number;
 }
+
+export interface ICoordinates {
+  x: number;
+  y: number;
+}

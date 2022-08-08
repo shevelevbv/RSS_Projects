@@ -3,6 +3,18 @@ body {
   background-size: 100%;
 }
 
+.button {
+
+  outline: none;
+  border: none;
+
+  &_start.disabled,
+  &_stop.disabled {
+    background-color: rgb(234, 135, 135);
+    pointer-events: none;
+  }
+}
+
 .title {
 
   &__total,
@@ -20,6 +32,8 @@ body {
 
   &__icon_container {
     display: inline-block;
+    position: relative;
+    z-index: 1;
   }
 
   &__icon {

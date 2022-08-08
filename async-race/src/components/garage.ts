@@ -107,9 +107,9 @@ class Garage {
     removeButton.id = `button_remove_${carObject.id}`;
     createElement(carControls, 'span', 'car__span_name', carObject.name);
     const raceTrackContainer: HTMLDivElement = createElement(carContainer, 'div', 'car__track_container');
-    const startEngineButton = createElement(raceTrackContainer, 'button', 'button button_start', 'A');
+    const startEngineButton: HTMLButtonElement = createElement(raceTrackContainer, 'button', 'button button_engine button_start', 'A');
     startEngineButton.id = `button_start_${carObject.id}`;
-    const stopEngineButton = createElement(raceTrackContainer, 'button', 'button button_stop', 'B');
+    const stopEngineButton: HTMLButtonElement = createElement(raceTrackContainer, 'button', 'button button_engine button_stop', 'B');
     stopEngineButton.id = `button_stop_${carObject.id}`;
     const raceTrack: HTMLDivElement = createElement(raceTrackContainer, 'div', 'car__track');
     raceTrack.append(new Car(carObject).renderCar(carObject.id));
