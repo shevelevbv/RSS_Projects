@@ -9,14 +9,13 @@ class Connector {
 
   private makes: Array<string>;
 
-  private numCarsToGenerate: number;
+  private static readonly numCarsToGenerate = 100;
 
   constructor() {
     this.serverURL = 'http://127.0.0.1:3000/';
     this.garageURL = `${this.serverURL}garage`;
     this.models = ['Volvo', 'Chevrolet', 'Jaguar', 'Peugeot', 'Renault', 'Mustang', 'Fiat', 'Kia', 'Volkswagen', 'Nissan'];
     this.makes = ['Rio', 'F', 'Logan', 'Passat', 'Lacetti', 'XC60', 'GT', 'Panda', 'Beetle', '308'];
-    this.numCarsToGenerate = 100;
   }
 
   public getCars = async (page: number, limit: number):
@@ -62,7 +61,7 @@ class Connector {
 
   private makeCars = (): Array<INewCar> => {
     const cars: Array<INewCar> = [];
-    for (let i: number = 0; i < this.numCarsToGenerate; i += 1) {
+    for (let i: number = 0; i < Connector.numCarsToGenerate; i += 1) {
       const model: string = this.models[Math.floor(Math.random() * this.models.length)];
       const make: string = this.makes[Math.floor(Math.random() * this.makes.length)];
       const hexDigits: string = '0123456789ABCDEF';

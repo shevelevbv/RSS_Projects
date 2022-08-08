@@ -16,15 +16,15 @@ class Controller {
 
   private page: Page;
 
-  private id: number;
+  private carId: number;
 
   constructor() {
     this.page = new Page();
     this.connector = new Connector();
     this.garage = new Garage();
-    this.state = new State(this.connector.getCars(this.garage.pageCount, this.garage.carsPerPage));
+    this.state = new State(this.connector.getCars(this.garage.pageCount, Garage.carsPerPage));
     this.winners = new Winners();
-    this.id = 0;
+    this.carId = 0;
   }
 
   public start = (): void => {
@@ -68,8 +68,8 @@ class Controller {
   };
 
   private selectCar = async (e: MouseEvent): Promise<void> => {
-    this.id = Number((e.target as HTMLElement).id.split('button_select_')[1]);
-    const car: ICar = await this.connector.getCar(this.id);
+    this.carId = Number((e.target as HTMLElement).id.split('button_select_')[1]);
+    const car: ICar = await this.connector.getCar(this.carId);
     this.garage.updateCarTextInput.value = car.name;
     this.garage.updateCarColorInput.value = car.color;
     this.garage.updateCarTextInput.disabled = false;
@@ -91,8 +91,8 @@ class Controller {
       name: this.garage.updateCarTextInput.value,
       color: this.garage.updateCarColorInput.value,
     };
-    await this.connector.updateCar(this.id, newCar);
-    this.renderUpdatedCars();
+    await this.connector.updateCar(this.carId, newCar);
+    await this.renderUpdatedCars();
     this.garage.updateCarTextInput.disabled = true;
     this.garage.updateCarColorInput.disabled = true;
     this.garage.updateCarTextInput.value = '';
@@ -109,7 +109,7 @@ class Controller {
   private renderUpdatedCars = async (): Promise<void> => {
     await this.state.updateState(this.connector.getCars(
       this.garage.pageCount,
-      this.garage.carsPerPage,
+      Garage.carsPerPage,
     ));
     this.page.resetMain();
     const { total: carsTotal } = await this.state.cars;

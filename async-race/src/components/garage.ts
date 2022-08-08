@@ -28,9 +28,9 @@ class Garage {
 
   public nextButton: HTMLButtonElement;
 
-  public carsPerPage: number;
-
   public pageCount: number;
+
+  public static readonly carsPerPage = 7;
 
   constructor() {
     this.createCarTextInput = createElement(null, 'input', 'input__text');
@@ -45,7 +45,6 @@ class Garage {
     this.generateButton = createElement(null, 'button', 'button button_generate', 'GENERATE CARS');
     this.backButton = createElement(null, 'button', 'button button_back', 'BACK');
     this.nextButton = createElement(null, 'button', 'button button_next', 'NEXT');
-    this.carsPerPage = 7;
     this.pageCount = 1;
   }
 
@@ -80,7 +79,7 @@ class Garage {
       this.backButton.disabled = false;
     }
 
-    if (total <= this.carsPerPage * this.pageCount) {
+    if (total <= Garage.carsPerPage * this.pageCount) {
       this.nextButton.disabled = true;
     } else {
       this.nextButton.disabled = false;
