@@ -146,9 +146,13 @@ class Connector {
       : { success: false };
   };
 
-  public getWinners = async (page: number, limit: number):
-  Promise<{winners: Array<IWinner>, total: number}> => {
-    const response = await fetch(`${this.winnerURL}?_page=${page}&_limit=${limit}`);
+  public getWinners = async (
+    page: number,
+    limit: number,
+    sort: string = Connector.sortFeatures.time,
+    order: string = Connector.sortOrder.asc,
+  ): Promise<{winners: Array<IWinner>, total: number}> => {
+    const response = await fetch(`${this.winnerURL}?_page=${page}&_limit=${limit}&_sort=${sort}&order=${order}`);
 
     return {
       winners: await response.json(),

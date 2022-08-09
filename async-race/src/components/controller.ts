@@ -153,9 +153,11 @@ class Controller {
       this.winners.pageCount,
       Winners.winnersPerPage,
     ));
-    const { total: winnersTotal } = await this.state.winners;
+    const { winners, total: winnersTotal } = await this.state.winners;
     this.winners.renderWinners(this.page.main, winnersTotal);
-    // await this.winners.renderCarContainers(this.state.winners);
+    const cars: Array<Promise<ICar>> = winners.map((winner) => this.connector.getCar(winner.id));
+    const carObjects: Array<ICar> = await Promise.all(cars);
+    this.winners.renderTable(winners, carObjects);
   };
 
   private start = async (id: number): Promise<ISuccessData> => {

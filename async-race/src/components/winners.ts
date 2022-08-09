@@ -1,4 +1,6 @@
 import createElement from '../helpers/functions';
+import { ICar, IWinner } from '../helpers/interfaces';
+import Car from './car';
 
 class Winners {
   public winnersContainer: HTMLDivElement;
@@ -44,8 +46,30 @@ class Winners {
 
     this.winnersContainer.append(this.winnersTableContainer);
 
-    const navButtons: HTMLDivElement = createElement(this.winnersTableContainer, 'div', 'nav-buttons_container');
+    const navButtons: HTMLDivElement = createElement(this.winnersContainer, 'div', 'nav-buttons_container');
     navButtons.append(this.backButton, this.nextButton);
+  };
+
+  public renderTable = async (winners: Array<IWinner>, cars: Array<ICar>) => {
+    this.winnersTableContainer.innerHTML = '';
+    const winnersTable = createElement(this.winnersTableContainer, 'table', 'winners__table');
+    const tableHeader = createElement(winnersTable, 'thead', 'winners__thead');
+    createElement(tableHeader, 'th', 'winners__column_number', 'Number');
+    createElement(tableHeader, 'th', 'winners__column_car', 'Car');
+    createElement(tableHeader, 'th', 'winners__column_name', 'Name');
+    createElement(tableHeader, 'th', 'winners__column_wins', 'Wins');
+    createElement(tableHeader, 'th', 'winners__column_time', 'Time');
+    winners.forEach((winner, index) => {
+      const row = createElement(winnersTable, 'tr');
+      createElement(row, 'td', 'winners__cell winners__cell_number', `${index + (this.pageCount - 1) * Winners.winnersPerPage + 1}`);
+      const carCell = createElement(row, 'td', 'winners__cell winners__cell_car');
+      const carLogoContainer = new Car(cars[index]).renderCar(cars[index].id);
+      carLogoContainer.className = 'winners__logo_container';
+      carCell.append(carLogoContainer);
+      createElement(row, 'td', 'winners__cell winners__cell_name', `${cars[index].name}`);
+      createElement(row, 'td', 'winners__cell winners__cell_wins', `${winners[index].wins}`);
+      createElement(row, 'td', 'winners__cell winners__cell_time', `${winners[index].time}`);
+    });
   };
 }
 
