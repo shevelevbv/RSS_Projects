@@ -108,6 +108,16 @@ class Connector {
     return response.json();
   };
 
+  public stopEngine = async (id: number): Promise<ICarData> => {
+    const response: Response = await fetch(
+      `${this.engineURL}?id=${id}&status=${Connector.engineStatuses.stopped}`,
+      {
+        method: Connector.HTTPMethods.patch,
+      },
+    );
+    return response.json();
+  };
+
   public moveCar = async (id: number): Promise<{success: boolean}> => {
     const response: Response = await fetch(
       `${this.engineURL}?id=${id}&status=${Connector.engineStatuses.drive}`,

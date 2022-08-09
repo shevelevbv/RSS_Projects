@@ -84,11 +84,8 @@ class Controller {
       const id: number = Number(target.id.split('button_start_')[1]);
       this.start(id);
     } else if (target.classList.contains('button_stop')) {
-      this.carId = Number(target.id.split('button_stop_')[1]);
-      const startButton = document.getElementById(`button_start_${this.carId}`);
-      const stopButton = document.getElementById(`button_stop_${this.carId}`);
-      (startButton as HTMLButtonElement).disabled = false;
-      (stopButton as HTMLButtonElement).disabled = true;
+      const id: number = Number(target.id.split('button_stop_')[1]);
+      this.stop(id);
     }
   };
 
@@ -164,6 +161,19 @@ class Controller {
     }
 
     return { success, id, time };
+  };
+
+  private stop = async (id: number): Promise<void> => {
+    const car = document.getElementById(`car_${id}`) as HTMLElement;
+    const startButton = document.getElementById(`button_start_${id}`);
+    const stopButton = document.getElementById(`button_stop_${id}`);
+    (startButton as HTMLButtonElement).disabled = false;
+    (stopButton as HTMLButtonElement).disabled = true;
+    await this.connector.stopEngine(id);
+    car.style.transform = 'translateX(0)';
+    if (this.animationID) {
+      window.cancelAnimationFrame(this.animationID.id);
+    }
   };
 
   private static animate = (car: HTMLElement, distance: number, time: number) => {
