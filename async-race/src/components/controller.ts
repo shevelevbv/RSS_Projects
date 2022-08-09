@@ -4,7 +4,7 @@ import Garage from './garage';
 import Winners from './winners';
 import Page from './page';
 import {
-  ICar, ICarData, ICoordinates, INewCar,
+  ICar, ICarData, ICoordinates, INewCar, ISuccessData,
 } from '../helpers/interfaces';
 
 class Controller {
@@ -36,8 +36,10 @@ class Controller {
     this.page.renderHeader();
     this.page.renderMain();
     this.selectView();
-    window.onload = () => alert(`Привет, уважаемый проверяющий! 
+    /*
+    window.onload = () => alert(`Привет, уважаемый проверяющий!
 Если есть возможность, проверь, пожалуйста, в среду или в четверг`);
+*/
   };
 
   private selectView = (): void => {
@@ -65,7 +67,7 @@ class Controller {
     this.page.main.addEventListener('click', this.handleEventsOnMain);
   };
 
-  private handleEventsOnMain = (e: MouseEvent): void => {
+  private handleEventsOnMain = async (e: MouseEvent): Promise<void> => {
     const target = e.target as HTMLElement;
     if (target.classList.contains('car__button_select')) {
       this.selectCar(e);
@@ -138,7 +140,7 @@ class Controller {
     await this.garage.renderCarContainers(this.state.cars);
   };
 
-  private start = async (id: number) => {
+  private start = async (id: number): Promise<ISuccessData> => {
     const startButton = document.getElementById(`button_start_${id}`);
     const stopButton = document.getElementById(`button_stop_${id}`);
     (startButton as HTMLButtonElement).disabled = true;
@@ -202,7 +204,10 @@ class Controller {
 
   private static getPositionAtCenter = (element: HTMLElement): ICoordinates => {
     const {
-      top, left, width, height,
+      top,
+      left,
+      width,
+      height,
     } = element.getBoundingClientRect();
     return {
       x: left + width / 2,

@@ -115,6 +115,7 @@ class Garage {
     startEngineButton.id = `button_start_${carObject.id}`;
     const stopEngineButton: HTMLButtonElement = createElement(raceTrackContainer, 'button', 'button button_engine button_stop', 'B');
     stopEngineButton.id = `button_stop_${carObject.id}`;
+    stopEngineButton.disabled = true;
     const raceTrack: HTMLDivElement = createElement(raceTrackContainer, 'div', 'car__track');
     raceTrack.append(new Car(carObject).renderCar(carObject.id));
     const flagContainer: HTMLDivElement = createElement(raceTrack, 'div', 'flag__icon_container');

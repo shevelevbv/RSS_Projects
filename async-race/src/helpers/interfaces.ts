@@ -18,3 +18,9 @@ export interface ICoordinates {
   x: number;
   y: number;
 }
+
+export interface ISuccessData {
+  success: boolean;
+  id: number;
+  time: number;
+}
