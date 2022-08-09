@@ -1,6 +1,7 @@
 import {
   ICar, INewCar, ICarData, IWinner,
 } from '../helpers/interfaces';
+import carModels from './car-models';
 
 class Connector {
   private serverURL: string;
@@ -10,10 +11,6 @@ class Connector {
   private engineURL: string;
 
   private winnerURL: string;
-
-  private models: Array<string>;
-
-  private makes: Array<string>;
 
   private static readonly numCarsToGenerate = 100;
 
@@ -42,7 +39,7 @@ class Connector {
     desc: 'DESC',
   };
 
-  private static contentTypes = {
+  private static readonly contentTypes = {
     applicationJson: 'application/json',
   };
 
@@ -53,8 +50,6 @@ class Connector {
     this.garageURL = `${this.serverURL}garage`;
     this.engineURL = `${this.serverURL}engine`;
     this.winnerURL = `${this.serverURL}winners`;
-    this.models = ['Volvo', 'Chevrolet', 'Jaguar', 'Peugeot', 'Renault', 'Mustang', 'Fiat', 'Kia', 'Volkswagen', 'Nissan'];
-    this.makes = ['Rio', 'F', 'Logan', 'Passat', 'Lacetti', 'XC60', 'GT', 'Panda', 'Beetle', '308'];
   }
 
   public getCars = async (page: number, limit: number):
@@ -90,7 +85,7 @@ class Connector {
 
   public updateCar = async (id: number, car: INewCar): Promise<void> => {
     await fetch(`${this.garageURL}/${id}`, {
-      method: 'PUT',
+      method: Connector.HTTPMethods.put,
       body: JSON.stringify(car),
       headers: {
         'Content-Type': Connector.contentTypes.applicationJson,
@@ -98,24 +93,9 @@ class Connector {
     });
   };
 
-  private makeCars = (): Array<INewCar> => {
-    const cars: Array<INewCar> = [];
-    for (let i: number = 0; i < Connector.numCarsToGenerate; i += 1) {
-      const model: string = this.models[Math.floor(Math.random() * this.models.length)];
-      const make: string = this.makes[Math.floor(Math.random() * this.makes.length)];
-      const hexDigits: string = '0123456789ABCDEF';
-      let newColor: string = '#';
-      const hexColorLength: number = 6;
-      for (let j: number = 0; j < hexColorLength; j += 1) {
-        newColor += hexDigits[Math.floor(Math.random() * hexDigits.length)];
-      }
-      cars.push({ name: `${model} ${make}`, color: newColor });
-    }
-    return cars;
-  };
-
   public generateCars = async (): Promise<void> => {
-    Promise.all(this.makeCars().map(async (car: INewCar): Promise<void> => this.createCar(car)));
+    await Promise.all(Connector.makeCars()
+      .map(async (car: INewCar): Promise<void> => this.createCar(car)));
   };
 
   public startEngine = async (id: number): Promise<ICarData> => {
@@ -156,12 +136,17 @@ class Connector {
     sort: string = Connector.sortFeatures.time,
     order: string = Connector.sortOrder.asc,
   ): Promise<{winners: Array<IWinner>, total: number}> => {
-    const response = await fetch(`${this.winnerURL}?_page=${page}&_limit=${limit}&_sort=${sort}&order=${order}`);
+    const response: Response = await fetch(`${this.winnerURL}?_page=${page}&_limit=${limit}&_sort=${sort}&order=${order}`);
 
     return {
       winners: await response.json(),
       total: Number(response.headers.get('X-Total-Count')),
     };
+  };
+
+  public getWinner = async (id: number): Promise<IWinner> => {
+    const response = await fetch(`${this.winnerURL}/${id}`);
+    return response.json();
   };
 
   public createWinner = async (car: IWinner): Promise<void> => {
@@ -172,6 +157,38 @@ class Connector {
         'Content-Type': Connector.contentTypes.applicationJson,
       },
     });
+  };
+
+  public removeWinner = async (id: number): Promise<void> => {
+    await fetch(`${this.winnerURL}/${id}`, {
+      method: Connector.HTTPMethods.delete,
+    });
+  };
+
+  public updateWinner = async (id: number, winner: IWinner): Promise<void> => {
+    await fetch(`${this.winnerURL}/${id}`, {
+      method: Connector.HTTPMethods.put,
+      body: JSON.stringify(winner),
+      headers: {
+        'Content-Type': Connector.contentTypes.applicationJson,
+      },
+    });
+  };
+
+  private static makeCars = (): Array<INewCar> => {
+    const cars: Array<INewCar> = [];
+    for (let i: number = 0; i < Connector.numCarsToGenerate; i += 1) {
+      const model: string = carModels.models[Math.floor(Math.random() * carModels.models.length)];
+      const make: string = carModels.makes[Math.floor(Math.random() * carModels.makes.length)];
+      const hexDigits: string = '0123456789ABCDEF';
+      let newColor: string = '#';
+      const hexColorLength: number = 6;
+      for (let j: number = 0; j < hexColorLength; j += 1) {
+        newColor += hexDigits[Math.floor(Math.random() * hexDigits.length)];
+      }
+      cars.push({ name: `${model} ${make}`, color: newColor });
+    }
+    return cars;
   };
 }
 
