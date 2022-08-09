@@ -42,6 +42,10 @@ class Connector {
     desc: 'DESC',
   };
 
+  private static contentTypes = {
+    applicationJson: 'application/json',
+  };
+
   private static readonly statusSuccess = 200;
 
   constructor() {
@@ -73,7 +77,7 @@ class Connector {
       method: Connector.HTTPMethods.post,
       body: JSON.stringify(car),
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': Connector.contentTypes.applicationJson,
       },
     });
   };
@@ -89,7 +93,7 @@ class Connector {
       method: 'PUT',
       body: JSON.stringify(car),
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': Connector.contentTypes.applicationJson,
       },
     });
   };
@@ -158,6 +162,16 @@ class Connector {
       winners: await response.json(),
       total: Number(response.headers.get('X-Total-Count')),
     };
+  };
+
+  public createWinner = async (car: IWinner): Promise<void> => {
+    await fetch(this.winnerURL, {
+      method: Connector.HTTPMethods.post,
+      body: JSON.stringify(car),
+      headers: {
+        'Content-Type': Connector.contentTypes.applicationJson,
+      },
+    });
   };
 }
 

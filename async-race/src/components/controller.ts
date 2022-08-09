@@ -174,7 +174,8 @@ class Controller {
     const car = document.getElementById(`car_${id}`) as HTMLElement;
     const flag = document.getElementById(`flag_${id}`) as HTMLElement;
 
-    const distance: number = Controller.getDistanceBetweenElements(car, flag);
+    const distance: number = Controller.getDistanceBetweenElements(car, flag)
+                              + Number(flag.style.width);
     this.animationID = Controller.animateCar(car, distance, time);
 
     const { success } = await this.connector.moveCar(id);
@@ -189,13 +190,13 @@ class Controller {
     const car = document.getElementById(`car_${id}`) as HTMLElement;
     const startButton = document.getElementById(`button_start_${id}`) as HTMLButtonElement;
     const stopButton = document.getElementById(`button_stop_${id}`) as HTMLButtonElement;
-    startButton.disabled = false;
     stopButton.disabled = true;
     await this.connector.stopEngine(id);
     car.style.transform = 'translateX(0)';
     if (this.animationID) {
       window.cancelAnimationFrame(this.animationID.id);
     }
+    startButton.disabled = false;
   };
 
   private static animateCar = (car: HTMLElement, distance: number, time: number) => {
