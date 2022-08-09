@@ -25,7 +25,7 @@ class Winners {
     this.winnersContainer.innerHTML = '';
     main.append(this.winnersContainer);
 
-    createElement(this.winnersContainer, 'h2', 'title__total', `Garage (${total})`);
+    createElement(this.winnersContainer, 'h2', 'title__total', `Winners (${total})`);
     createElement(this.winnersContainer, 'h3', 'title__page', `Page #${this.pageCount}`);
 
     const isFirstPage = this.pageCount === 1;

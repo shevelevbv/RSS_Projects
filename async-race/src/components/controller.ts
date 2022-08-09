@@ -46,22 +46,27 @@ class Controller {
     this.page.toGarageButton.addEventListener('click', this.showGarage);
     this.page.toWinnersButton.addEventListener('click', this.showWinners);
     this.addListeners();
-    this.operate();
+    this.initPage();
   };
 
-  private operate = (): void => {
+  private initPage = (): void => {
     this.renderUpdatedCars();
     this.renderUpdatedWinners();
+    this.winners.winnersContainer.style.display = 'none';
   };
 
   private showGarage = (): void => {
     this.garage.garageContainer.style.display = 'block';
     this.winners.winnersContainer.style.display = 'none';
+    this.page.toGarageButton.disabled = true;
+    this.page.toWinnersButton.disabled = false;
   };
 
   private showWinners = (): void => {
     this.garage.garageContainer.style.display = 'none';
     this.winners.winnersContainer.style.display = 'block';
+    this.page.toGarageButton.disabled = false;
+    this.page.toWinnersButton.disabled = true;
   };
 
   private addListeners = (): void => {

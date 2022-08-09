@@ -16,6 +16,7 @@ class Page {
   public renderHeader = (): void => {
     const header = createElement(document.body, 'header', 'header');
     header.append(this.toGarageButton, this.toWinnersButton);
+    this.toGarageButton.disabled = true;
   };
 
   public renderMain = (): void => {
