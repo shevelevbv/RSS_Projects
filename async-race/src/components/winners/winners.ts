@@ -64,7 +64,7 @@ class Winners {
       const row = createElement(winnersTable, 'tr');
       createElement(row, 'td', 'winners__cell winners__cell_number', `${index + (this.pageCount - 1) * Winners.winnersPerPage + 1}`);
       const carCell = createElement(row, 'td', 'winners__cell winners__cell_car');
-      const carLogoContainer = new Car(cars[index]).renderCar(cars[index].id);
+      const carLogoContainer = new Car(cars[index]).renderCar(false);
       carLogoContainer.className = 'winners__logo_container';
       carCell.append(carLogoContainer);
       createElement(row, 'td', 'winners__cell winners__cell_name', `${cars[index].name}`);
