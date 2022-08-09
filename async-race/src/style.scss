@@ -39,18 +39,18 @@ body {
 
   &__inner-layer {
     position: absolute;
-    top: 30px;
+    top: 18px;
     left: 0;
     right: 0;
-    height: 40px;
-    background-color: black;
-    border-radius: 20px;
+    height: 28px;
+    background-color: rgb(101, 98, 98);
+    border-radius: 15px;
     z-index: 0;
   }
 
   &__icon {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     stroke: white;
     position: relative;
     stroke-width: 5rem;
@@ -79,8 +79,8 @@ body {
 
   &__icon_container {
     
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     background-color: black;
     position: absolute;
     display: flex;

@@ -1,4 +1,6 @@
-import { ICar, INewCar, ICarData } from '../helpers/interfaces';
+import {
+  ICar, INewCar, ICarData, IWinner,
+} from '../helpers/interfaces';
 
 class Connector {
   private serverURL: string;
@@ -6,6 +8,8 @@ class Connector {
   private garageURL: string;
 
   private engineURL: string;
+
+  private winnerURL: string;
 
   private models: Array<string>;
 
@@ -27,12 +31,24 @@ class Connector {
     delete: 'DELETE',
   };
 
+  private static readonly sortFeatures = {
+    id: 'id',
+    wins: 'wins',
+    time: 'time',
+  };
+
+  private static readonly sortOrder = {
+    asc: 'ASC',
+    desc: 'DESC',
+  };
+
   private static readonly statusSuccess = 200;
 
   constructor() {
     this.serverURL = 'http://127.0.0.1:3000/';
     this.garageURL = `${this.serverURL}garage`;
     this.engineURL = `${this.serverURL}engine`;
+    this.winnerURL = `${this.serverURL}winners`;
     this.models = ['Volvo', 'Chevrolet', 'Jaguar', 'Peugeot', 'Renault', 'Mustang', 'Fiat', 'Kia', 'Volkswagen', 'Nissan'];
     this.makes = ['Rio', 'F', 'Logan', 'Passat', 'Lacetti', 'XC60', 'GT', 'Panda', 'Beetle', '308'];
   }
@@ -128,6 +144,16 @@ class Connector {
       .catch();
     return response.status === Connector.statusSuccess ? response.json()
       : { success: false };
+  };
+
+  public getWinners = async (page: number, limit: number):
+  Promise<{winners: Array<IWinner>, total: number}> => {
+    const response = await fetch(`${this.winnerURL}?_page=${page}&_limit=${limit}`);
+
+    return {
+      winners: await response.json(),
+      total: Number(response.headers.get('X-Total-Count')),
+    };
   };
 }
 

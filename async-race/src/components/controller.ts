@@ -26,7 +26,11 @@ class Controller {
     this.page = new Page();
     this.connector = new Connector();
     this.garage = new Garage();
-    this.state = new State(this.connector.getCars(this.garage.pageCount, Garage.carsPerPage));
+    this.winners = new Winners();
+    this.state = new State(
+      this.connector.getCars(this.garage.pageCount, Garage.carsPerPage),
+      this.connector.getWinners(this.winners.pageCount, Winners.winnersPerPage),
+    );
     this.winners = new Winners();
     this.carId = 0;
     this.animationID = { id: 0 };
@@ -36,29 +40,28 @@ class Controller {
     this.page.renderHeader();
     this.page.renderMain();
     this.selectView();
-    /*
-    window.onload = () => alert(`Привет, уважаемый проверяющий!
-Если есть возможность, проверь, пожалуйста, в среду или в четверг`);
-*/
   };
 
   private selectView = (): void => {
     this.page.toGarageButton.addEventListener('click', this.showGarage);
     this.page.toWinnersButton.addEventListener('click', this.showWinners);
     this.addListeners();
-    this.operateInGarage();
+    this.operate();
   };
 
-  private operateInGarage = (): void => {
+  private operate = (): void => {
     this.renderUpdatedCars();
+    this.renderUpdatedWinners();
   };
 
   private showGarage = (): void => {
     this.garage.garageContainer.style.display = 'block';
+    this.winners.winnersContainer.style.display = 'none';
   };
 
   private showWinners = (): void => {
     this.garage.garageContainer.style.display = 'none';
+    this.winners.winnersContainer.style.display = 'block';
   };
 
   private addListeners = (): void => {
@@ -131,7 +134,7 @@ class Controller {
   };
 
   private renderUpdatedCars = async (): Promise<void> => {
-    await this.state.updateState(this.connector.getCars(
+    await this.state.updateStateCars(this.connector.getCars(
       this.garage.pageCount,
       Garage.carsPerPage,
     ));
@@ -140,11 +143,21 @@ class Controller {
     await this.garage.renderCarContainers(this.state.cars);
   };
 
+  private renderUpdatedWinners = async (): Promise<void> => {
+    await this.state.updateStateWinners(this.connector.getWinners(
+      this.winners.pageCount,
+      Winners.winnersPerPage,
+    ));
+    const { total: winnersTotal } = await this.state.winners;
+    this.winners.renderWinners(this.page.main, winnersTotal);
+    // await this.winners.renderCarContainers(this.state.winners);
+  };
+
   private start = async (id: number): Promise<ISuccessData> => {
-    const startButton = document.getElementById(`button_start_${id}`);
-    const stopButton = document.getElementById(`button_stop_${id}`);
-    (startButton as HTMLButtonElement).disabled = true;
-    (stopButton as HTMLButtonElement).disabled = false;
+    const startButton = document.getElementById(`button_start_${id}`) as HTMLButtonElement;
+    const stopButton = document.getElementById(`button_stop_${id}`) as HTMLButtonElement;
+    startButton.disabled = true;
+    stopButton.disabled = false;
 
     const { velocity: carVelocity, distance: carDistance }:
     ICarData = await this.connector.startEngine(id);
@@ -155,7 +168,7 @@ class Controller {
     const flag = document.getElementById(`flag_${id}`) as HTMLElement;
 
     const distance: number = Controller.getDistanceBetweenElements(car, flag);
-    this.animationID = Controller.animate(car, distance, time);
+    this.animationID = Controller.animateCar(car, distance, time);
 
     const { success } = await this.connector.moveCar(id);
     if (!success) {
@@ -167,10 +180,10 @@ class Controller {
 
   private stop = async (id: number): Promise<void> => {
     const car = document.getElementById(`car_${id}`) as HTMLElement;
-    const startButton = document.getElementById(`button_start_${id}`);
-    const stopButton = document.getElementById(`button_stop_${id}`);
-    (startButton as HTMLButtonElement).disabled = false;
-    (stopButton as HTMLButtonElement).disabled = true;
+    const startButton = document.getElementById(`button_start_${id}`) as HTMLButtonElement;
+    const stopButton = document.getElementById(`button_stop_${id}`) as HTMLButtonElement;
+    startButton.disabled = false;
+    stopButton.disabled = true;
     await this.connector.stopEngine(id);
     car.style.transform = 'translateX(0)';
     if (this.animationID) {
@@ -178,7 +191,7 @@ class Controller {
     }
   };
 
-  private static animate = (car: HTMLElement, distance: number, time: number) => {
+  private static animateCar = (car: HTMLElement, distance: number, time: number) => {
     const currentCar = car;
     let startTime = 0;
     const state: { id: number } = { id: 0 };

@@ -24,3 +24,9 @@ export interface ISuccessData {
   id: number;
   time: number;
 }
+
+export interface IWinner {
+  id: number;
+  wins: number;
+  time: number;
+}
