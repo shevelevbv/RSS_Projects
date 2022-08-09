@@ -1,7 +1,7 @@
 import Connector from './connector';
 import State from './state';
 import Garage from './garage';
-import Winners from './winners';
+import Winners from './winners/winners';
 import Page from './page';
 import {
   ICar, ICarData, ICoordinates, INewCar, ISuccessData,

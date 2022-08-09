@@ -1,6 +1,7 @@
-import createElement from '../helpers/functions';
-import { ICar, IWinner } from '../helpers/interfaces';
-import Car from './car';
+import './winners.scss';
+import createElement from '../../helpers/functions';
+import { ICar, IWinner } from '../../helpers/interfaces';
+import Car from '../car';
 
 class Winners {
   public winnersContainer: HTMLDivElement;
@@ -50,7 +51,7 @@ class Winners {
     navButtons.append(this.backButton, this.nextButton);
   };
 
-  public renderTable = async (winners: Array<IWinner>, cars: Array<ICar>) => {
+  public renderTable = async (winners: Array<IWinner>, cars: Array<ICar>): Promise<void> => {
     this.winnersTableContainer.innerHTML = '';
     const winnersTable = createElement(this.winnersTableContainer, 'table', 'winners__table');
     const tableHeader = createElement(winnersTable, 'thead', 'winners__thead');
@@ -67,8 +68,8 @@ class Winners {
       carLogoContainer.className = 'winners__logo_container';
       carCell.append(carLogoContainer);
       createElement(row, 'td', 'winners__cell winners__cell_name', `${cars[index].name}`);
-      createElement(row, 'td', 'winners__cell winners__cell_wins', `${winners[index].wins}`);
-      createElement(row, 'td', 'winners__cell winners__cell_time', `${winners[index].time}`);
+      createElement(row, 'td', 'winners__cell winners__cell_wins', `${winner.wins}`);
+      createElement(row, 'td', 'winners__cell winners__cell_time', `${winner.time}`);
     });
   };
 }

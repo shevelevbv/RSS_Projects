@@ -1,0 +1,36 @@
+.winners {
+
+  &__table {
+    color: white;
+    width: 400px;
+  }
+
+  &__table > thead {
+    width: 100%;
+  }
+
+  &__column_number {
+    width: 10px;
+  }
+
+  &__cell {
+    text-align: center;
+  }
+
+  &__logo_container {
+    margin: 0 auto;
+    padding: 0;
+    width: 50px;
+  }
+
+  &__logo_container > .car__icon {
+    position: static;
+    width: 50px;
+    height: 50px;
+  }
+
+  &__logo_container > .car__inner-layer {
+    display: none;
+  }
+
+}
