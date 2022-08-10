@@ -6,6 +6,20 @@
   justify-content: space-between;
 }
 
+.create-tools_container,
+.update-tools_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0;
+}
+
+.action_button_container {
+  display: flex;
+  gap: 5px;
+}
+
 .container {
   margin-top: 10px;
   background-color: black;
@@ -16,6 +30,11 @@
   &__objects_container {
     width: 100%;
     margin: 10px 0;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 5px;
   }
 
   &__icon_container {

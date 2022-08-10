@@ -7,6 +7,8 @@ body {
 
   outline: none;
   border: none;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
 
   &_start.disabled,
   &_stop.disabled {

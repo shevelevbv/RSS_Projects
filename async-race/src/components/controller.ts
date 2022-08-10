@@ -95,7 +95,7 @@ class Controller {
       const id: number = Number(target.id.split('button_stop_')[1]);
       this.stop(id);
     } else if (target.classList.contains('button_race')) {
-      this.handleRaceButton();
+      await this.handleRaceButton();
     } else if (target.classList.contains('button_reset')) {
       this.reset();
     } else if (target.classList.contains('button_next_winners')) {
