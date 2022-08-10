@@ -94,9 +94,14 @@ class Controller {
       this.stop(id);
     } else if (target.classList.contains('button_race')) {
       this.garage.raceButton.disabled = true;
-      this.race();
-      const announcement = document.getElementById(`announcement_${1}`) as HTMLElement;
+      const winner: INewWinner = await this.race();
+      await this.connector.saveWinner(winner);
+      const announcement = document.getElementById(`announcement_${winner.id}`) as HTMLElement;
+      announcement.textContent = `${(await this.connector.getCar(winner.id)).name} won in ${winner.time}s!`;
       announcement.style.display = 'block';
+      this.garage.resetButton.disabled = false;
+    } else if (target.classList.contains('button_reset')) {
+      this.reset();
     }
   };
 
@@ -230,6 +235,7 @@ class Controller {
       const restPromises = [...promises.slice(0, failedIndex),
         ...promises.slice(failedIndex + 1, promises.length)];
       const restIds = [...ids.slice(0, failedIndex), ...ids.slice(failedIndex + 1, ids.length)];
+
       return this.raceAll(restPromises, restIds);
     }
 
@@ -239,6 +245,17 @@ class Controller {
     };
 
     return newWinner;
+  };
+
+  private reset = async (): Promise<void> => {
+    this.garage.resetButton.disabled = true;
+    (await this.state.cars).cars.forEach((car: ICar) => this.stop(car.id));
+    const announcements: Array<HTMLTitleElement> = Array.from(document.querySelectorAll('.title__winner'));
+    announcements.forEach((announcement: HTMLTitleElement) => {
+      const element = announcement;
+      element.style.display = 'none';
+    });
+    this.garage.raceButton.disabled = false;
   };
 
   private static animateCar = (car: HTMLElement, distance: number, time: number) => {

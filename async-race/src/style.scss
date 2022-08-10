@@ -38,6 +38,10 @@ body {
 
 .car {
 
+  &__objects_container {
+    margin: 10px 0;
+  }
+
   &__icon_container {
     display: inline-block;
     height: 20px;
