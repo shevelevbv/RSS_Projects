@@ -59,6 +59,7 @@ class Controller {
   };
 
   private showWinners = (): void => {
+    this.renderUpdatedWinners();
     this.garage.garageContainer.style.display = 'none';
     this.winners.winnersContainer.style.display = 'block';
     this.page.toGarageButton.disabled = false;
@@ -252,7 +253,7 @@ class Controller {
     (await this.state.cars).cars.forEach((car: ICar) => this.stop(car.id));
     const announcements: Array<HTMLTitleElement> = Array.from(document.querySelectorAll('.title__winner'));
     announcements.forEach((announcement: HTMLTitleElement) => {
-      const element = announcement;
+      const element: HTMLTitleElement = announcement;
       element.style.display = 'none';
     });
     this.garage.raceButton.disabled = false;
