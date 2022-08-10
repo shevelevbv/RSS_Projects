@@ -28,17 +28,6 @@ class Connector {
     delete: 'DELETE',
   };
 
-  private static readonly sortFeatures = {
-    id: 'id',
-    wins: 'wins',
-    time: 'time',
-  };
-
-  private static readonly sortOrder = {
-    asc: 'ASC',
-    desc: 'DESC',
-  };
-
   private static readonly contentTypes = {
     applicationJson: 'application/json',
   };
@@ -136,10 +125,10 @@ class Connector {
   public getWinners = async (
     page: number,
     limit: number,
-    sort: string = Connector.sortFeatures.time,
-    order: string = Connector.sortOrder.asc,
+    sort: string = 'time',
+    order: string = 'asc',
   ): Promise<{winners: Array<IWinner>, total: number}> => {
-    const response: Response = await fetch(`${this.winnerURL}?_page=${page}&_limit=${limit}&_sort=${sort}&order=${order}`);
+    const response: Response = await fetch(`${this.winnerURL}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
 
     return {
       winners: await response.json(),

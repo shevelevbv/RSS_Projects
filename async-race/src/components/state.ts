@@ -5,12 +5,18 @@ class State {
 
   public winners: Promise<{winners: Array<IWinner>, total: number}>;
 
+  public sortBy: string;
+
+  public sortOrder: string;
+
   constructor(
     cars: Promise<{cars: Array<ICar>, total: number}>,
     winners: Promise<{winners: Array<IWinner>, total: number}>,
   ) {
     this.cars = cars;
     this.winners = winners;
+    this.sortBy = 'time';
+    this.sortOrder = 'asc';
   }
 
   public updateStateCars = async (

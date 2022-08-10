@@ -12,6 +12,10 @@ class Winners {
 
   public nextButton: HTMLButtonElement;
 
+  public winsSortButton: HTMLButtonElement;
+
+  public timeSortButton: HTMLButtonElement;
+
   public pageCount: number;
 
   public static readonly winnersPerPage = 10;
@@ -21,6 +25,8 @@ class Winners {
     this.winnersTableContainer = createElement(null, 'div', 'winners__table_container');
     this.backButton = createElement(null, 'button', 'button button_back_winners', 'BACK');
     this.nextButton = createElement(null, 'button', 'button button_next_winners', 'NEXT');
+    this.winsSortButton = createElement(null, 'button', 'button button_wins', 'Wins');
+    this.timeSortButton = createElement(null, 'button', 'button button_time', 'Time↑');
     this.pageCount = 1;
   }
 
@@ -59,9 +65,9 @@ class Winners {
     createElement(tableHeader, 'th', 'winners__column_car', 'Car');
     createElement(tableHeader, 'th', 'winners__column_name', 'Name');
     const wins = createElement(tableHeader, 'th', 'winners__column_wins');
-    createElement(wins, 'button', 'button button_wins', 'Wins');
+    wins.append(this.winsSortButton);
     const time = createElement(tableHeader, 'th', 'winners__column_time');
-    createElement(time, 'button', 'button_time', 'Time');
+    time.append(this.timeSortButton);
     winners.forEach((winner, index) => {
       const row = createElement(winnersTable, 'tr');
       createElement(row, 'td', 'winners__cell winners__cell_number', `${index + (this.pageCount - 1) * Winners.winnersPerPage + 1}`);

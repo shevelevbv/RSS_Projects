@@ -104,6 +104,10 @@ class Controller {
     } else if (target.classList.contains('button_back_winners')) {
       this.winners.pageCount -= 1;
       this.renderUpdatedWinners();
+    } else if (target.classList.contains('button_wins')) {
+      this.sortBy('wins', target);
+    } else if (target.classList.contains('button_time')) {
+      this.sortBy('time', target);
     }
   };
 
@@ -160,6 +164,8 @@ class Controller {
     await this.state.updateStateWinners(this.connector.getWinners(
       this.winners.pageCount,
       Winners.winnersPerPage,
+      this.state.sortBy,
+      this.state.sortOrder,
     ));
     const { winners, total: winnersTotal } = await this.state.winners;
     this.winners.renderWinners(this.page.main, winnersTotal);
@@ -205,13 +211,6 @@ class Controller {
       window.cancelAnimationFrame(this.animationID.id);
     }
     startButton.disabled = false;
-  };
-
-  private startRace = async () => {
-    this.garage.raceButton.disabled = true;
-    const winner = await this.race();
-    await this.connector.saveWinner(winner);
-    this.garage.resetButton.disabled = false;
   };
 
   private handleRaceButton = async (): Promise<void> => {
@@ -268,6 +267,16 @@ class Controller {
       element.style.display = 'none';
     });
     this.garage.raceButton.disabled = false;
+  };
+
+  private sortBy = async (sortBy: string, target: HTMLElement) => {
+    const element = target;
+    this.winners.winsSortButton.textContent = 'Wins';
+    this.winners.timeSortButton.textContent = 'Time';
+    this.state.sortOrder = this.state.sortOrder === 'asc' ? 'desc' : 'asc';
+    this.state.sortBy = sortBy;
+    element.textContent += this.state.sortOrder === 'asc' ? '↑' : '↓';
+    await this.renderUpdatedWinners();
   };
 
   private static animateCar = (car: HTMLElement, distance: number, time: number) => {
