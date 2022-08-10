@@ -1,5 +1,5 @@
 import {
-  ICar, INewCar, ICarData, IWinner,
+  ICar, INewCar, ICarData, IWinner, INewWinner,
 } from '../helpers/interfaces';
 import carModels from './car-models';
 
@@ -43,7 +43,10 @@ class Connector {
     applicationJson: 'application/json',
   };
 
-  private static readonly statusSuccess = 200;
+  private static readonly statuses = {
+    success: 200,
+    notFound: 404,
+  };
 
   constructor() {
     this.serverURL = 'http://127.0.0.1:3000/';
@@ -126,7 +129,7 @@ class Connector {
       },
     )
       .catch();
-    return response.status === Connector.statusSuccess ? response.json()
+    return response.status === Connector.statuses.success ? response.json()
       : { success: false };
   };
 
@@ -189,6 +192,21 @@ class Connector {
       cars.push({ name: `${model} ${make}`, color: newColor });
     }
     return cars;
+  };
+
+  public saveWinner = async ({ id, time }: INewWinner): Promise<void> => {
+    const response: Response = await fetch(`${this.winnerURL}/${id}`);
+
+    if (response.status === Connector.statuses.notFound) {
+      await this.createWinner({ id, wins: 1, time });
+    } else {
+      const winner = await this.getWinner(id);
+      await this.updateWinner(id, {
+        id,
+        wins: winner.wins + 1,
+        time: time < winner.time ? time : winner.time,
+      });
+    }
   };
 }
 

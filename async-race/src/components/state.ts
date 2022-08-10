@@ -13,13 +13,15 @@ class State {
     this.winners = winners;
   }
 
-  public updateStateCars = async (cars: Promise<{cars: Array<ICar>, total: number}>) => {
+  public updateStateCars = async (
+    cars: Promise<{cars: Array<ICar>, total: number}>,
+  ): Promise<void> => {
     await (this.cars = cars);
   };
 
   public updateStateWinners = async (
     winners: Promise<{winners: Array<IWinner>, total: number}>,
-  ) => {
+  ): Promise<void> => {
     await (this.winners = winners);
   };
 }

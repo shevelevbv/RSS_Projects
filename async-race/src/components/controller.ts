@@ -4,7 +4,7 @@ import Garage from './garage';
 import Winners from './winners/winners';
 import Page from './page';
 import {
-  ICar, ICarData, ICoordinates, INewCar, ISuccessData,
+  ICar, ICarData, ICoordinates, INewCar, INewWinner, ISuccessData,
 } from '../helpers/interfaces';
 
 class Controller {
@@ -22,16 +22,12 @@ class Controller {
 
   private animationID: {id: number};
 
-  constructor() {
-    this.page = new Page();
-    this.connector = new Connector();
-    this.garage = new Garage();
-    this.winners = new Winners();
-    this.state = new State(
-      this.connector.getCars(this.garage.pageCount, Garage.carsPerPage),
-      this.connector.getWinners(this.winners.pageCount, Winners.winnersPerPage),
-    );
-    this.winners = new Winners();
+  constructor(page: Page, connector: Connector, garage: Garage, winners: Winners, state: State) {
+    this.page = page;
+    this.connector = connector;
+    this.garage = garage;
+    this.winners = winners;
+    this.state = state;
     this.carId = 0;
     this.animationID = { id: 0 };
   }
@@ -96,6 +92,11 @@ class Controller {
     } else if (target.classList.contains('button_stop')) {
       const id: number = Number(target.id.split('button_stop_')[1]);
       this.stop(id);
+    } else if (target.classList.contains('button_race')) {
+      this.garage.raceButton.disabled = true;
+      this.race();
+      const announcement = document.getElementById(`announcement_${1}`) as HTMLElement;
+      announcement.style.display = 'block';
     }
   };
 
@@ -197,6 +198,47 @@ class Controller {
       window.cancelAnimationFrame(this.animationID.id);
     }
     startButton.disabled = false;
+  };
+
+  private startRace = async () => {
+    this.garage.raceButton.disabled = true;
+    const winner = await this.race();
+    await this.connector.saveWinner(winner);
+    this.garage.resetButton.disabled = false;
+  };
+
+  private race = async (): Promise<INewWinner> => {
+    const promises: Array<Promise<ISuccessData>> = (await this.state.cars).cars
+      .map((car: ICar) => this.start(car.id));
+
+    const winner: Promise<INewWinner> = this.raceAll(
+      promises,
+      (await this.state.cars).cars.map((car: ICar) => car.id),
+    );
+
+    return winner;
+  };
+
+  private raceAll = async (
+    promises: Array<Promise<ISuccessData>>,
+    ids: Array<number>,
+  ): Promise<INewWinner> => {
+    const { success, id, time } = await Promise.race(promises);
+
+    if (!success) {
+      const failedIndex = ids.findIndex((index: number) => index === id);
+      const restPromises = [...promises.slice(0, failedIndex),
+        ...promises.slice(failedIndex + 1, promises.length)];
+      const restIds = [...ids.slice(0, failedIndex), ...ids.slice(failedIndex + 1, ids.length)];
+      return this.raceAll(restPromises, restIds);
+    }
+
+    const newWinner: INewWinner = {
+      id: ((await this.state.cars).cars.find((car: ICar) => car.id === id) as ICar).id,
+      time: Number((time / 1000).toFixed(2)),
+    };
+
+    return newWinner;
   };
 
   private static animateCar = (car: HTMLElement, distance: number, time: number) => {

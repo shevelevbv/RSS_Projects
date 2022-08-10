@@ -43,7 +43,7 @@ class Garage {
     this.updateCarColorInput = createElement(null, 'input', 'input__color');
     this.carControlsContainer = createElement(null, 'div', 'car__objects_container');
     this.updateCarButton = createElement(null, 'button', 'button', 'UPDATE');
-    this.raceButton = createElement(null, 'button', 'button', 'RACE');
+    this.raceButton = createElement(null, 'button', 'button button_race', 'RACE');
     this.resetButton = createElement(null, 'button', 'button', 'RESET');
     this.generateButton = createElement(null, 'button', 'button button_generate', 'GENERATE CARS');
     this.backButton = createElement(null, 'button', 'button button_back', 'BACK');
@@ -72,6 +72,8 @@ class Garage {
     createElement(this.garageContainer, 'h3', 'title__page', `Page #${this.pageCount}`);
 
     const actionButtonContainer: HTMLDivElement = createElement(this.garageContainer, 'div', 'action_button_container');
+
+    this.resetButton.disabled = true;
 
     actionButtonContainer.append(this.raceButton, this.resetButton, this.generateButton);
 
@@ -118,6 +120,8 @@ class Garage {
     stopEngineButton.disabled = true;
     const raceTrack: HTMLDivElement = createElement(raceTrackContainer, 'div', 'car__track');
     raceTrack.append(new Car(carObject).renderCar());
+    const announcement = createElement(raceTrack, 'h3', 'title__winner', 'Hey');
+    announcement.id = `announcement_${carObject.id}`;
     const flagContainer: HTMLDivElement = createElement(raceTrack, 'div', 'flag__icon_container');
     flagContainer.id = `flag_${carObject.id}`;
     const flagLogo: HTMLImageElement = createElement(flagContainer, 'img', 'flag__icon');

@@ -21,6 +21,14 @@ body {
   &__page {
     color: white;
   }
+
+  &__winner {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    color: gold;
+    display: none;
+  }
 }
 
 .container {

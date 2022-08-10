@@ -30,3 +30,8 @@ export interface IWinner {
   wins: number;
   time: number;
 }
+
+export interface INewWinner {
+  id: number;
+  time: number;
+}
