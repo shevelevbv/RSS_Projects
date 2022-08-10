@@ -78,10 +78,11 @@ class Controller {
       this.selectCar(e);
     } else if (target.classList.contains('car__button_remove')) {
       this.removeCar(e);
-    } else if (target.classList.contains('button_next')) {
+    } else if (target.classList.contains('button_next_garage')) {
       this.garage.pageCount += 1;
       this.renderUpdatedCars();
-    } else if (target.classList.contains('button_back')) {
+      this.garage.raceButton.disabled = false;
+    } else if (target.classList.contains('button_back_garage')) {
       this.garage.pageCount -= 1;
       this.renderUpdatedCars();
     } else if (target.classList.contains('button_generate')) {
@@ -94,15 +95,15 @@ class Controller {
       const id: number = Number(target.id.split('button_stop_')[1]);
       this.stop(id);
     } else if (target.classList.contains('button_race')) {
-      this.garage.raceButton.disabled = true;
-      const winner: INewWinner = await this.race();
-      await this.connector.saveWinner(winner);
-      const announcement = document.getElementById(`announcement_${winner.id}`) as HTMLElement;
-      announcement.textContent = `${(await this.connector.getCar(winner.id)).name} won in ${winner.time}s!`;
-      announcement.style.display = 'block';
-      this.garage.resetButton.disabled = false;
+      this.handleRaceButton();
     } else if (target.classList.contains('button_reset')) {
       this.reset();
+    } else if (target.classList.contains('button_next_winners')) {
+      this.winners.pageCount += 1;
+      this.renderUpdatedWinners();
+    } else if (target.classList.contains('button_back_winners')) {
+      this.winners.pageCount -= 1;
+      this.renderUpdatedWinners();
     }
   };
 
@@ -210,6 +211,16 @@ class Controller {
     this.garage.raceButton.disabled = true;
     const winner = await this.race();
     await this.connector.saveWinner(winner);
+    this.garage.resetButton.disabled = false;
+  };
+
+  private handleRaceButton = async (): Promise<void> => {
+    this.garage.raceButton.disabled = true;
+    const winner: INewWinner = await this.race();
+    await this.connector.saveWinner(winner);
+    const announcement = document.getElementById(`announcement_${winner.id}`) as HTMLElement;
+    announcement.textContent = `${(await this.connector.getCar(winner.id)).name} won in ${winner.time}s!`;
+    announcement.style.display = 'block';
     this.garage.resetButton.disabled = false;
   };
 

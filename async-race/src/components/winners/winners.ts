@@ -19,8 +19,8 @@ class Winners {
   constructor() {
     this.winnersContainer = createElement(null, 'div', 'winners-container');
     this.winnersTableContainer = createElement(null, 'div', 'winners_table_container');
-    this.backButton = createElement(null, 'button', 'button button_back', 'BACK');
-    this.nextButton = createElement(null, 'button', 'button button_next', 'NEXT');
+    this.backButton = createElement(null, 'button', 'button button_back_winners', 'BACK');
+    this.nextButton = createElement(null, 'button', 'button button_next_winners', 'NEXT');
     this.pageCount = 1;
   }
 

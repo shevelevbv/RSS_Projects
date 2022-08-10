@@ -46,8 +46,8 @@ class Garage {
     this.raceButton = createElement(null, 'button', 'button button_race', 'RACE');
     this.resetButton = createElement(null, 'button', 'button_reset', 'RESET');
     this.generateButton = createElement(null, 'button', 'button button_generate', 'GENERATE CARS');
-    this.backButton = createElement(null, 'button', 'button button_back', 'BACK');
-    this.nextButton = createElement(null, 'button', 'button button_next', 'NEXT');
+    this.backButton = createElement(null, 'button', 'button button_back_garage', 'BACK');
+    this.nextButton = createElement(null, 'button', 'button button_next_garage', 'NEXT');
     this.pageCount = 1;
   }
 
