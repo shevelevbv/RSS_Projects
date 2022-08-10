@@ -17,8 +17,8 @@ class Winners {
   public static readonly winnersPerPage = 10;
 
   constructor() {
-    this.winnersContainer = createElement(null, 'div', 'winners-container');
-    this.winnersTableContainer = createElement(null, 'div', 'winners_table_container');
+    this.winnersContainer = createElement(null, 'div', 'winners__container');
+    this.winnersTableContainer = createElement(null, 'div', 'winners__table_container');
     this.backButton = createElement(null, 'button', 'button button_back_winners', 'BACK');
     this.nextButton = createElement(null, 'button', 'button button_next_winners', 'NEXT');
     this.pageCount = 1;
@@ -28,8 +28,8 @@ class Winners {
     this.winnersContainer.innerHTML = '';
     main.append(this.winnersContainer);
 
-    createElement(this.winnersContainer, 'h2', 'title__total', `Winners (${total})`);
-    createElement(this.winnersContainer, 'h3', 'title__page', `Page #${this.pageCount}`);
+    createElement(this.winnersContainer, 'h2', 'title title__total', `Winners (${total})`);
+    createElement(this.winnersContainer, 'h3', 'title title__page', `Page #${this.pageCount}`);
 
     const isFirstPage = this.pageCount === 1;
 
@@ -58,8 +58,10 @@ class Winners {
     createElement(tableHeader, 'th', 'winners__column_number', 'Number');
     createElement(tableHeader, 'th', 'winners__column_car', 'Car');
     createElement(tableHeader, 'th', 'winners__column_name', 'Name');
-    createElement(tableHeader, 'th', 'winners__column_wins', 'Wins');
-    createElement(tableHeader, 'th', 'winners__column_time', 'Time');
+    const wins = createElement(tableHeader, 'th', 'winners__column_wins');
+    createElement(wins, 'button', 'button button_wins', 'Wins');
+    const time = createElement(tableHeader, 'th', 'winners__column_time');
+    createElement(time, 'button', 'button_time', 'Time');
     winners.forEach((winner, index) => {
       const row = createElement(winnersTable, 'tr');
       createElement(row, 'td', 'winners__cell winners__cell_number', `${index + (this.pageCount - 1) * Winners.winnersPerPage + 1}`);

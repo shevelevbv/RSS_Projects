@@ -1,7 +1,7 @@
-import createElement from '../helpers/functions';
-import Car from './car';
-import { ICar } from '../helpers/interfaces';
-import '../style.scss';
+import createElement from '../../helpers/functions';
+import Car from '../car';
+import { ICar } from '../../helpers/interfaces';
+import './garage.scss';
 
 class Garage {
   public garageContainer: HTMLDivElement;
@@ -68,8 +68,8 @@ class Garage {
     this.createCarColorInput.type = 'color';
     this.updateCarColorInput.type = 'color';
 
-    createElement(this.garageContainer, 'h2', 'title__total', `Garage (${total})`);
-    createElement(this.garageContainer, 'h3', 'title__page', `Page #${this.pageCount}`);
+    createElement(this.garageContainer, 'h2', 'title title__total', `Garage (${total})`);
+    createElement(this.garageContainer, 'h3', 'title title__page', `Page #${this.pageCount}`);
 
     const actionButtonContainer: HTMLDivElement = createElement(this.garageContainer, 'div', 'action_button_container');
 

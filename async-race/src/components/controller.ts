@@ -1,8 +1,8 @@
 import Connector from './connector';
 import State from './state';
-import Garage from './garage';
+import Garage from './garage/garage';
 import Winners from './winners/winners';
-import Page from './page';
+import Page from './page/page';
 import {
   ICar, ICarData, ICoordinates, INewCar, INewWinner, ISuccessData,
 } from '../helpers/interfaces';
@@ -52,7 +52,7 @@ class Controller {
   };
 
   private showGarage = (): void => {
-    this.garage.garageContainer.style.display = 'block';
+    this.garage.garageContainer.style.display = 'flex';
     this.winners.winnersContainer.style.display = 'none';
     this.page.toGarageButton.disabled = true;
     this.page.toWinnersButton.disabled = false;
@@ -61,7 +61,7 @@ class Controller {
   private showWinners = (): void => {
     this.renderUpdatedWinners();
     this.garage.garageContainer.style.display = 'none';
-    this.winners.winnersContainer.style.display = 'block';
+    this.winners.winnersContainer.style.display = 'flex';
     this.page.toGarageButton.disabled = false;
     this.page.toWinnersButton.disabled = true;
   };

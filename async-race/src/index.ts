@@ -1,9 +1,10 @@
 import Connector from './components/connector';
 import Controller from './components/controller';
-import Garage from './components/garage';
-import Page from './components/page';
+import Garage from './components/garage/garage';
+import Page from './components/page/page';
 import State from './components/state';
 import Winners from './components/winners/winners';
+import './style.scss';
 
 const page = new Page();
 const connector = new Connector();

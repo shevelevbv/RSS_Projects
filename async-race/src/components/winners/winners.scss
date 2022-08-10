@@ -1,5 +1,17 @@
 .winners {
 
+  &__container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__table_container {
+    margin: 0 auto;
+  }
+
   &__table {
     color: white;
     width: 400px;

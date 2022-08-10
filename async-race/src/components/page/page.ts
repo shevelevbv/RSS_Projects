@@ -1,4 +1,5 @@
-import createElement from '../helpers/functions';
+import './page.scss';
+import createElement from '../../helpers/functions';
 
 class Page {
   public toGarageButton: HTMLButtonElement;
@@ -15,7 +16,9 @@ class Page {
 
   public renderHeader = (): void => {
     const header = createElement(document.body, 'header', 'header');
-    header.append(this.toGarageButton, this.toWinnersButton);
+    createElement(header, 'h1', 'title title__main', 'Async Race');
+    const viewButtonContainer: HTMLDivElement = createElement(header, 'div', 'view__button_container');
+    viewButtonContainer.append(this.toGarageButton, this.toWinnersButton);
     this.toGarageButton.disabled = true;
   };
 
