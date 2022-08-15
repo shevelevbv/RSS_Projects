@@ -1,0 +1,3 @@
+- Video: https://youtu.be/2K4NYJ7EIig
+- Slides: https://rolling-scopes-school.github.io/shevelevbv-JSFE2022Q1/presentation-MongoDB/
+- Transcript: https://docs.google.com/document/d/18FTf1y7jRIU9kOrGqFAz4wwGBAxtuyUsnl9C4_e7EIc/edit?usp=sharing
