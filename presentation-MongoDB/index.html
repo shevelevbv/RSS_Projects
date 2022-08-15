@@ -456,7 +456,7 @@ async function main() {
 		const db = client.db(myDBName);
 		const collection = db.collection('products');
 
-		collection.updateMany({brand: 'iPhone'}, {$inc: {price: -100}});
+		await collection.updateMany({brand: 'iPhone'}, {$inc: {price: -100}});
 
     const findResult = await collection.find({brand: 'iPhone'}).toArray();
     console.log('Found documents =>', findResult);
